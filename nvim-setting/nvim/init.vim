@@ -1,1 +1,1 @@
-/Users/gotoutoshiki/.vimrc
+../vimrc
