@@ -1,0 +1,222 @@
+
+# color
+autoload -Uz colors: colors
+
+# git prompt
+setopt PROMPT_SUBST
+RPROMPT='%*'
+
+function virtualenv_info {
+    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
+}
+
+source ~/.zsh/rust-git-prompt/git-prompt.sh
+function precmd {
+PROMPT="%F{green}kons@%m: %F{yellow}%~%f
+$(virtualenv_info)$(git_PS "%s ")%F{white}%%%f "
+}
+
+#自動補完
+autoload -U compinit; compinit
+zstyle ':completion:*' list-colors "${LS_COLORS}"
+
+# spell miss
+setopt correct
+
+# z setting
+eval "$(zoxide init zsh)"
+# =============================================================================
+#
+# Utility functions for zoxide.
+#
+
+# pwd based on the value of _ZO_RESOLVE_SYMLINKS.
+function __zoxide_pwd() {
+    \builtin pwd -L
+}
+
+# cd + custom logic based on the value of _ZO_ECHO.
+function __zoxide_cd() {
+    # shellcheck disable=SC2164
+    \builtin cd -- "$@"
+}
+
+# =============================================================================
+#
+# Hook configuration for zoxide.
+#
+
+# Hook to add new entries to the database.
+function __zoxide_hook() {
+    \command zoxide add -- "$(__zoxide_pwd || \builtin true)"
+}
+
+# Initialize hook.
+# shellcheck disable=SC2154
+if [[ ${precmd_functions[(Ie)__zoxide_hook]:-} -eq 0 ]] && [[ ${chpwd_functions[(Ie)__zoxide_hook]:-} -eq 0 ]]; then
+    chpwd_functions+=(__zoxide_hook)
+fi
+
+# =============================================================================
+#
+# When using zoxide with --no-cmd, alias these internal functions as desired.
+#
+
+__zoxide_z_prefix='z#'
+
+# Jump to a directory using only keywords.
+function __zoxide_z() {
+    # shellcheck disable=SC2199
+    if [[ "$#" -eq 0 ]]; then
+        __zoxide_cd ~
+    elif [[ "$#" -eq 1 ]] && [[ "$1" = '-' ]]; then
+        if [[ -n "${OLDPWD}" ]]; then
+            __zoxide_cd "${OLDPWD}"
+        else
+            # shellcheck disable=SC2016
+            \builtin printf 'zoxide: $OLDPWD is not set'
+            return 1
+        fi
+    elif [[ "$#" -eq 1 ]] && [[ -d "$1" ]]; then
+        __zoxide_cd "$1"
+    elif [[ "$@[-1]" == "${__zoxide_z_prefix}"* ]]; then
+        # shellcheck disable=SC2124
+        \builtin local result="${@[-1]}"
+        __zoxide_cd "${result:${#__zoxide_z_prefix}}"
+    else
+        \builtin local result
+        result="$(\command zoxide query --exclude "$(__zoxide_pwd || \builtin true)" -- "$@")" &&
+            __zoxide_cd "${result}"
+    fi
+}
+
+# Jump to a directory using interactive search.
+function __zoxide_zi() {
+    \builtin local result
+    result="$(\command zoxide query -i -- "$@")" && __zoxide_cd "${result}"
+}
+
+# =============================================================================
+#
+# Commands for zoxide. Disable these using --no-cmd.
+#
+
+# Remove definitions.
+function __zoxide_unset() {
+    \builtin unalias "$@" &>/dev/null || \builtin true
+    \builtin unfunction "$@" &>/dev/null || \builtin true
+    \builtin unset "$@" &>/dev/null
+}
+
+__zoxide_unset z
+function z() {
+    __zoxide_z "$@"
+}
+
+__zoxide_unset zi
+function zi() {
+    __zoxide_zi "$@"
+}
+
+if [[ -o zle ]]; then
+    __zoxide_unset __zoxide_z_complete
+    function __zoxide_z_complete() {
+        # Only show completions when the cursor is at the end of the line.
+        # shellcheck disable=SC2154
+        [[ "${#words[@]}" -eq "${CURRENT}" ]] || return
+
+        if [[ "${#words[@]}" -eq 2 ]]; then
+            _files -/
+        elif [[ "${words[-1]}" == '' ]]; then
+            \builtin local result
+            # shellcheck disable=SC2086
+            if result="$(\command zoxide query -i -- ${words[2,-1]})"; then
+                __zoxide_result="${result}"
+            else
+                __zoxide_result=''
+            fi
+            \builtin printf '\e[5n'
+        fi
+    }
+
+    __zoxide_unset __zoxide_z_complete_helper
+    function __zoxide_z_complete_helper() {
+        \builtin local result="${__zoxide_z_prefix}${__zoxide_result}"
+        # shellcheck disable=SC2296
+        [[ -n "${__zoxide_result}" ]] && LBUFFER="${LBUFFER}${(q-)result}"
+        \builtin zle reset-prompt
+    }
+
+    \builtin zle -N __zoxide_z_complete_helper
+    \builtin bindkey "\e[0n" __zoxide_z_complete_helper
+    if [[ "${+functions[compdef]}" -ne 0 ]]; then
+        \compdef -d z
+        \compdef __zoxide_z_complete z
+    fi
+fi
+
+# history
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt hist_ignore_all_dups
+setopt share_history
+setopt hist_reduce_blanks
+
+# Ctrl D 
+setopt ignore_eof
+
+# zplug
+source ~/.zplug/init.zsh
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "chrissicool/zsh-256color"
+zplug "zsh-users/zsh-history-substring-search"
+
+if ! zplug check --verbose;then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+zplug load
+
+#alias
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ls='ls -G -l -h'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias python='/usr/local/bin/python3.8'
+alias la='ls -a'
+alias vi='\vim'
+alias vim='nvim'
+alias gs='git status'
+alias updvi="zsh ~/Documents2/programming/automation/vimrc_backup.sh"
+alias updzs="zsh ~/Documents2/programming/automation/zshrc_backup.sh"
+alias gitinit="zsh ~/Documents2/programming/automation/gitinit.sh"
+alias gitremoteinit="zsh ~/Documents2/programming/automation/gitremoteinit.sh"
+alias sozsh="source ~/.zshrc"
+alias cdd='cd ~/Documents2'
+alias inkscape=/Applications/Inkscape.app/Contents/MacOS/inkscape
+alias g++='g++-11'
+alias log_paper="python3 ~/Documents2/programming/creation/peper_manegement_system/simple_implementation/gui.py"
+alias cd="z"
+
+#[ -f "~/.ghcup/env" ] && source "~/.ghcup/env" # ghcup-env
+
+
+function mcd(){
+    mkdir $1
+    cd $1
+}
+
+# path setting
+export PATH="$PATH:$HOME/Documents2/llvm-project/build/bin"
+export PATH="$PATH:/usr/local/Cellar/dosfstools/4.2/sbin"
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="/usr/local/opt/swig@3/bin:$PATH"
+export PATH=/usr/local/smlnj/bin:"$PATH"
