@@ -51,13 +51,15 @@ if isdirectory(s:local_session_directory)
   " vimを辞める時に自動保存
   let g:session_autosave = 'yes'
   " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
-  let g:session_autoload = 'yes'
+  let g:session_autoload = 'no'
   " 1分間に1回自動保存
   let g:session_autosave_periodic = 1
 else
   let g:session_autosave = 'no'
   let g:session_autoload = 'no'
 endif
+nnoremap <C-[> :OpenSession<CR>
+nnoremap <C-s> :SaveSession<CR>
 '''
 
 # status line
@@ -72,6 +74,7 @@ repo = "nvim-neo-tree/neo-tree.nvim"
 hook_add = '''
   let g:neo_tree_remove_legacy_commands = 1
 
+  let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
   autocmd StdinReadPre * let s:std_in=1
   autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | exe ':Neotree current' | endif
   nnoremap <C-t> :Neotree toggle right<CR>
