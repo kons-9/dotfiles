@@ -3,7 +3,7 @@
 -- local home = vim.env.HOME
 local home = os.getenv("HOME")
 local dein_dir = home .. '/.cache/nvim/dein'
-local toml_dir = home .. '/.config/nvim/config'
+local toml_dir = home .. '/.config/nvim/toml'
 local dein_source = dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 vim.o.runtimepath = dein_source .. ',' .. vim.o.runtimepath
