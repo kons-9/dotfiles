@@ -55,6 +55,15 @@ keymap('i', '{<C-o>o', '{}<Left><CR><UP><C-o>o')
 keymap('c', '%%', "getcmdtype()==':'?expand('%:h').'/': '%%'", {noremap=true, expr=true})
 keymap('c', '<C-c>', "getcmdtype()==':'?expand('%:h').'/': '%%'", {noremap=true, expr=true})
 keymap('s', 'w!!', 'w !sudo tee > /dev/null %<CR> :e!<CR')
+
+-- terminal
+keymap('n', '<C-`>', ':split | wincmd j | resize 20 | terminal<CR>')
+keymap('t', '<Esc>', '<C-\\><C-n>')
+keymap('t', '<C-[>', '<C-\\><C-n>')
+vim.cmd[[
+  autocmd TermOpen * startinsert
+]]
+
 --
 ------------------------ plugins ----------------------
 --
@@ -72,6 +81,8 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {noremap=true, silent=true}
 vim.keymap.set('n', '<leader>fm', builtin.man_pages, {noremap=true, silent=true})
 vim.keymap.set('n', '<leader>fc', builtin.commands, {noremap=true, silent=true})
 vim.keymap.set('n', '<leader>ft', builtin.treesitter, {noremap=true, silent=true})
+vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {noremap=true, silent=true})
+vim.keymap.set('n', '<leader>fq', builtin.quickfix, {noremap=true, silent=true})
 
 local actions = require("telescope.actions")
 

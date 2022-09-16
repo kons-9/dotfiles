@@ -1,9 +1,8 @@
 ------------- dein.vim ------------------
 
--- local home = vim.env.HOME
 local home = os.getenv("HOME")
 local dein_dir = home .. '/.cache/nvim/dein'
-local toml_dir = home .. '/.config/nvim/toml'
+local toml_dir = home .. '/.config/nvim/lua/toml'
 local dein_source = dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 vim.o.runtimepath = dein_source .. ',' .. vim.o.runtimepath
@@ -22,8 +21,10 @@ if vim.call('dein#load_state', dein_dir) == 1 then
      vim.call('dein#save_state')
  
      -- Required:
-     -- filetype plugin indent on
-     -- syntax enable
+     vim.cmd[[
+       filetype plugin indent on
+       syntax enable
+     ]]
 end
 
 -- If you want to install not installed plugins on startup.

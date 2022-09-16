@@ -46,5 +46,4 @@ set wildchar=<Tab>
 set wildcharm=<Tab>
 ]]
 vim.opt.wildmode='full'
-vim.opt.wildoptions='pum'
 
