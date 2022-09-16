@@ -39,6 +39,10 @@ repo = 'nvim-treesitter/nvim-treesitter'
 # git
 [[plugins]]
 repo = 'TimUntersberger/neogit'
+[[plugins]]
+repo = 'sindrets/diffview.nvim'
+[[plugins]]
+repo = 'akinsho/git-conflict.nvim'
 
 # session
 [[plugins]]

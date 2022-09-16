@@ -1,4 +1,4 @@
-local function keymap(mode, l, r, opt) 
+local function keymap(mode, l, r, opt)
 	if (not opt) then
 		opt = {
 			silent = false,
@@ -39,9 +39,9 @@ keymap('c', '<C-K>', '<C-p>')
 
 -- disable arrow
 keymap('n', '<Up>', 'H')
-keymap('n', '<Down>', 'L') 
-keymap('n', '<Left>', '<Nop>') 
-keymap('n', '<Right>', '<Nop>') 
+keymap('n', '<Down>', 'L')
+keymap('n', '<Left>', '<Nop>')
+keymap('n', '<Right>', '<Nop>')
 
 -- first last
 keymap('n', 'H', '^')
@@ -255,3 +255,14 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 ]])
+
+--
+-- git-conflict
+--
+
+vim.keymap.set('n', 'co', '<Plug>(git-conflict-ours)')
+vim.keymap.set('n', 'ct', '<Plug>(git-conflict-theirs)')
+vim.keymap.set('n', 'cb', '<Plug>(git-conflict-both)')
+vim.keymap.set('n', 'c0', '<Plug>(git-conflict-none)')
+vim.keymap.set('n', ']x', '<Plug>(git-conflict-prev-conflict)')
+vim.keymap.set('n', '[x', '<Plug>(git-conflict-next-conflict)')
