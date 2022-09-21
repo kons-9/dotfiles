@@ -38,7 +38,7 @@ vim.opt.matchtime=2
 vim.opt.whichwrap='b,s,h,l,<,>,[,],~'
 vim.opt.number=true
 vim.opt.cursorline=true
-vim.opt.completeopt='menuone,noinsert'
+vim.opt.completeopt='menu,menuone,noinsert'
 
 -- vim.opt.wildchar='<C-n>'
 vim.cmd [[

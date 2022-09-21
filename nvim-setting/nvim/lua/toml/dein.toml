@@ -1,7 +1,46 @@
 [[plugins]]
-repo = 'neoclide/coc.nvim'
-branch = 'release'
-merged = 0
+repo = 'Shougo/dein.vim'
+
+# [[plugins]]
+# repo = 'neoclide/coc.nvim'
+# branch = 'release'
+# merged = 0
+
+# lsp
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+[[plugins]]
+repo = 'williamboman/mason.nvim' 
+[[plugins]]
+repo = 'williamboman/mason-lspconfig.nvim'
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
+[[plugins]]
+repo = 'hrsh7th/cmp-buffer'
+[[plugins]]
+repo = 'hrsh7th/cmp-path'
+[[plugins]]
+repo = 'hrsh7th/cmp-cmdline'
+[[plugins]]
+repo = 'hrsh7th/nvim-cmp'
+[[plugins]]
+repo = 'hrsh7th/cmp-vsnip'
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+
+[[plugins]]
+repo = 'windwp/nvim-autopairs'
+hook_add = '''
+lua << EOF
+require("nvim-autopairs").setup {}
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local cmp = require('cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
+EOF
+'''
 
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
@@ -9,6 +48,7 @@ repo = 'easymotion/vim-easymotion'
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 
+# Fuzzy Finder
 [[plugins]]
 repo = 'nvim-telescope/telescope.nvim'
 tag = '0.1.x'
@@ -50,13 +90,10 @@ repo = 'xolox/vim-misc'
 [[plugins]]
 repo = 'xolox/vim-session'
 hook_add = '''
-" 現在のディレクトリ直下の .vimsessions/ を取得 
 let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
-" 存在すれば
 if isdirectory(s:local_session_directory)
   " session保存ディレクトリをそのディレクトリの設定
   let g:session_directory = s:local_session_directory
-  " vimを辞める時に自動保存
   let g:session_autosave = 'yes'
   " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
   let g:session_autoload = 'no'

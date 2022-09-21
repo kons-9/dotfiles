@@ -11,6 +11,7 @@ else
 	require('options')
 	require('plugins')
 	require('colors')
+  require('nvimlsp')
 end
 require('keymapping')
 require('statusline')

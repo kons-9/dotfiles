@@ -182,41 +182,39 @@ if ! zplug check --verbose;then
 fi
 zplug load
 
-#alias
+# use rust command
+alias cd="z"
+alias ls="exa"
+alias vi='nvim'
+alias vim='nvim'
+function mcd(){
+    mkdir $1
+    cd $1
+}
+
+# alias
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias ls='ls -G -l -h'
+alias ls='exa -l -h'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 alias python='/usr/local/bin/python3.8'
 alias la='ls -a'
-alias vi='\vim'
-alias vim='nvim'
 alias gs='git status'
 alias updvi="zsh ~/Documents2/programming/automation/vimrc_backup.sh"
 alias updzs="zsh ~/Documents2/programming/automation/zshrc_backup.sh"
 alias gitinit="zsh ~/Documents2/programming/automation/gitinit.sh"
 alias gitremoteinit="zsh ~/Documents2/programming/automation/gitremoteinit.sh"
 alias sozsh="source ~/.zshrc"
-alias cdd='cd ~/Documents2'
+alias cdd='z ~/Documents2'
 alias inkscape=/Applications/Inkscape.app/Contents/MacOS/inkscape
 alias g++='g++-11'
 alias log_paper="python3 ~/Documents2/programming/creation/peper_manegement_system/simple_implementation/gui.py"
-alias cd="z"
 
-#[ -f "~/.ghcup/env" ] && source "~/.ghcup/env" # ghcup-env
-
-
-function mcd(){
-    mkdir $1
-    cd $1
-}
 
 # path setting
 export PATH="$PATH:$HOME/Documents2/llvm-project/build/bin"
 export PATH="$PATH:/usr/local/Cellar/dosfstools/4.2/sbin"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="/usr/local/opt/swig@3/bin:$PATH"
-export PATH=/usr/local/smlnj/bin:"$PATH"
