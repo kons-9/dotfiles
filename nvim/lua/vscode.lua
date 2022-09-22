@@ -1,0 +1,10 @@
+vim.cmd [[set incsearch]]
+vim.cmd [[set ignorecase]]
+vim.cmd [[set smartcase " if search pattern has Capital letter, not ignore.]]
+vim.cmd [[set hlsearch " you can disable this setting :noh temporary]]
+
+vim.cmd [[xmap gc  <Plug>VSCodeCommentary]]
+vim.cmd [[nmap gc  <Plug>VSCodeCommentary]]
+vim.cmd [[omap gc  <Plug>VSCodeCommentary]]
+vim.cmd [[nmap gcc <Plug>VSCodeCommentaryLine]]
+vim.cmd [[set clipboard+=unnamed]]

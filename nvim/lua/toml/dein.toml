@@ -1,0 +1,128 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# [[plugins]]
+# repo = 'neoclide/coc.nvim'
+# branch = 'release'
+# merged = 0
+
+# lsp
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+[[plugins]]
+repo = 'williamboman/mason.nvim' 
+[[plugins]]
+repo = 'williamboman/mason-lspconfig.nvim'
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
+[[plugins]]
+repo = 'hrsh7th/cmp-buffer'
+[[plugins]]
+repo = 'hrsh7th/cmp-path'
+[[plugins]]
+repo = 'hrsh7th/cmp-cmdline'
+[[plugins]]
+repo = 'hrsh7th/nvim-cmp'
+[[plugins]]
+repo = 'hrsh7th/cmp-vsnip'
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+
+[[plugins]]
+repo = 'windwp/nvim-autopairs'
+hook_add = '''
+lua << EOF
+require("nvim-autopairs").setup {}
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local cmp = require('cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
+EOF
+'''
+
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+# Fuzzy Finder
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+tag = '0.1.x'
+
+[[plugins]]
+repo = 'nvim-telescope/telescope-file-browser.nvim'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+  let g:indent_guides_enable_on_vim_startup = 1
+  let g:indent_guides_auto_colors = 0
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=239
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
+  let g:indent_guides_guide_size = 1
+  let g:indent_guides_start_level =2
+'''
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+
+# git
+[[plugins]]
+repo = 'TimUntersberger/neogit'
+[[plugins]]
+repo = 'sindrets/diffview.nvim'
+[[plugins]]
+repo = 'akinsho/git-conflict.nvim'
+
+# session
+[[plugins]]
+repo = 'xolox/vim-misc'
+[[plugins]]
+repo = 'xolox/vim-session'
+hook_add = '''
+let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
+if isdirectory(s:local_session_directory)
+  " session保存ディレクトリをそのディレクトリの設定
+  let g:session_directory = s:local_session_directory
+  let g:session_autosave = 'yes'
+  " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
+  let g:session_autoload = 'no'
+  " 1分間に1回自動保存
+  let g:session_autosave_periodic = 1
+else
+  let g:session_autosave = 'no'
+  let g:session_autoload = 'no'
+endif
+nnoremap <C-s> :OpenSession<CR>
+nnoremap <C-[> :SaveSession<CR>
+'''
+
+# status line
+[[plugins]]
+repo = 'kyazdani42/nvim-web-devicons'
+[[plugins]]
+repo = 'nvim-lualine/lualine.nvim'
+
+#filer
+[[plugins]]
+repo = "nvim-neo-tree/neo-tree.nvim"
+hook_add = '''
+  let g:neo_tree_remove_legacy_commands = 1
+
+  " let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
+  " autocmd StdinReadPre * let s:std_in=1
+  " autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | exe ':Neotree current' | endif
+  nnoremap <C-t> :Neotree toggle right<CR>
+'''
+[[plugins]]
+repo = "MunifTanjim/nui.nvim"
