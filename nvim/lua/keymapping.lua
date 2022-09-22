@@ -34,9 +34,6 @@ keymap('c', '<C-n>', '<Down>')
 -- vim.cmd [[set esckeys]]
 keymap('c', '<C-J>', '<C-n>')
 keymap('c', '<C-K>', '<C-p>')
--- vim.cmd [[
---   cnoremap <C-j> <TAB>
--- ]]
 
 -- disable arrow
 keymap('n', '<Up>', 'H')
@@ -52,9 +49,7 @@ keymap('n', 'L', '$')
 keymap('n', '<C-h>', ':noh<cr>', { noremap = true, silent = true })
 
 -- etc...
-keymap('i', '{<C-o>o', '{}<Left><CR><UP><C-o>o')
 keymap('c', '%%', "getcmdtype()==':'?expand('%:h').'/': '%%'", { noremap = true, expr = true })
-keymap('c', '<C-c>', "getcmdtype()==':'?expand('%:h').'/': '%%'", { noremap = true, expr = true })
 keymap('s', 'w!!', 'w !sudo tee > /dev/null %<CR> :e!<CR')
 
 -- terminal
