@@ -1,3 +1,5 @@
+-- help
+vim.cmd [[autocmd FileType help wincmd L]]
 -- buffer
 vim.opt.hidden = true
 vim.opt.autowrite = true
@@ -26,7 +28,6 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = true
-
 
 -- <C-h> setting
 vim.opt.backspace = 'indent,eol,start'

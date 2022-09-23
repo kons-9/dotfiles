@@ -16,6 +16,7 @@ else
 end
 require('keymapping')
 require('statusline')
+require('abbreviation')
 
 if vim.fn.has('mac') == 1 then
   require('mac')

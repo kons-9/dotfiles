@@ -21,7 +21,6 @@ keymap('n', ']b', ':bnext<CR>', { noremap = true, silent = true })
 keymap('n', '[B', ':bfirst<CR>', { noremap = true, silent = true })
 keymap('n', ']B', ':blast<CR>', { noremap = true, silent = true })
 
-
 -- carsor movement
 keymap('n', 'j', 'gj')
 keymap('n', 'k', 'gk')
@@ -103,3 +102,6 @@ vim.keymap.set('n', 'c0', '<Plug>(git-conflict-none)')
 vim.keymap.set('n', ']x', '<Plug>(git-conflict-prev-conflict)')
 vim.keymap.set('n', '[x', '<Plug>(git-conflict-next-conflict)')
 vim.keymap.set('n', '[x', '<Plug>(git-conflict-next-conflict)')
+
+vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>',
+  { noremap = true, silent = true })
