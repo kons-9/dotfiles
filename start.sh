@@ -13,6 +13,9 @@ zshrc_target=~/.zshrc
 clang_source="${path}/clang-format"
 clang_target=~/.clang-format
 
+git_config_source="${path}/gitconfig"
+git_config_target=~/.gitconfig
+
 function symlink() {
   source=$1
   target=$2
