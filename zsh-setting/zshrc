@@ -12,7 +12,7 @@ function virtualenv_info {
 
 source ~/.zsh/rust-git-prompt/git-prompt.sh
 function precmd {
-PROMPT="%F{green}kons@%m: %F{yellow}%~%f
+PROMPT="%F{green}%n@%m: %F{yellow}%~%f
 $(virtualenv_info)$(git_PS "%s ")%F{white}%%%f "
 }
 
@@ -92,8 +92,8 @@ function __zoxide_z() {
 
 # Jump to a directory using interactive search.
 function __zoxide_zi() {
-    \builtin local result
-    result="$(\command zoxide query -i -- "$@")" && __zoxide_cd "${result}"
+  \builtin local result
+  result="$(\command zoxide query -i -- "$@")" && __zoxide_cd "${result}"
 }
 
 # =============================================================================
@@ -166,8 +166,10 @@ setopt hist_reduce_blanks
 # Ctrl D 
 setopt ignore_eof
 
+
 # zplug
-source ~/.zplug/init.zsh
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
@@ -175,9 +177,9 @@ zplug "chrissicool/zsh-256color"
 zplug "zsh-users/zsh-history-substring-search"
 
 if ! zplug check --verbose;then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo; zplug install
     fi
 fi
 zplug load

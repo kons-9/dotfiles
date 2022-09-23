@@ -8,15 +8,15 @@ if vim.g.vscode then
   -- must have nvim
   require('vscode')
 else
-  require('options')
-  require('plugins')
   require('colors')
+  require('options')
+  require('abbreviation')
+  require('dein')
   require('nvimlsp')
   require('neotree')
+  require('statusline')
 end
 require('keymapping')
-require('statusline')
-require('abbreviation')
 
 if vim.fn.has('mac') == 1 then
   require('mac')

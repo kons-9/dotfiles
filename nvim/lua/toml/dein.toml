@@ -153,27 +153,27 @@ repo = 'kyazdani42/nvim-web-devicons'
 repo = 'nvim-lualine/lualine.nvim'
 
 # cursor move
-[[plugins]]
-repo = 'gen740/SmoothCursor.nvim'
-lua_add='''
-require('smoothcursor').setup({
-  speed = 50,
-  fancy = {
-    enable = true,       -- enable fancy mode
-    head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
-    body = {
-      { cursor = "", texthl = "SmoothCursorRed" },
-      { cursor = "", texthl = "SmoothCursorOrange" },
-      { cursor = "●", texthl = "SmoothCursorYellow" },
-      { cursor = "●", texthl = "SmoothCursorGreen" },
-      { cursor = "•", texthl = "SmoothCursorAqua" },
-      { cursor = ".", texthl = "SmoothCursorBlue" },
-      { cursor = ".", texthl = "SmoothCursorPurple" },
-    },
-    tail = { cursor = nil, texthl = "SmoothCursor" }
-  },
-})
-'''
+# [[plugins]]
+# repo = 'gen740/SmoothCursor.nvim'
+# lua_add='''
+# require('smoothcursor').setup({
+#   speed = 50,
+#   fancy = {
+#     enable = false,       -- enable fancy mode
+#     head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
+#     body = {
+#       { cursor = "", texthl = "SmoothCursorRed" },
+#       { cursor = "", texthl = "SmoothCursorOrange" },
+#       { cursor = "●", texthl = "SmoothCursorYellow" },
+#       { cursor = "●", texthl = "SmoothCursorGreen" },
+#       { cursor = "•", texthl = "SmoothCursorAqua" },
+#       { cursor = ".", texthl = "SmoothCursorBlue" },
+#       { cursor = ".", texthl = "SmoothCursorPurple" },
+#     },
+#     tail = { cursor = nil, texthl = "SmoothCursor" }
+#   },
+# })
+# '''
 
 # indent
 [[plugins]]

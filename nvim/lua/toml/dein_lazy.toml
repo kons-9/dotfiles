@@ -1,1 +1,8 @@
 # all
+# toml
+[[plugins]]
+repo = "osyo-manga/vim-precious"
+on_ft = "toml"
+[[plugins]]
+repo = "Shougo/context_filetype.vim"
+on_source = ["vim-precious.vim"]
