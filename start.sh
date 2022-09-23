@@ -11,6 +11,9 @@ zsh_target=~/.zsh
 zshrc_source="${path}/zsh-setting/zshrc"
 zshrc_target=~/.zshrc
 
+clang_source="${path}/clang-format"
+clang_target=~/.clang-format
+
 function symlink() {
   source=$1
   target=$2
@@ -32,3 +35,4 @@ function symlink() {
 symlink $nvim_source $nvim_target
 symlink $zsh_source $zsh_target
 symlink $zshrc_source $zshrc_target
+symlink $clang_source $clang_target
