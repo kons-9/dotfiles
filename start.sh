@@ -1,6 +1,5 @@
 cd `dirname $0`
 path=`pwd`
-echo $path
 
 nvim_source="${path}/nvim"
 nvim_target=~/.config/nvim
@@ -17,10 +16,8 @@ clang_target=~/.clang-format
 function symlink() {
   source=$1
   target=$2
-  echo $source
-  echo $target
 
-  if [ ! -e $target ]; then
+  if [ ! -e $target ] && [ ! -L $target ]; then
     ln -s $source $target
   else
     echo "${target} is exist."
