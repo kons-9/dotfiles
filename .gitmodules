@@ -1,0 +1,3 @@
+[submodule "rust-git-prompt"]
+	path = rust-git-prompt
+	url = https://github.com/kons-9/rust-git-prompt.git
