@@ -9,14 +9,14 @@ if vim.g.vscode then
   require('vscode')
 else
   require('colors')
-  require('options')
   require('abbreviation')
+  require('options')
   require('dein')
-  require('nvimlsp')
   require('neotree')
   require('statusline')
+  require('keymapping')
+  require('nvimlsp')
 end
-require('keymapping')
 
 if vim.fn.has('mac') == 1 then
   require('mac')

@@ -1,5 +1,11 @@
 -- help
 vim.cmd [[autocmd FileType help wincmd L]]
+
+vim.cmd [[
+syntax on
+filetype plugin indent on
+]]
+
 -- buffer
 vim.opt.hidden = true
 vim.opt.autowrite = true
@@ -55,3 +61,4 @@ set wildchar=<Tab>
 set wildcharm=<Tab>
 ]]
 vim.opt.wildmode = 'full'
+-- vim.builtin.treesitter.autotag.enable = true

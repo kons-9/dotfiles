@@ -25,13 +25,15 @@ if vim.call('dein#load_state', dein_dir) == 1 then
   vim.call('dein#save_state')
 
   -- Required:
-  vim.cmd [[
-       filetype plugin indent on
-       syntax enable
-     ]]
 end
 
 -- If you want to install not installed plugins on startup.
 if vim.call('dein#check_install') == 1 then
   vim.call('dein#install')
 end
+
+-- これをifの中に入れるとfiletype detectionがなぜかoffになる
+vim.cmd [[
+ filetype plugin indent on
+ syntax enable
+]]

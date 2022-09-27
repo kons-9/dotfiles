@@ -103,5 +103,5 @@ vim.keymap.set('n', ']x', '<Plug>(git-conflict-prev-conflict)')
 vim.keymap.set('n', '[x', '<Plug>(git-conflict-next-conflict)')
 vim.keymap.set('n', '[x', '<Plug>(git-conflict-next-conflict)')
 
-vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>',
-  { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>',
+  -- { noremap = true, silent = true })

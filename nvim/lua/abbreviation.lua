@@ -24,6 +24,7 @@ end
 local list = {
   retrun = "return",
   improt = "import",
+  ture = "true"
 }
 
 all_abbreviations(list)
