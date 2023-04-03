@@ -12,7 +12,7 @@ else
   require('abbreviation')
   require('options')
   require('dein')
-  require('neotree')
+  -- require('neotree')
   require('statusline')
   require('keymapping')
   require('nvimlsp')

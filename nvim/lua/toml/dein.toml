@@ -25,56 +25,11 @@ repo = 'hrsh7th/vim-vsnip'
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 [[plugins]]
-repo = "glepnir/lspsaga.nvim"
+repo = "Saecki/crates.nvim"
+tag = "v3.0.0"
 lua_add = '''
-local keymap = vim.keymap.set
+require('crates').setup()
 '''
-# [[plugins]]
-# repo = 'filipdutescu/renamer.nvim'
-# rev = 'master'
-# lua_add = '''
-# local mappings_utils = require('renamer.mappings.utils')
-# require('renamer').setup {
-#     -- The popup title, shown if `border` is true
-#     title = 'Rename',
-#     -- The padding around the popup content
-#     padding = {
-#         top = 0,
-#         left = 0,
-#         bottom = 0,
-#         right = 0,
-#     },
-#     -- The minimum width of the popup
-#     min_width = 15,
-#     -- The maximum width of the popup
-#     max_width = 45,
-#     -- Whether or not to shown a border around the popup
-#     border = true,
-#     -- The characters which make up the border
-#     border_chars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-#     -- Whether or not to highlight the current word references through LSP
-#     show_refs = true,
-#     -- Whether or not to add resulting changes to the quickfix list
-#     with_qf_list = true,
-#     -- Whether or not to enter the new name through the UI or Neovim's `input`
-#     -- prompt
-#     with_popup = true,
-#     -- The keymaps available while in the `renamer` buffer. The example below
-#     -- overrides the default values, but you can add others as well.
-#     mappings = {
-#         ['<c-i>'] = mappings_utils.set_cursor_to_start,
-#         ['<c-a>'] = mappings_utils.set_cursor_to_end,
-#         ['<c-e>'] = mappings_utils.set_cursor_to_word_end,
-#         ['<c-b>'] = mappings_utils.set_cursor_to_word_start,
-#         ['<c-c>'] = mappings_utils.clear_line,
-#         ['<c-u>'] = mappings_utils.undo,
-#         ['<c-r>'] = mappings_utils.redo,
-#     },
-#     -- Custom handler to be run after successfully renaming the word. Receives
-#     -- the LSP 'textDocument/rename' raw response as its parameter.
-#     handler = nil,
-# }
-# '''
 
 # Fuzzy Finder
 [[plugins]]
@@ -104,70 +59,31 @@ repo = 'tpope/vim-surround'
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
 
-# git
-[[plugins]]
-repo = 'TimUntersberger/neogit'
-[[plugins]]
-repo = 'sindrets/diffview.nvim'
-[[plugins]]
-repo = 'akinsho/git-conflict.nvim'
-
-# session
-[[plugins]]
-repo = 'xolox/vim-misc'
-[[plugins]]
-repo = 'xolox/vim-session'
-hook_add = '''
-let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
-if isdirectory(s:local_session_directory)
-  " session保存ディレクトリをそのディレクトリの設定
-  let g:session_directory = s:local_session_directory
-  let g:session_autosave = 'yes'
-  " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
-  let g:session_autoload = 'no'
-  " 1分間に1回自動保存
-  let g:session_autosave_periodic = 1
-else
-  let g:session_autosave = 'no'
-  let g:session_autoload = 'no'
-endif
-nnoremap <C-s> :OpenSession<CR>
-nnoremap <C-[> :SaveSession<CR>
-'''
-
-#filer
-[[plugins]]
-repo = "nvim-neo-tree/neo-tree.nvim"
-hook_add = '''
-  let g:neo_tree_remove_legacy_commands = 1
-
-  " let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
-  " autocmd StdinReadPre * let s:std_in=1
-  " autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | exe ':Neotree current' | endif
-  nnoremap <C-t> :Neotree toggle right<CR>
-'''
-[[plugins]]
-repo = "MunifTanjim/nui.nvim"
 
 # tag
-# [[plugins]]
-# repo = 'windwp/nvim-ts-autotag'
-# lua_add='''
-# require('nvim-ts-autotag').setup()
-# '''
 [[plugins]]
 repo = 'alvan/vim-closetag'
 hook_add = '''
 let g:closetag_enable_react_fragment = 1
 '''
 
-###################### looks ############################
+# terminal
+[[plugins]]
+repo = "akinsho/toggleterm.nvim"
+lua_add = '''
+  require('toggleterm').setup()
+'''
+
+###################### appearance ############################
 
 # status line
 [[plugins]]
 repo = 'kyazdani42/nvim-web-devicons'
 [[plugins]]
 repo = 'nvim-lualine/lualine.nvim'
+[[plugins]]
+repo = 'arkav/lualine-lsp-progress'
+
 
 # cursor move
 [[plugins]]

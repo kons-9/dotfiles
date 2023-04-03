@@ -36,7 +36,8 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = true
 
 -- <C-h> setting
-vim.opt.backspace = 'indent,eol,start'
+-- I use Karabiner-element and here, I change <C-h> to delete.
+-- vim.opt.backspace = 'indent,eol,start'
 
 -- (){} corresponding
 vim.opt.showmatch = true
@@ -62,3 +63,10 @@ set wildcharm=<Tab>
 ]]
 vim.opt.wildmode = 'full'
 -- vim.builtin.treesitter.autotag.enable = true
+
+-- spell checker
+vim.cmd [[
+  autocmd FileType markdown setlocal spell spelllang=en,cjk
+  autocmd FileType text setlocal spell spelllang=en,cjk
+  autocmd FileType gitcommit setlocal spell spelllang=en,cjk
+]]

@@ -1,10 +1,10 @@
 local function keymap(mode, l, r, opt)
   if (not opt) then
     opt = {
-      silent = false,
-      nowait = false,
-      expr = false,
-      noremap = true,
+        silent = false,
+        nowait = false,
+        expr = false,
+        noremap = true,
     }
   end
   vim.api.nvim_set_keymap(mode, l, r, opt)
@@ -43,16 +43,20 @@ keymap('n', '<Right>', '<Nop>')
 -- first last
 keymap('n', 'H', '^')
 keymap('n', 'L', '$')
+keymap('v', 'H', '^')
+keymap('v', 'L', '$')
 
 -- nohilight
-keymap('n', '<C-h>', ':noh<cr>', { noremap = true, silent = true })
+-- keymap('n', '<C-h>', ':noh<cr>', { noremap = true, silent = true })
+keymap('n', 'M', ':noh<cr>', { noremap = true, silent = true })
 
 -- etc...
 keymap('c', '%%', "getcmdtype()==':'?expand('%:h').'/': '%%'", { noremap = true, expr = true })
 keymap('s', 'w!!', 'w !sudo tee > /dev/null %<CR> :e!<CR')
 
 -- terminal
-keymap('n', '<C-`>', ':split | wincmd j | resize 20 | terminal<CR>')
+keymap('n', '<C-`>', ':ToggleTerm size=20<CR>')
+keymap('t', '<C-`>', '<C-\\><C-n>:ToggleTermToggleAll<CR>')
 keymap('t', '<Esc>', '<C-\\><C-n>')
 keymap('t', '<C-[>', '<C-\\><C-n>')
 vim.cmd [[
@@ -67,7 +71,6 @@ vim.cmd [[
 require("telescope").load_extension "file_browser"
 
 local builtin = require('telescope.builtin')
-
 vim.keymap.set('n', '<leader>fe', ":Telescope file_browser<CR>", { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { noremap = true, silent = true })
@@ -82,26 +85,22 @@ vim.keymap.set('n', '<leader>fq', builtin.quickfix, { noremap = true, silent = t
 local actions = require("telescope.actions")
 
 require("telescope").setup({
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-e>"] = actions.close,
-      },
+    defaults = {
+        mappings = {
+            i = {
+                ["<C-e>"] = actions.close,
+            },
+        },
     },
-  },
 })
 
---
--- git-conflict
---
 
-vim.keymap.set('n', 'co', '<Plug>(git-conflict-ours)')
-vim.keymap.set('n', 'ct', '<Plug>(git-conflict-theirs)')
-vim.keymap.set('n', 'cb', '<Plug>(git-conflict-both)')
-vim.keymap.set('n', 'c0', '<Plug>(git-conflict-none)')
-vim.keymap.set('n', ']x', '<Plug>(git-conflict-prev-conflict)')
-vim.keymap.set('n', '[x', '<Plug>(git-conflict-next-conflict)')
-vim.keymap.set('n', '[x', '<Plug>(git-conflict-next-conflict)')
-
--- vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>',
-  -- { noremap = true, silent = true })
+-- vsnip
+keymap('i', '<Tab>', 'gj')
+keymap('n', 'k', 'gk')
+keymap('i', '<Tab>', "vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>' ", { expr = true, silent = true })
+keymap('s', '<Tab>', "vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>' ", { expr = true, silent = true })
+keymap('i', '<S-Tab>', "vsnip#jumpable(-1)   ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>' ",
+    { expr = true, silent = true })
+keymap('s', '<S-Tab>', "vsnip#jumpable(-1)   ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>' ",
+    { expr = true, silent = true })

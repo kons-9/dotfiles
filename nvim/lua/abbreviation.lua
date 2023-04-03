@@ -2,6 +2,7 @@ local function i_abbreviation_str(lch, rch)
   return 'iab ' .. lch .. ' ' .. rch
 end
 
+-- apply to all file
 local function all_abbreviations(list)
   for lch, rch in pairs(list) do
     vim.cmd(i_abbreviation_str(lch, rch))
@@ -12,6 +13,7 @@ local function ft_abbreviation(ft, lch, rch)
   vim.cmd('autocmd FileType ' .. ft .. ' <silent> ', i_abbreviation_str(lch, rch))
 end
 
+-- apply to specific file type
 local function all_ft_abbreviations(ft, list)
   for lch, rch in pairs(list) do
     ft_abbreviation(ft, lch, rch)

@@ -6,7 +6,7 @@ local toml_dir = home .. '/.config/nvim/lua/toml'
 local dein_source = dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 if vim.fn.isdirectory(dein_dir) == 0 then
-  os.execute('git clone https://github.com/Shougo/dein.vim ' .. dein_source)
+  vim.cmd([[execute '!git clone https://github.com/Shougo/dein.vim ]] .. dein_dir .. "'")
 end
 
 vim.o.runtimepath = dein_source .. ',' .. vim.o.runtimepath
