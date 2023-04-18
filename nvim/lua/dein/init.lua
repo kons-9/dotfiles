@@ -1,0 +1,6 @@
+require('dein.dein')
+require('dein.statusline')
+require('dein.tree')
+require('dein.cmp')
+require('dein.lspserver')
+require('dein.plugin')

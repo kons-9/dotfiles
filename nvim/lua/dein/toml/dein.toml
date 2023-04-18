@@ -1,35 +1,54 @@
+# manage dein itself
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-# lsp
+# tree 
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+[[plugins]]
+repo = 'lambdalisue/fern-hijack.vim'
+depends = ['fern']
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+hook_add = '''
+  let g:fern#renderer = 'nerdfont'
+'''
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+
+# relate to lsp
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
 [[plugins]]
 repo = 'williamboman/mason.nvim' 
+build = ':MasonUpdate'
+depends = ['nvim-lspconfig']
 [[plugins]]
 repo = 'williamboman/mason-lspconfig.nvim'
+depends = ['mason']
 [[plugins]]
 repo = 'hrsh7th/cmp-nvim-lsp'
 [[plugins]]
 repo = 'hrsh7th/cmp-buffer'
+depends = ['cmp-nvim-lsp']
 [[plugins]]
 repo = 'hrsh7th/cmp-path'
+depends = ['cmp-nvim-lsp']
 [[plugins]]
 repo = 'hrsh7th/cmp-cmdline'
+depends = ['cmp-nvim-lsp']
 [[plugins]]
 repo = 'hrsh7th/nvim-cmp'
+depends = ['cmp-nvim-lsp']
 [[plugins]]
 repo = 'hrsh7th/cmp-vsnip'
+depends = ['cmp-nvim-lsp']
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip'
+depends = ['cmp-nvim-lsp']
+
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
-[[plugins]]
-repo = "Saecki/crates.nvim"
-tag = "v3.0.0"
-lua_add = '''
-require('crates').setup()
-'''
 
 # Fuzzy Finder
 [[plugins]]
@@ -39,6 +58,18 @@ tag = '0.1.x'
 repo = 'nvim-telescope/telescope-file-browser.nvim'
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
+
+# movement
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+
+# AI completion
+[[plugins]]
+repo = 'github/copilot.vim'
+
+# git
+[[plugins]]
+repo = 'lambdalisue/gin.vim'
 
 # convinient
 [[plugins]]
@@ -57,15 +88,7 @@ cmp.event:on(
 [[plugins]]
 repo = 'tpope/vim-surround'
 [[plugins]]
-repo = 'easymotion/vim-easymotion'
-
-
-# tag
-[[plugins]]
-repo = 'alvan/vim-closetag'
-hook_add = '''
-let g:closetag_enable_react_fragment = 1
-'''
+repo = 'thinca/vim-quickrun'
 
 # terminal
 [[plugins]]

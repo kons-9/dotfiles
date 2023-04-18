@@ -46,7 +46,7 @@ vim.opt.matchtime = 2
 vim.opt.whichwrap = 'b,s,h,l,<,>,[,],~'
 vim.opt.relativenumber = true
 vim.opt.number = true
-vim.cmd [[ 
+vim.cmd [[
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif

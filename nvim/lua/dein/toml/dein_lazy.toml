@@ -1,0 +1,27 @@
+# all
+[[plugins]]
+repo = "Saecki/crates.nvim"
+tag = "v0.3.0"
+lua_add = '''
+require('crates').setup()
+'''
+# toml
+
+[[plugins]]
+repo = 'dkarter/bullets.vim'
+on_ft = "markdown"
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = "markdown"
+build = 'sh -c "cd app && yarn install"' 
+
+# tag
+[[plugins]]
+repo = 'alvan/vim-closetag'
+on_ft = ["html", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "xml", "xhtml", "markdown"]
+
+hook_add = '''
+let g:closetag_enable_react_fragment = 1
+'''
+

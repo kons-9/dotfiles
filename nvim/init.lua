@@ -6,18 +6,15 @@ vim.opt.ambiwidth = 'single'
 
 if vim.g.vscode then
   -- must have nvim
-  require('vscode')
+  require('env/vscode')
 else
   require('colors')
   require('abbreviation')
   require('options')
-  require('dein')
-  -- require('neotree')
-  require('statusline')
   require('keymapping')
-  require('nvimlsp')
+  require('dein')
 end
 
 if vim.fn.has('mac') == 1 then
-  require('mac')
+  require('env/mac')
 end
