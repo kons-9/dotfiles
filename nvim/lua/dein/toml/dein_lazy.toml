@@ -1,10 +1,4 @@
 # all
-[[plugins]]
-repo = "Saecki/crates.nvim"
-tag = "v0.3.0"
-lua_add = '''
-require('crates').setup()
-'''
 # toml
 
 [[plugins]]

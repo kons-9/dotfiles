@@ -97,6 +97,14 @@ lua_add = '''
   require('toggleterm').setup()
 '''
 
+[[plugins]]
+repo = "Saecki/crates.nvim"
+tag = "v0.3.0"
+on_ft = "toml"
+lua_add = '''
+require('crates').setup()
+'''
+
 ###################### appearance ############################
 
 # status line
