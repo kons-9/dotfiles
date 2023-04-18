@@ -220,3 +220,4 @@ alias log_paper="python3 ~/Documents2/programming/creation/peper_manegement_syst
 export PATH="$PATH:$HOME/Documents2/llvm-project/build/bin"
 export PATH="$PATH:/usr/local/Cellar/dosfstools/4.2/sbin"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="$PATH:$HOME/flutter/bin"
