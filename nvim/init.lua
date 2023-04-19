@@ -17,4 +17,7 @@ end
 
 if vim.fn.has('mac') == 1 then
   require('env/mac')
+elseif vim.fn.has('linux') then
+  require('env/linux')
 end
+
