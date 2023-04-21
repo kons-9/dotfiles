@@ -20,9 +20,19 @@ if vim.call('dein#load_state', dein_dir) == 1 then
   -- Let dein manage dein
   local toml = toml_dir .. '/dein.toml'
   local lazy_toml = toml_dir .. '/dein_lazy.toml'
+  local tree_toml = toml_dir .. '/dein_tree.toml'
+  local lsp_toml = toml_dir .. '/dein_lsp.toml'
+  local insert_toml = toml_dir .. '/dein_insert.toml'
+  local telescope_toml = toml_dir .. '/dein_telescope.toml'
+  local depends_toml = toml_dir .. '/dein_depends.toml'
 
   vim.call('dein#load_toml', toml, { lazy = 0 })
   vim.call('dein#load_toml', lazy_toml, { lazy = 1 })
+  vim.call('dein#load_toml', tree_toml, { lazy = 1 })
+  vim.call('dein#load_toml', lsp_toml, { lazy = 1 })
+  vim.call('dein#load_toml', insert_toml, { lazy = 1 })
+  vim.call('dein#load_toml', telescope_toml, { lazy = 1 })
+  vim.call('dein#load_toml', depends_toml, { lazy = 1 })
 
   vim.call('dein#end')
   vim.call('dein#save_state')

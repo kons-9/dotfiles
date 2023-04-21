@@ -65,12 +65,12 @@ local lsp_flags = {
 }
 
 -- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require('lspconfig')['pyright'].setup {
   on_attach = on_attach,
   flags = lsp_flags,
-  capabilities = capabilities
+  -- capabilities = capabilities
 }
 
 require('lspconfig')['lua_ls'].setup {
@@ -105,7 +105,7 @@ require('lspconfig')['lua_ls'].setup {
       },
     }
   },
-  capabilities = capabilities
+  -- capabilities = capabilities
 }
 
 require('lspconfig')['rust_analyzer'].setup {
@@ -116,7 +116,7 @@ require('lspconfig')['rust_analyzer'].setup {
     ["rust-analyzer"] = {
     },
   },
-  capabilities = capabilities
+  -- capabilities = capabilities
 }
 require('lspconfig')['grammarly'].setup {
   on_attach = on_attach,

@@ -22,7 +22,7 @@ vim.opt.history = 5000
 
 -- tab indent
 vim.opt.expandtab = true
-vim.opt.tabstop = 2
+vim.opt.tabstop = 4
 vim.opt.softtabstop = 2
 vim.opt.autoindent = true
 vim.opt.smartindent = true
@@ -62,7 +62,6 @@ set wildchar=<Tab>
 set wildcharm=<Tab>
 ]]
 vim.opt.wildmode = 'full'
--- vim.builtin.treesitter.autotag.enable = true
 
 -- spell checker
 vim.cmd [[

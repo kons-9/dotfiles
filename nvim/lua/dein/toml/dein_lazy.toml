@@ -1,5 +1,11 @@
-# all
 # toml
+[[plugins]]
+repo = "Saecki/crates.nvim"
+tag = "v0.3.0"
+on_if = "expand('%:t') == 'Cargo.toml'"
+lua_post_source = '''
+require('crates').setup()
+'''
 
 [[plugins]]
 repo = 'dkarter/bullets.vim'
@@ -19,3 +25,75 @@ hook_add = '''
 let g:closetag_enable_react_fragment = 1
 '''
 
+# git
+[[plugins]]
+repo = 'lambdalisue/gin.vim'
+on_cmd = ['Gin']
+depends=['vim-denops/denops.vim']
+
+# convinient
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+on_cmd = ['QuickRun']
+lua_add = '''
+vim.keymap.set('n', '<leader>rr', "<cmd>QuickRun<cr>", { noremap = true, silent = true })
+'''
+
+# terminal
+[[plugins]]
+repo = "akinsho/toggleterm.nvim"
+on_cmd = ['ToggleTerm']
+lua_post_source = '''
+require('toggleterm').setup()
+'''
+lua_add = '''
+local function keymap(mode, l, r, opt)
+  if (not opt) then
+    opt = {
+      silent = true,
+      nowait = false,
+      expr = false,
+      noremap = true,
+    }
+  end
+  vim.api.nvim_set_keymap(mode, l, r, opt)
+end
+-- [ToggleTerm]
+keymap('n', '<C-`>', ':ToggleTerm size=20<CR>')
+keymap('t', '<C-`>', '<C-\\><C-n>:ToggleTermToggleAll<CR>')
+'''
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+on_cmd = ['Commentary']
+lua_add = '''
+vim.keymap.set('n', 'gcc', "<cmd>Commentary<cr>", { noremap = true, silent = true })
+'''
+
+
+# movement
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+on_event = 'CursorMoved'
+[[plugins]]
+repo = 'gen740/SmoothCursor.nvim'
+on_event = 'CursorMoved'
+lua_post_source='''
+require('smoothcursor').setup({
+  speed = 50,
+  fancy = {
+    enable = true,       -- enable fancy mode
+    head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
+    body = {
+      { cursor = "", texthl = "SmoothCursorRed" },
+      { cursor = "", texthl = "SmoothCursorOrange" },
+      { cursor = "●", texthl = "SmoothCursorYellow" },
+      { cursor = "●", texthl = "SmoothCursorGreen" },
+      { cursor = "•", texthl = "SmoothCursorAqua" },
+      { cursor = ".", texthl = "SmoothCursorBlue" },
+      { cursor = ".", texthl = "SmoothCursorPurple" },
+    },
+    tail = { cursor = nil, texthl = "SmoothCursor" }
+  },
+})
+'''

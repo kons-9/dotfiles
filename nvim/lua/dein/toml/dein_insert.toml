@@ -1,0 +1,19 @@
+# done
+
+# AI completion
+[[plugins]]
+repo = 'github/copilot.vim'
+on_event = 'InsertEnter'
+
+[[plugins]]
+repo = 'windwp/nvim-autopairs'
+on_event = 'InsertEnter'
+lua_post_source = '''
+require("nvim-autopairs").setup {}
+-- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+-- local cmp = require('cmp')
+-- cmp.event:on(
+--   'confirm_done',
+--   cmp_autopairs.on_confirm_done()
+-- )
+'''

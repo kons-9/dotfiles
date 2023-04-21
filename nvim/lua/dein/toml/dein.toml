@@ -2,108 +2,8 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-# tree 
-[[plugins]]
-repo = 'lambdalisue/fern.vim'
-[[plugins]]
-repo = 'lambdalisue/fern-hijack.vim'
-depends = ['fern']
-[[plugins]]
-repo = 'lambdalisue/fern-renderer-nerdfont.vim'
-hook_add = '''
-  let g:fern#renderer = 'nerdfont'
-'''
-[[plugins]]
-repo = 'lambdalisue/nerdfont.vim'
-
-# relate to lsp
-[[plugins]]
-repo = 'neovim/nvim-lspconfig'
-[[plugins]]
-repo = 'williamboman/mason.nvim' 
-build = ':MasonUpdate'
-depends = ['nvim-lspconfig']
-[[plugins]]
-repo = 'williamboman/mason-lspconfig.nvim'
-depends = ['mason']
-[[plugins]]
-repo = 'hrsh7th/cmp-nvim-lsp'
-[[plugins]]
-repo = 'hrsh7th/cmp-buffer'
-depends = ['cmp-nvim-lsp']
-[[plugins]]
-repo = 'hrsh7th/cmp-path'
-depends = ['cmp-nvim-lsp']
-[[plugins]]
-repo = 'hrsh7th/cmp-cmdline'
-depends = ['cmp-nvim-lsp']
-[[plugins]]
-repo = 'hrsh7th/nvim-cmp'
-depends = ['cmp-nvim-lsp']
-[[plugins]]
-repo = 'hrsh7th/cmp-vsnip'
-depends = ['cmp-nvim-lsp']
-[[plugins]]
-repo = 'hrsh7th/vim-vsnip'
-depends = ['cmp-nvim-lsp']
-
-[[plugins]]
-repo = 'nvim-lua/plenary.nvim'
-
-# Fuzzy Finder
-[[plugins]]
-repo = 'nvim-telescope/telescope.nvim'
-tag = '0.1.x'
-[[plugins]]
-repo = 'nvim-telescope/telescope-file-browser.nvim'
-[[plugins]]
-repo = 'nvim-treesitter/nvim-treesitter'
-
-# movement
-[[plugins]]
-repo = 'easymotion/vim-easymotion'
-
-# AI completion
-[[plugins]]
-repo = 'github/copilot.vim'
-
-# git
-[[plugins]]
-repo = 'lambdalisue/gin.vim'
-
-# convinient
-[[plugins]]
-repo = 'tpope/vim-commentary'
-[[plugins]]
-repo = 'windwp/nvim-autopairs'
-lua_add = '''
-require("nvim-autopairs").setup {}
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-local cmp = require('cmp')
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)
-'''
 [[plugins]]
 repo = 'tpope/vim-surround'
-[[plugins]]
-repo = 'thinca/vim-quickrun'
-
-# terminal
-[[plugins]]
-repo = "akinsho/toggleterm.nvim"
-lua_add = '''
-  require('toggleterm').setup()
-'''
-
-[[plugins]]
-repo = "Saecki/crates.nvim"
-tag = "v0.3.0"
-on_ft = "toml"
-lua_add = '''
-require('crates').setup()
-'''
 
 ###################### appearance ############################
 
@@ -112,31 +12,8 @@ require('crates').setup()
 repo = 'kyazdani42/nvim-web-devicons'
 [[plugins]]
 repo = 'nvim-lualine/lualine.nvim'
-[[plugins]]
-repo = 'arkav/lualine-lsp-progress'
-
-
-# cursor move
-[[plugins]]
-repo = 'gen740/SmoothCursor.nvim'
 lua_add='''
-require('smoothcursor').setup({
-  speed = 50,
-  fancy = {
-    enable = true,       -- enable fancy mode
-    head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
-    body = {
-      { cursor = "", texthl = "SmoothCursorRed" },
-      { cursor = "", texthl = "SmoothCursorOrange" },
-      { cursor = "●", texthl = "SmoothCursorYellow" },
-      { cursor = "●", texthl = "SmoothCursorGreen" },
-      { cursor = "•", texthl = "SmoothCursorAqua" },
-      { cursor = ".", texthl = "SmoothCursorBlue" },
-      { cursor = ".", texthl = "SmoothCursorPurple" },
-    },
-    tail = { cursor = nil, texthl = "SmoothCursor" }
-  },
-})
+require('dein.statusline')
 '''
 
 # indent

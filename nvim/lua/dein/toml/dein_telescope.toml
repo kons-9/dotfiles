@@ -1,0 +1,44 @@
+# Fuzzy Finder
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+depends = ['plenary.nvim', 'telescope-file-browser.nvim', 'nvim-treesitter']
+on_cmd = ['Telescope']
+tag = '0.1.x'
+lua_add = '''
+vim.keymap.set('n', '<leader>fe', ":Telescope file_browser<CR>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>ff', "<cmd>Telescope find_files<cr>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fg', "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fb', "<cmd>Telescope buffers<cr>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fh', "<cmd>Telescope help_tags<cr>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fm', "<cmd>Telescope man_pages<cr>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fc', "<cmd>Telescope commands<cr>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>ft', "<cmd>Telescope treesitter<cr>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fo', "<cmd>Telescope oldfiles<cr>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fq', "<cmd>Telescope quickfix<cr>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fd', "<cmd>Telescope diagnostics<cr>", { noremap = true, silent = true })
+'''
+lua_post_source = '''
+-- [telescope]
+require("telescope").load_extension "file_browser"
+
+local actions = require("telescope.actions")
+
+require("telescope").setup({
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-e>"] = actions.close,
+      },
+    },
+  },
+})
+
+'''
+[[plugins]]
+repo = 'nvim-telescope/telescope-file-browser.nvim'
+on_source = ['telescope.nvim']
+depends = ['plenary.nvim', 'telescope.nvim']
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+on_source = ['telescope.nvim']

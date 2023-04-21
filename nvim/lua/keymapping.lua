@@ -48,7 +48,7 @@ keymap('v', 'L', '$')
 
 -- nohilight
 -- keymap('n', '<C-h>', ':noh<cr>', { noremap = true, silent = true })
-keymap('n', 'M', ':noh<cr>', { noremap = true, silent = true })
+keymap('n', '<BS>', ':noh<cr>', { noremap = true, silent = true })
 
 -- etc...
 keymap('c', '%%', "getcmdtype()==':'?expand('%:h').'/': '%%'", { noremap = true, expr = true })
