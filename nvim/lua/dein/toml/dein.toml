@@ -26,3 +26,4 @@ hook_add = '''
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
   let g:indent_guides_guide_size = 1
 '''
+

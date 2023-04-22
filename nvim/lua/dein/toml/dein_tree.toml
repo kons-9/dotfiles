@@ -30,4 +30,4 @@ on_source = ['fern.vim']
 
 [[plugins]]
 repo = 'lambdalisue/nerdfont.vim'
-on_source = ['fern.vim']
+# on_source = ['fern.vim']

@@ -1,5 +1,4 @@
 ------------- dein.vim ------------------
-
 local home = os.getenv("HOME")
 local dein_dir = home .. '/.cache/nvim/dein'
 local toml_dir = home .. '/.config/nvim/lua/dein/toml'
@@ -33,8 +32,8 @@ if vim.call('dein#load_state', dein_dir) == 1 then
   vim.call('dein#load_toml', lsp_toml, { lazy = 1 })
   vim.call('dein#load_toml', insert_toml, { lazy = 1 })
   vim.call('dein#load_toml', telescope_toml, { lazy = 1 })
-  vim.call('dein#load_toml', depends_toml, { lazy = 1 })
-  -- vim.call('dein#load_toml', ddc_toml, { lazy = 1 })
+  vim.call('dein#load_toml', depends_toml, { lazy = 0 })
+  vim.call('dein#load_toml', ddc_toml, { lazy = 1 })
 
   vim.call('dein#end')
   vim.call('dein#save_state')

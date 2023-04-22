@@ -29,7 +29,7 @@ let g:closetag_enable_react_fragment = 1
 [[plugins]]
 repo = 'lambdalisue/gin.vim'
 on_cmd = ['Gin']
-depends=['vim-denops/denops.vim']
+depends=['denops.vim']
 
 # convinient
 [[plugins]]
