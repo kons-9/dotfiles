@@ -189,9 +189,15 @@ alias cd="z"
 alias ls="exa"
 alias vi='nvim'
 alias vim='nvim'
+
 function mcd(){
     mkdir $1
     cd $1
+}
+
+
+function mnvim(){
+  nvim --startuptime tmp.log +q && cat tmp.log && rm -rf tmp.log
 }
 
 # alias
@@ -215,9 +221,12 @@ alias inkscape=/Applications/Inkscape.app/Contents/MacOS/inkscape
 alias g++='g++-11'
 alias log_paper="python3 ~/Documents2/programming/creation/peper_manegement_system/simple_implementation/gui.py"
 
+function c(){
+    cd $1
+    ls
+}
 
 # path setting
 export PATH="$PATH:$HOME/Documents2/llvm-project/build/bin"
 export PATH="$PATH:/usr/local/Cellar/dosfstools/4.2/sbin"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="$PATH:$HOME/flutter/bin"
