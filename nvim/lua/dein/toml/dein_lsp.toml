@@ -1,21 +1,16 @@
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
 depends = ['mason.nvim']
-on_ft = ['lua', 'python', 'c++', 'rust', 'c', 'markdown']
 
 [[plugins]]
 repo = 'williamboman/mason.nvim' 
 build = ':MasonUpdate'
-on_source = ['lspconfig']
-on_ft = ['lua']
 depends = ['nvim-lspconfig']
-on_cmd = ['Mason', 'MasonUpdate']
 
 [[plugins]]
 repo = 'williamboman/mason-lspconfig.nvim'
-on_source = ['lspconfig']
-on_ft = ['lua']
-lua_post_source = '''
+depends = ['nvim-lspconfig']
+lua_add = '''
 require('dein.lspserver')
 '''
 
