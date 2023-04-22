@@ -25,6 +25,7 @@ if vim.call('dein#load_state', dein_dir) == 1 then
   local insert_toml = toml_dir .. '/dein_insert.toml'
   local telescope_toml = toml_dir .. '/dein_telescope.toml'
   local depends_toml = toml_dir .. '/dein_depends.toml'
+  local ddc_toml = toml_dir .. '/dein_ddc.toml'
 
   vim.call('dein#load_toml', toml, { lazy = 0 })
   vim.call('dein#load_toml', lazy_toml, { lazy = 1 })
@@ -33,6 +34,7 @@ if vim.call('dein#load_state', dein_dir) == 1 then
   vim.call('dein#load_toml', insert_toml, { lazy = 1 })
   vim.call('dein#load_toml', telescope_toml, { lazy = 1 })
   vim.call('dein#load_toml', depends_toml, { lazy = 1 })
+  vim.call('dein#load_toml', ddc_toml, { lazy = 1 })
 
   vim.call('dein#end')
   vim.call('dein#save_state')
