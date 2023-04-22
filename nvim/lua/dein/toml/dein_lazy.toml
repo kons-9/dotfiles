@@ -66,6 +66,7 @@ keymap('t', '<C-`>', '<C-\\><C-n>:ToggleTermToggleAll<CR>')
 [[plugins]]
 repo = 'tpope/vim-commentary'
 on_cmd = ['Commentary']
+on_event = ['ModeChanged']
 lua_add = '''
 vim.keymap.set('n', 'gcc', "<cmd>Commentary<cr>", { noremap = true, silent = true })
 '''
