@@ -73,6 +73,7 @@ require('lspconfig')['pyright'].setup {
   -- capabilities = capabilities
 }
 
+
 require('lspconfig')['lua_ls'].setup {
   on_attach = on_attach,
   flags = lsp_flags,

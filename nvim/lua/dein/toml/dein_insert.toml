@@ -4,6 +4,9 @@
 [[plugins]]
 repo = 'github/copilot.vim'
 on_event = 'InsertEnter'
+hook_post_source = '''
+let g:copilot_hide_during_completion = 0
+'''
 
 [[plugins]]
 repo = 'windwp/nvim-autopairs'

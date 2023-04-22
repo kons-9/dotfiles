@@ -34,7 +34,7 @@ if vim.call('dein#load_state', dein_dir) == 1 then
   vim.call('dein#load_toml', insert_toml, { lazy = 1 })
   vim.call('dein#load_toml', telescope_toml, { lazy = 1 })
   vim.call('dein#load_toml', depends_toml, { lazy = 1 })
-  vim.call('dein#load_toml', ddc_toml, { lazy = 1 })
+  -- vim.call('dein#load_toml', ddc_toml, { lazy = 1 })
 
   vim.call('dein#end')
   vim.call('dein#save_state')
