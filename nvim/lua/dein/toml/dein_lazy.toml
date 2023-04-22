@@ -38,6 +38,9 @@ on_cmd = ['QuickRun']
 lua_add = '''
 vim.keymap.set('n', '<leader>rr', "<cmd>QuickRun<cr>", { noremap = true, silent = true })
 '''
+lua_post_source = '''
+vim.g.quickrun_config.python = {'command' : 'python3'}
+'''
 
 # terminal
 [[plugins]]
