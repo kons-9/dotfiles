@@ -54,7 +54,7 @@ augroup numbertoggle
 augroup END
 ]]
 vim.opt.cursorline = true
-vim.opt.completeopt = 'menu,menuone,noinsert'
+vim.opt.completeopt = 'menu,menuone'
 
 -- vim.opt.wildchar='<C-n>'
 vim.cmd [[
