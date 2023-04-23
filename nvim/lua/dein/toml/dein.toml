@@ -1,9 +1,20 @@
 # manage dein itself
 [[plugins]]
 repo = 'Shougo/dein.vim'
+hook_add = '''
+  :command Dre :call dein#recache_runtimepath()
+'''
 
 [[plugins]]
 repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'windwp/nvim-autopairs'
+# on_event = 'InsertEnter'
+# lua_post_source = '''
+lua_post_source='''
+require("nvim-autopairs").setup({ map_cr=false })
+'''
 
 ###################### appearance ############################
 
@@ -26,4 +37,8 @@ hook_add = '''
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
   let g:indent_guides_guide_size = 1
 '''
+
+# notify
+[[plugins]]
+repo = "rcarriga/nvim-notify"
 
