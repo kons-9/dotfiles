@@ -1,0 +1,7 @@
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+on_source = ['telescope.nvim']
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+# on_source = ['gin.vim', 'ddc.vim', 'denops-popup-preview.vim', 'denops-helloworld.vim']

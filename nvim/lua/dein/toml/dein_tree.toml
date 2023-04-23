@@ -1,0 +1,33 @@
+# tree 
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+on_cmd = ['Fern']
+on_source = ['fern-hijack.vim']
+lua_add = '''
+local g = vim.g
+local keymap = vim.api.nvim_set_keymap
+
+keymap('n', '<c-t>', ':Fern . -right -drawer -toggle<cr>', { noremap = true, silent = true })
+'''
+
+# [[plugins]]
+# repo = 'lambdalisue/fern-hijack.vim'
+# on_event = ['DirChanged']
+# if = "isdirectory(expand('%:p'))"
+# depends = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+hook_add = '''
+  let g:fern#renderer = 'nerdfont'
+'''
+depends = ['fern.vim', 'nerdfont.vim']
+on_source = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/fern-git-status.vim'
+on_source = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+# on_source = ['fern.vim']

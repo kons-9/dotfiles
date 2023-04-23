@@ -1,0 +1,69 @@
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+depends = ['denops.vim']
+on_event = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged' ]
+hook_post_source = '''
+source ~/.config/nvim/lua/dein/ddc.vim
+'''
+
+# sources
+[[plugins]]
+repo = 'Shougo/ddc-source-nvim-lsp'
+depends = ['denops.vim', 'ddc.vim']
+on_source = ['ddc.vim']
+[[plugins]]
+repo = 'Shougo/ddc-source-around'
+depends = ['denops.vim', 'ddc.vim']
+on_source = ['ddc.vim']
+[[plugins]]
+repo = 'Shougo/ddc-source-rg'
+depends = ['denops.vim', 'ddc.vim']
+on_source = ['ddc.vim']
+
+[[plugins]]
+repo = 'LumaKernel/ddc-source-file'
+depends = ['denops.vim', 'ddc.vim']
+on_source = ['ddc.vim']
+
+[[plugins]]
+repo = 'Shougo/ddc-source-cmdline'
+depends = ['denops.vim', 'ddc.vim']
+on_source = ['ddc.vim']
+[[plugins]]
+repo = 'Shougo/ddc-source-cmdline-history'
+depends = ['denops.vim', 'ddc.vim']
+on_source = ['ddc.vim']
+
+# filter and sorter and converter
+[[plugins]]
+repo = 'tani/ddc-fuzzy'
+depends = ['denops.vim', 'ddc.vim']
+on_source = ['ddc.vim']
+
+
+# UI
+[[plugins]]
+repo = 'Shougo/pum.vim'
+depends = ['denops.vim', 'ddc.vim']
+on_source = ['ddc.vim']
+
+[[plugins]]
+repo = 'Shougo/ddc-ui-pum'
+depends = ['denops.vim', 'ddc.vim', 'pum.vim']
+on_source = ['ddc.vim']
+
+# preview
+[[plugins]]
+repo = 'matsui54/denops-popup-preview.vim'
+depends = ['denops.vim', 'ddc.vim']
+on_source = ['ddc.vim']
+hook_source = '''
+call popup_preview#enable()
+'''
+[[plugins]]
+repo = 'matsui54/denops-signature_help'
+depends = ['denops.vim']
+on_source = ['ddc.vim']
+hook_source = '''
+call signature_help#enable()
+'''
