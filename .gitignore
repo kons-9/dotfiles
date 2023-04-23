@@ -1,4 +1,5 @@
 nvim-setting/nvim/dein/repos/github.com
+nvim/lua_old
 .cache
 nvim-setting/nvim/dein
 .vimsessions
