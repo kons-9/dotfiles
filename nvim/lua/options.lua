@@ -6,6 +6,8 @@ syntax on
 filetype plugin indent on
 ]]
 
+--window
+vim.opt.splitright = true
 -- buffer
 vim.opt.hidden = true
 vim.opt.autowrite = true

@@ -84,30 +84,6 @@ function! CommandlinePost() abort
 endfunction
 
 
-" <TAB>: completion.
-" inoremap <silent><expr> <TAB>
-" \ pumvisible() ? '<C-n>' :
-" \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-" \ '<TAB>' : ddc#map#manual_complete()
-
-" <S-TAB>: completion back.
-" inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
-
-" Use ddc.
 
 call ddc#enable()
 
-" lua << EOF
-" local remap = vim.api.nvim_set_keymap
-" local npairs = require('nvim-autopairs')
-" npairs.setup({map_cr = false})
-" _G.MUtils= {}
-" _G.MUtils.completion_confirm=function()
-" if vim.call('pum#visible') ~= 0  then
-"       return vim.fn["pum#map#confirm"]()
-"   else
-"     return npairs.autopairs_cr()
-"   end
-" end
-" remap("i", "<CR>", "v:lua.MUtils.completion_confirm()", {expr = true , noremap = true})
-" EOF

@@ -9,8 +9,8 @@ depends = ['nvim-lspconfig']
 
 [[plugins]]
 repo = 'williamboman/mason-lspconfig.nvim'
-depends = ['nvim-lspconfig']
-lua_post_source = '''
+depends = ['nvim-lspconfig', 'mason.nvim']
+lua_add = '''
 require('dein.lspserver')
 '''
 
