@@ -37,9 +37,12 @@ repo = 'thinca/vim-quickrun'
 on_cmd = ['QuickRun']
 lua_add = '''
 vim.keymap.set('n', '<leader>rr', "<cmd>QuickRun<cr>", { noremap = true, silent = true })
+vim.g.quickrun_config = {}
+local tmp = vim.g.quickrun_config 
+tmp.python = {command = 'python3'}
+vim.g.quickrun_config = tmp
 '''
 lua_post_source = '''
-vim.g.quickrun_config.python = {'command' : 'python3'}
 '''
 
 # terminal

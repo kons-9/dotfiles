@@ -70,7 +70,14 @@ local lsp_flags = {
 require('lspconfig')['pyright'].setup {
   on_attach = on_attach,
   flags = lsp_flags,
-  -- capabilities = capabilities
+  on_init = function(client)
+   client.config.settings.python.pythonPath = vim.fn.exepath('python3')
+   end,
+  -- settings = {
+  --   python = {
+  --     pythonPath = '/Library/Frameworks/Python.framework/Versions/3.8/bin/python3',
+  --   }
+  -- }
 }
 
 

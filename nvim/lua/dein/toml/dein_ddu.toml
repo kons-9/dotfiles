@@ -27,6 +27,7 @@ call ddu#custom#patch_global({
     \     },
     \   }
     \ })
+nnoremap <silent> <leader>dd <Cmd>Ddu file_rec<CR>
 '''
 
 [[plugins]]
@@ -58,7 +59,6 @@ function! s:ddu_filter_my_settings() abort
   nnoremap <buffer><silent> q
   \ <Cmd>close<CR>
 endfunction
-nnoremap <silent> <leader>dd <Cmd>Ddu file_rec<CR>
 '''
 
 [[plugins]]
