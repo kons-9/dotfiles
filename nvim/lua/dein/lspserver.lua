@@ -73,11 +73,11 @@ require('lspconfig')['pyright'].setup {
   on_init = function(client)
    client.config.settings.python.pythonPath = vim.fn.exepath('python3')
    end,
-  -- settings = {
-  --   python = {
-  --     pythonPath = '/Library/Frameworks/Python.framework/Versions/3.8/bin/python3',
-  --   }
-  -- }
+  settings = {
+    python = {
+      pythonPath = '/Library/Frameworks/Python.framework/Versions/3.8/bin/python3',
+    }
+  }
 }
 
 
