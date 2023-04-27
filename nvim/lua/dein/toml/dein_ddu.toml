@@ -6,7 +6,13 @@ call ddu#custom#patch_global({
     \   'ui': 'ff',
     \   'uiParams': {
     \     'previewFloating': v:true,
-    \     'split': 'floating'
+    \     'split': 'floating',
+    \     'startFilter': v:true,
+    \     'prompt': '> ',
+    \     'winCol': &columns / 8,
+    \     'winHeight': 40,
+    \     'winRow': &lines / 4 - 8,
+    \     'winWidth': &columns * 3 / 4,
     \   },
     \   'sources': [{'name': 'file_rec', 'params': {}}],
     \   'sourceOptions': {
@@ -52,6 +58,7 @@ function! s:ddu_filter_my_settings() abort
   nnoremap <buffer><silent> q
   \ <Cmd>close<CR>
 endfunction
+nnoremap <silent> <leader>dd <Cmd>Ddu file_rec<CR>
 '''
 
 [[plugins]]
