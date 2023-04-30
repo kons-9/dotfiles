@@ -6,6 +6,8 @@ syntax on
 filetype plugin indent on
 ]]
 
+--window
+vim.opt.splitright = true
 -- buffer
 vim.opt.hidden = true
 vim.opt.autowrite = true
@@ -22,7 +24,7 @@ vim.opt.history = 5000
 
 -- tab indent
 vim.opt.expandtab = true
-vim.opt.tabstop = 4
+vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.autoindent = true
 vim.opt.smartindent = true

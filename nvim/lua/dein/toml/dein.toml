@@ -10,11 +10,11 @@ repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'windwp/nvim-autopairs'
-# on_event = 'InsertEnter'
-# lua_post_source = '''
-lua_post_source='''
-require("nvim-autopairs").setup({ map_cr=false })
+lua_add='''
+require("nvim-autopairs").setup()
 '''
+
+
 
 ###################### appearance ############################
 

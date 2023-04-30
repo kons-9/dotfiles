@@ -1,0 +1,156 @@
+[[plugins]]
+repo = 'Shougo/ddu.vim'
+depends = ['denops.vim']
+hook_add = '''
+call ddu#custom#patch_global({
+    \   'ui': 'ff',
+    \   'uiParams': {
+    \     'ff': {
+    \        'previewFloating': v:true,
+    \        'previewSplit': "vertical",
+    \        'previewHeight': &lines - 8,
+    \        'previewWidth': &columns * 3 / 8,
+    \        'previewRow': &lines / 4 - 8,
+    \        'winWidth': &columns * 3 / 8,
+    \        'winCol': &columns / 8,
+    \        'winRow': 3,
+    \        'winHeight': &lines - 8,
+    \        'filterSplitDirection': 'floating',
+    \        'split': 'floating',
+    \        'startFilter': v:true,
+    \        'autoAction': {
+    \          'name': 'preview',
+    \          'delay': 50,
+    \        },
+    \        'prompt': '>> ',
+    \     },
+    \   },
+    \   'sources': [
+    \        {'name': 'file_rec', 'params': {}},
+    \        {'name': 'file_old', 'params': {}},
+    \        {'name': 'rg', 'params': {}},
+    \        {'name': 'buffer', 'params': {}},
+    \        {'name': 'help', 'params': {}},
+    \        {'name': 'mr', 'params': {}},
+    \        {'name': 'man', 'params': {}},
+    \   ],
+    \   'sourceParams': {
+    \     'rg': {
+    \       'args' : ['--json'],
+    \     },
+    \   },
+    \   'sourceOptions': {
+    \     '_': {
+    \       'matchers': ['matcher_fzf'],
+    \       'ignoreCase': v:true,
+    \     },
+    \     'man': {
+    \       'volatile': v:true,
+    \     },
+    \     'rg': {
+    \       'matchers': ['converter_display_word'],
+    \       'volatile': v:true,
+    \     },
+    \   },
+    \   'filterParams': {
+    \     'matcher_fzf': {
+    \       'highlightMatched': 'Search',
+    \     },
+    \   },
+    \   'kindOptions': {
+    \     'file': {
+    \       'defaultAction': 'open',
+    \     },
+    \     'man': {
+    \       'defaultAction': 'open',
+    \     },
+    \     'help': {
+    \       'defaultAction': 'open',
+    \     },
+    \   }
+    \ })
+    " \       'args': ['--column', '--no-heading', '--color', 'never'],
+nnoremap <silent> <leader>ff <Cmd>Ddu file_rec<CR>
+nnoremap <silent> <leader>fo <Cmd>Ddu file_old<CR>
+nnoremap <silent> <leader>fg <Cmd>Ddu rg<CR>
+nnoremap <silent> <leader>fb <Cmd>Ddu buffer<CR>
+nnoremap <silent> <leader>fh <Cmd>Ddu help<CR>
+nnoremap <silent> <leader>fr <Cmd>Ddu mr<CR>
+nnoremap <silent> <leader>fm <Cmd>Ddu man<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/ddu-commands.vim'
+depends = ['ddu.vim', 'denops.vim']
+
+[[plugins]]
+repo = 'Shougo/ddu-ui-ff'
+depends = ['ddu.vim', 'denops.vim']
+hook_add = '''
+autocmd FileType ddu-ff call s:ddu_my_settings()
+function! s:ddu_my_settings() abort
+  nnoremap <buffer><silent> <CR>
+        \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+  nnoremap <buffer><silent> <Space>
+        \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
+  nnoremap <buffer><silent> i
+        \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
+  nnoremap <buffer><silent> q
+        \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+  nnoremap <buffer><silent> p
+        \ <Cmd>call ddu#ui#ff#do_action('preview')<CR>
+  nnoremap <buffer><silent> <C-e>
+        \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+endfunction
+
+autocmd FileType ddu-ff-filter call s:ddu_filter_my_settings()
+function! s:ddu_filter_my_settings() abort
+  call ddu#ui#ff#do_action("preview")
+  inoremap <buffer><silent> <CR>
+        \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+  imap <buffer><silent> <esc>
+        \ <esc><Cmd>close<CR>
+  inoremap <buffer><silent> <C-e>
+        \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+  inoremap <buffer> <C-n>
+        \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')+1,0)<Bar>redraw")<CR>
+  inoremap <buffer> <C-p>
+        \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')-1,0)<Bar>redraw")<CR>
+
+endfunction
+'''
+
+[[plugins]]
+repo = 'Shougo/ddu-source-file_rec'
+depends = ['ddu.vim', 'denops.vim']
+[[plugins]]
+repo = 'Shougo/ddu-source-file_old'
+depends = ['ddu.vim', 'denops.vim']
+[[plugins]]
+repo = 'shun/ddu-source-rg'
+depends = ['ddu.vim', 'denops.vim']
+[[plugins]]
+repo = 'shun/ddu-source-buffer'
+depends = ['ddu.vim', 'denops.vim']
+[[plugins]]
+repo = 'matsui54/ddu-source-help'
+depends = ['ddu.vim', 'denops.vim']
+[[plugins]]
+repo = 'kuuote/ddu-source-mr'
+depends = ['ddu.vim', 'denops.vim', 'mr.vim']
+[[plugins]]
+repo = 'matsui54/ddu-source-man'
+depends = ['ddu.vim', 'denops.vim']
+
+[[plugins]]
+repo = 'Shougo/ddu-filter-converter_display_word'
+depends = ['ddu.vim', 'denops.vim']
+[[plugins]]
+repo = 'Shougo/ddu-filter-matcher_substring'
+depends = ['ddu.vim', 'denops.vim']
+[[plugins]]
+repo = 'yuki-yano/ddu-filter-fzf'
+depends = ['ddu.vim', 'denops.vim']
+[[plugins]]
+repo = 'Shougo/ddu-kind-file'
+depends = ['ddu.vim', 'denops.vim']
