@@ -1,11 +1,18 @@
 [[plugins]]
 repo = 'Shougo/ddu-commands.vim'
-depends = ['ddu.vim', 'denops.vim']
+hook_add = '''
+nnoremap <silent> <leader>ff <Cmd>Ddu file_rec<CR>
+nnoremap <silent> <leader>fo <Cmd>Ddu file_old<CR>
+nnoremap <silent> <leader>fg <Cmd>Ddu rg<CR>
+nnoremap <silent> <leader>fb <Cmd>Ddu buffer<CR>
+nnoremap <silent> <leader>fh <Cmd>Ddu help<CR>
+nnoremap <silent> <leader>fr <Cmd>Ddu mr<CR>
+nnoremap <silent> <leader>fm <Cmd>Ddu man<CR>
+'''
 
 [[plugins]]
 repo = 'Shougo/ddu.vim'
-depends = ['denops.vim', 'ddu-commands.vim']
-on_cmd = 'Ddu'
+# on_cmd = 'Ddu'
 hook_source = '''
 call ddu#custom#patch_global({
     \   'ui': 'ff',
@@ -77,21 +84,10 @@ call ddu#custom#patch_global({
     " \       'args': ['--column', '--no-heading', '--color', 'never'],
 '''
 
-hook_add = '''
-nnoremap <silent> <leader>ff <Cmd>Ddu file_rec<CR>
-nnoremap <silent> <leader>fo <Cmd>Ddu file_old<CR>
-nnoremap <silent> <leader>fg <Cmd>Ddu rg<CR>
-nnoremap <silent> <leader>fb <Cmd>Ddu buffer<CR>
-nnoremap <silent> <leader>fh <Cmd>Ddu help<CR>
-nnoremap <silent> <leader>fr <Cmd>Ddu mr<CR>
-nnoremap <silent> <leader>fm <Cmd>Ddu man<CR>
-'''
 
 
 [[plugins]]
 repo = 'Shougo/ddu-ui-ff'
-depends = ['ddu.vim', 'denops.vim']
-on_source='ddu.vim'
 
 [plugins.ftplugin]
 ddu-ff = '''
@@ -124,46 +120,24 @@ ddu-ff-filter = '''
 
 [[plugins]]
 repo = 'Shougo/ddu-source-file_rec'
-depends = ['ddu.vim', 'denops.vim']
-on_source = 'ddu.vim'
 [[plugins]]
 repo = 'Shougo/ddu-source-file_old'
-depends = ['ddu.vim', 'denops.vim']
-on_source = 'ddu.vim'
 [[plugins]]
 repo = 'shun/ddu-source-rg'
-depends = ['ddu.vim', 'denops.vim']
-on_source = 'ddu.vim'
 [[plugins]]
 repo = 'shun/ddu-source-buffer'
-depends = ['ddu.vim', 'denops.vim']
-on_source = 'ddu.vim'
 [[plugins]]
 repo = 'matsui54/ddu-source-help'
-depends = ['ddu.vim', 'denops.vim']
-on_source = 'ddu.vim'
 [[plugins]]
 repo = 'kuuote/ddu-source-mr'
-depends = ['ddu.vim', 'denops.vim', 'mr.vim']
-on_source = 'ddu.vim'
 [[plugins]]
 repo = 'matsui54/ddu-source-man'
-depends = ['ddu.vim', 'denops.vim']
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-filter-converter_display_word'
-depends = ['ddu.vim', 'denops.vim']
-on_source = 'ddu.vim'
 [[plugins]]
 repo = 'Shougo/ddu-filter-matcher_substring'
-depends = ['ddu.vim', 'denops.vim']
-on_source = 'ddu.vim'
 [[plugins]]
 repo = 'yuki-yano/ddu-filter-fzf'
-depends = ['ddu.vim', 'denops.vim']
-on_source = 'ddu.vim'
 [[plugins]]
 repo = 'Shougo/ddu-kind-file'
-depends = ['ddu.vim', 'denops.vim']
-on_source = 'ddu.vim'
