@@ -1,8 +1,10 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
 depends = ['denops.vim']
-on_event = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged' ]
-hook_post_source = '''
+on_event = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged', 'CmdlineEnter'] 
+on_source = 'pum.vim'
+
+hook_source = '''
 source ~/.config/nvim/lua/dein/ddc.vim
 '''
 
@@ -39,6 +41,45 @@ on_source = ['ddc.vim']
 repo = 'tani/ddc-fuzzy'
 depends = ['denops.vim', 'ddc.vim']
 on_source = ['ddc.vim']
+on_func = ['CommandlinePre']
+
+hook_add = '''
+nnoremap :       <Cmd>call CommandlinePre()<CR>:
+'''
+hook_source = '''
+inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
+inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
+
+" pum settings of command line
+function! CommandlinePre() abort
+    cnoremap <Tab>   <Cmd>call pum#map#insert_relative(+1)<CR>
+    cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+    cnoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
+    cnoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+    cnoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+    " cmap <expr><CR>   pum#visible() ? '<C-y>' : '<CR>'
+    cnoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+
+    autocmd User DDCCmdlineLeave ++once call CommandlinePost()
+
+    " Enable command line completion for the buffer
+    call ddc#enable_cmdline_completion()
+endfunction
+
+function! CommandlinePost() abort
+    silent! cunmap <Tab>
+    silent! cunmap <S-Tab>
+    silent! cunmap <C-n>
+    silent! cunmap <C-p>
+    silent! cunmap <C-y>
+    silent! cunmap <CR>
+    silent! cunmap <C-e>
+endfunction
+'''
 
 
 # UI

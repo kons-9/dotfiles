@@ -31,7 +31,7 @@ if vim.call('dein#load_state', dein_dir) == 1 then
   vim.call('dein#load_toml', toml, { lazy = 0 })
   vim.call('dein#load_toml', lsp_toml, { lazy = 0 })
   vim.call('dein#load_toml', depends_toml, { lazy = 0 })
-  vim.call('dein#load_toml', ddu_toml, { lazy = 0 })
+  vim.call('dein#load_toml', ddu_toml, { lazy = 1 })
 
   vim.call('dein#load_toml', lazy_toml, { lazy = 1 })
   vim.call('dein#load_toml', tree_toml, { lazy = 1 })
@@ -40,6 +40,7 @@ if vim.call('dein#load_state', dein_dir) == 1 then
   vim.call('dein#load_toml', ddc_toml, { lazy = 1 })
 
   vim.call('dein#end')
+  vim.call('dein#call_hook', 'source')
   vim.call('dein#save_state')
 
   -- Required:

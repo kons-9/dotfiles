@@ -5,3 +5,5 @@ on_source = ['telescope.nvim']
 [[plugins]]
 repo = 'vim-denops/denops.vim'
 # on_source = ['gin.vim', 'ddc.vim', 'denops-popup-preview.vim', 'denops-helloworld.vim']
+[[plugins]]
+repo = 'lambdalisue/mr.vim'

@@ -1,14 +1,15 @@
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
 depends = ['mason.nvim']
-lua_post_source = '''
-require('dein.lspserver')
-'''
+
 
 [[plugins]]
 repo = 'williamboman/mason.nvim' 
 build = ':MasonUpdate'
 depends = ['nvim-lspconfig']
+lua_source = '''
+require('dein.lspserver')
+'''
 
 [[plugins]]
 repo = 'williamboman/mason-lspconfig.nvim'
