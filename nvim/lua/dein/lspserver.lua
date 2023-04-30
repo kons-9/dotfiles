@@ -64,18 +64,17 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
--- Set up lspconfig.
--- local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require('lspconfig')['pyright'].setup {
   on_attach = on_attach,
   flags = lsp_flags,
-  on_init = function(client)
-   client.config.settings.python.pythonPath = vim.fn.exepath('python3')
-   end,
   settings = {
     python = {
-      pythonPath = '/Library/Frameworks/Python.framework/Versions/3.8/bin/python3',
+      pythonPath = '/usr/local/bin/python3.11',
+      analysis = {
+        -- autoSearchPaths = true,
+        -- diagnosticMode = "workspace",
+      },
     }
   }
 }
