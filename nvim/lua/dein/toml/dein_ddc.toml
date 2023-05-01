@@ -1,28 +1,13 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
 on_source = 'pum.vim'
+on_event = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged'] 
+on_func = ['CommandlinePre']
 
 hook_source = '''
 source ~/.config/nvim/lua/dein/ddc.vim
 '''
 
-# sources
-[[plugins]]
-repo = 'Shougo/ddc-source-nvim-lsp'
-[[plugins]]
-repo = 'Shougo/ddc-source-around'
-[[plugins]]
-repo = 'Shougo/ddc-source-rg'
-[[plugins]]
-repo = 'LumaKernel/ddc-source-file'
-[[plugins]]
-repo = 'Shougo/ddc-source-cmdline'
-[[plugins]]
-repo = 'Shougo/ddc-source-cmdline-history'
-
-# filter and sorter and converter
-[[plugins]]
-repo = 'tani/ddc-fuzzy'
 
 # UI
 [[plugins]]
@@ -30,11 +15,11 @@ repo = 'Shougo/pum.vim'
 depends = ['ddc.vim']
 on_source = ['ddc.vim']
 on_func = ['CommandlinePre']
-on_event = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged', 'CmdlineEnter'] 
 
 hook_add = '''
 nnoremap :       <Cmd>call CommandlinePre()<CR>:
 '''
+
 hook_source = '''
 inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
 inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
@@ -69,9 +54,26 @@ function! CommandlinePost() abort
     silent! cunmap <C-e>
 endfunction
 '''
-
 [[plugins]]
 repo = 'Shougo/ddc-ui-pum'
+
+# sources
+[[plugins]]
+repo = 'Shougo/ddc-source-nvim-lsp'
+[[plugins]]
+repo = 'Shougo/ddc-source-around'
+[[plugins]]
+repo = 'Shougo/ddc-source-rg'
+[[plugins]]
+repo = 'LumaKernel/ddc-source-file'
+[[plugins]]
+repo = 'Shougo/ddc-source-cmdline'
+[[plugins]]
+repo = 'Shougo/ddc-source-cmdline-history'
+
+# filter and sorter and converter
+[[plugins]]
+repo = 'tani/ddc-fuzzy'
 
 # preview
 [[plugins]]

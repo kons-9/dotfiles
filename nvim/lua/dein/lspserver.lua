@@ -115,6 +115,25 @@ require('lspconfig')['lua_ls'].setup {
   -- capabilities = capabilities
 }
 
+require('lspconfig')['omnisharp_mono'].setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  -- Server-specific settings...
+  cmd = { "mono", "~/.local/share/nvim/mason/packages/omnisharp-mono/omnisharp/OmniSharp.exe" },
+  enable_roslyn_analyzers = true,
+  enable_import_completion = true,
+}
+
+require('lspconfig')['tsserver'].setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  -- Server-specific settings...
+  settings = {
+    ["tsserver"] = {
+    },
+  },
+  -- capabilities = capabilities
+}
 require('lspconfig')['rust_analyzer'].setup {
   on_attach = on_attach,
   flags = lsp_flags,
