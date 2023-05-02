@@ -45,7 +45,7 @@ hook_add = '''
 # repo = "MunifTanjim/nui.nvim"
 # [[plugins]]
 # repo = "folke/noice.nvim"
-# hook_source = '''
+# lua_source = '''
 # local noice = require("noice")
 
 # local function myMiniView(pattern, kind)
@@ -62,7 +62,7 @@ hook_add = '''
 
 # noice.setup({
 # 	messages = {
-# 		view_search = "mini",
+# 		view_search = "popup",
 # 	},
 # 	routes = {
 # 		{

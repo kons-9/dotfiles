@@ -1,9 +1,10 @@
 " Customize global settings
 call ddc#custom#patch_global({
     \ 'ui': 'pum',
-    \ 'sources': ['nvim-lsp', 'around', 'rg', 'file'],
+    \ 'sources': ['file','nvim-lsp', 'around', 'rg'],
     \ 'cmdlineSources': {
     \   ':': ['cmdline','cmdline-history', 'file', 'around'],
+    \   '/': ['rg','file', 'around'],
     \ },
     \ 'autoCompleteEvents': [
     \   'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged', 'CmdlineEnter'
@@ -12,39 +13,36 @@ call ddc#custom#patch_global({
     \   _: #{
     \     matchers: ['matcher_fuzzy'],
     \     sorters: ['sorter_fuzzy'],
-    \     converters: ['converter_fuzzy']
+    \     converters: ['converter_fuzzy'],
+    \     ignoreCase: v:true,
     \   },
     \   nvim-lsp: #{
-    \     ignoreCase: v:true,
     \     mark: 'lsp',
-    \     forceCompletionPattern: '\.\w*|:\w*|->\w*' 
+    \     forceCompletionPattern: '\.\w*|:\w*|->\w*',
     \   },
     \   around: #{
     \     mark:'a',
-    \     ignoreCase: v:true 
     \   },
     \   rg: #{
     \     mark:'rg',
-    \     ignoreCase: v:true 
     \   },
     \   cmdline: #{
     \     mark:'cmd',
-    \     ignoreCase: v:true 
     \   },
     \   cmdline-history: #{
     \     mark:'hist',
-    \     ignoreCase: v:true 
     \   },
     \   file: #{
     \     mark:'file',
-    \     ignoreCase: v:true 
     \   },
     \ },
     \ 'sourceParams' : #{
     \   around: #{ maxSize: 500 },
     \ },
     \ 'uiParams': #{
-    \   pum: #{ insert: v:false },
+    \   pum: #{ 
+    \     insert: v:false,
+    \   },
     \ },
     \ })
 
