@@ -4,9 +4,7 @@ local dein_dir = home .. '/.cache/nvim/dein'
 local toml_dir = home .. '/.config/nvim/lua/dein/toml'
 local dein_source = dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
-
-vim.api.nvim_set_var('dein#install_github_api_token',
-  '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')
+vim.api.nvim_set_var('dein#install_github_api_token', os.getenv('DEINGITTOKEN'))
 
 if vim.fn.isdirectory(dein_dir) == 0 then
   vim.cmd([[execute '!git clone https://github.com/Shougo/dein.vim ]] .. dein_source .. "'")

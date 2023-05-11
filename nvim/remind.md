@@ -13,5 +13,6 @@
 "[d" = go to the previous diagnosis.
 "d]" = go to the next diagnosis.
 " ca" = do the code action.
+" rn" = rename
 
 ## telescope

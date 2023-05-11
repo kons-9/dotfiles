@@ -43,6 +43,8 @@ keymap('n', '<Right>', '<Nop>')
 -- first last
 keymap('n', 'H', '^')
 keymap('n', 'L', '$')
+keymap('o', 'H', '^')
+keymap('o', 'L', '$')
 keymap('v', 'H', '^')
 keymap('v', 'L', '$')
 

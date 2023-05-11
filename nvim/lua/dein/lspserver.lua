@@ -70,7 +70,7 @@ require('lspconfig')['pyright'].setup {
   flags = lsp_flags,
   settings = {
     python = {
-      pythonPath = '/usr/local/bin/python3.11',
+      -- pythonPath = '/usr/local/bin/python3.11',
       analysis = {
         -- autoSearchPaths = true,
         -- diagnosticMode = "workspace",
@@ -150,6 +150,7 @@ require('lspconfig')['grammarly'].setup {
     clientId = "client_JspPpK94Xy57ZM463XJqkz",
   }
 }
+
 require 'lspconfig'['ccls'].setup {
   init_options = {
     compilationDatabaseDirectory = "build",

@@ -230,3 +230,4 @@ function c(){
 export PATH="$PATH:$HOME/Documents2/llvm-project/build/bin"
 export PATH="$PATH:/usr/local/Cellar/dosfstools/4.2/sbin"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="/Library/Frameworks/Python.framework/Versions/3.8/bin:${PATH}"
