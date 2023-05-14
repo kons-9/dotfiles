@@ -38,6 +38,12 @@ hook_add = '''
   let g:indent_guides_guide_size = 1
 '''
 
+# Colorscheme
+
+# [[plugins]]
+# repo = 'morhetz/gruvbox'
+# on_cmd = ['colorscheme gruvbox']
+
 # notify
 # [[plugins]]
 # repo = "rcarriga/nvim-notify"

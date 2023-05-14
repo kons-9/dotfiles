@@ -121,25 +121,25 @@ vim.keymap.set('n', 'gcc', "<cmd>Commentary<cr>", { noremap = true, silent = tru
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
 on_event = 'CursorMoved'
-[[plugins]]
-repo = 'gen740/SmoothCursor.nvim'
-on_event = 'CursorMoved'
-lua_post_source='''
-require('smoothcursor').setup({
-  speed = 50,
-  fancy = {
-    enable = true,       -- enable fancy mode
-    head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
-    body = {
-      { cursor = "", texthl = "SmoothCursorRed" },
-      { cursor = "", texthl = "SmoothCursorOrange" },
-      { cursor = "●", texthl = "SmoothCursorYellow" },
-      { cursor = "●", texthl = "SmoothCursorGreen" },
-      { cursor = "•", texthl = "SmoothCursorAqua" },
-      { cursor = ".", texthl = "SmoothCursorBlue" },
-      { cursor = ".", texthl = "SmoothCursorPurple" },
-    },
-    tail = { cursor = nil, texthl = "SmoothCursor" }
-  },
-})
-'''
+# [[plugins]]
+# repo = 'gen740/SmoothCursor.nvim'
+# on_event = 'CursorMoved'
+# lua_post_source='''
+# require('smoothcursor').setup({
+#   speed = 50,
+#   fancy = {
+#     enable = true,       -- enable fancy mode
+#     head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
+#     body = {
+#       { cursor = "", texthl = "SmoothCursorRed" },
+#       { cursor = "", texthl = "SmoothCursorOrange" },
+#       { cursor = "●", texthl = "SmoothCursorYellow" },
+#       { cursor = "●", texthl = "SmoothCursorGreen" },
+#       { cursor = "•", texthl = "SmoothCursorAqua" },
+#       { cursor = ".", texthl = "SmoothCursorBlue" },
+#       { cursor = ".", texthl = "SmoothCursorPurple" },
+#     },
+#     tail = { cursor = nil, texthl = "SmoothCursor" }
+#   },
+# })
+# '''

@@ -8,11 +8,11 @@ if vim.g.vscode then
   -- must have nvim
   require('env/vscode')
 else
-  require('colors')
   require('abbreviation')
   require('options')
   require('keymapping')
   require('dein')
+  require('colors')
 end
 
 if vim.fn.has('mac') == 1 then

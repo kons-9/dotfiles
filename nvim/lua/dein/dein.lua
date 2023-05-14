@@ -4,6 +4,8 @@ local dein_dir = home .. '/.cache/nvim/dein'
 local toml_dir = home .. '/.config/nvim/lua/dein/toml'
 local dein_source = dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
+vim.cmd [[set rtp+=~/.cache/nvim/dein/repos/github.com/morhetz/gruvbox]]
+
 vim.api.nvim_set_var('dein#install_github_api_token', os.getenv('DEINGITTOKEN'))
 
 if vim.fn.isdirectory(dein_dir) == 0 then
