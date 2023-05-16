@@ -83,7 +83,13 @@ call ddu#custom#patch_global({
     \     'colorscheme': {
     \       'defaultAction': 'set',
     \     },
-    \   }
+    \   },
+    \  'kindParams': {
+    \     'help': {
+    \       'command': 'vsplit',
+    \     },
+    \   },
+    \ 
     \ })
 '''
 
