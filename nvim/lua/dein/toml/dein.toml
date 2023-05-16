@@ -40,9 +40,9 @@ hook_add = '''
 
 # Colorscheme
 
-# [[plugins]]
-# repo = 'morhetz/gruvbox'
-# on_cmd = ['colorscheme gruvbox']
+[[plugins]]
+repo = 'morhetz/gruvbox'
+on_cmd = ['colorscheme gruvbox']
 
 # notify
 # [[plugins]]
