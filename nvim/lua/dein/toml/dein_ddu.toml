@@ -51,6 +51,10 @@ call ddu#custom#patch_global({
     \     'rg': {
     \       'args' : ['--json'],
     \     },
+    \     'file_rec': #{
+    \       expandSymlinks: v:true,
+    \       ignoredDirectories: [".git", "venv", ".vscode", ".ccls-cache"],
+    \     },
     \   },
     \   'sourceOptions': {
     \     '_': {

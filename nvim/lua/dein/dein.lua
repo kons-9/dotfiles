@@ -27,6 +27,7 @@ if vim.call('dein#load_state', dein_dir) == 1 then
   local depends_toml = toml_dir .. '/dein_depends.toml'
   local ddc_toml = toml_dir .. '/dein_ddc.toml'
   local ddu_toml = toml_dir .. '/dein_ddu.toml'
+  local debug_toml = toml_dir .. '/dein_debug.toml'
 
   vim.call('dein#load_toml', depends_toml, { lazy = 0 })
   vim.call('dein#load_toml', toml, { lazy = 0 })
@@ -36,6 +37,7 @@ if vim.call('dein#load_state', dein_dir) == 1 then
   vim.call('dein#load_toml', lazy_toml, { lazy = 1 })
   vim.call('dein#load_toml', tree_toml, { lazy = 1 })
   vim.call('dein#load_toml', insert_toml, { lazy = 1 })
+  vim.call('dein#load_toml', debug_toml, { lazy = 0 })
 
   vim.call('dein#end')
   vim.call('dein#save_state')
