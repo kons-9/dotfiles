@@ -13,7 +13,7 @@ nnoremap <silent> <leader>fc <Cmd>Ddu colorscheme -ui-param-winWidth=&columns*3/
 
 [[plugins]]
 repo = 'Shougo/ddu.vim'
-hook_source = '''
+hook_add = '''
 call ddu#custom#patch_global({
     \   'ui': 'ff',
     \   'uiParams': {
@@ -32,7 +32,6 @@ call ddu#custom#patch_global({
     \        'startFilter': v:true,
     \        'autoAction': {
     \          'name': 'preview',
-    \          'delay': 50,
     \        },
     \        'prompt': '>> ',
     \     },
@@ -110,6 +109,8 @@ ddu-ff = '''
         \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
   nnoremap <buffer><silent> i
         \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
+  nnoremap <buffer><silent> :q<CR>
+        \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
   nnoremap <buffer><silent> q
         \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
   nnoremap <buffer><silent> p

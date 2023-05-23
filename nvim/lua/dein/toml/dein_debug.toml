@@ -1,11 +1,11 @@
 [[plugins]]
 repo = 'mfussenegger/nvim-dap'
 # on_cmd = 'DebugModeOn'
-hook_add = '''
-function! DegugModeOn()
-  echo "Debug mode on"
-endfunction
-'''
+# hook_add = '''
+# function! DegugModeOn()
+#   echo "Debug mode on"
+# endfunction
+# '''
 lua_add = '''
 vim.keymap.set('n', '<leader>dc', function() require('dap').continue() end)
 vim.keymap.set('n', '<leader>do', function() require('dap').step_over() end)
