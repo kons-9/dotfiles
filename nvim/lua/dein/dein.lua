@@ -1,7 +1,15 @@
 ------------- dein.vim ------------------
-local home = os.getenv("HOME")
+local home
+local toml_dir
+if vim.fn.has('win32') == 1 then
+  home = os.getenv("MYVIMRC") .. "/../.."
+  toml_dir = home .. '/nvim/lua/dein/toml'
+else
+  home = os.getenv("HOME")
+  toml_dir = home .. '/.config/nvim/lua/dein/toml'
+end
+
 local dein_dir = home .. '/.cache/nvim/dein'
-local toml_dir = home .. '/.config/nvim/lua/dein/toml'
 local dein_source = dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 vim.cmd [[set rtp+=~/.cache/nvim/dein/repos/github.com/morhetz/gruvbox]]
