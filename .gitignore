@@ -3,3 +3,4 @@ nvim/lua_old
 .cache
 nvim-setting/nvim/dein
 .vimsessions
+.luarc.json
