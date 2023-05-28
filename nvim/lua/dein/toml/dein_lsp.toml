@@ -74,7 +74,7 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
-local data_path = vim.fn.stdpath "data" .. "/mason"
+local data_path = vim.fn.stdpath("data") .. "/mason"
 
 require('lspconfig')['pyright'].setup {
   on_attach = on_attach,
@@ -170,6 +170,25 @@ require 'lspconfig'['ccls'].setup {
   }
 }
 
+require('lspconfig')['arduino_language_server'].setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  -- Server-specific settings...
+  cmd = { 
+    "arduino-language-server", 
+    "-clangd", 
+    "/usr/local/opt/llvm/bin/clangd",
+    "-cli-config", 
+    "/User/kons9/Library/Arduino15/arduino-cli.yaml", 
+    "-fqbn",
+    "arduino:avr:nano",
+  },
+  settings = {
+    ["arduino_language_server"] = {
+    },
+  },
+  -- capabilities = capabilities
+}
 '''
 
 [[plugins]]
