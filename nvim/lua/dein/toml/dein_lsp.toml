@@ -17,7 +17,7 @@ lua_source = '''
 require("mason").setup()
 require("mason-lspconfig").setup({
   -- ensure_installed = { "sumneko_lua", "rust_analyzer", "taplo", "ccls" },
-  automatic_installation = true,
+  -- automatic_installation = true,
 })
 
 --------------
@@ -125,6 +125,7 @@ require('lspconfig')['lua_ls'].setup {
   },
   -- capabilities = capabilities
 }
+
 require("lspconfig").csharp_ls.setup {
   on_attach = on_attach,
   flags =lsp_flags,
