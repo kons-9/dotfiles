@@ -4,6 +4,10 @@ on_source = ['telescope.nvim']
 
 [[plugins]]
 repo = 'vim-denops/denops.vim'
+hook_add = '''
+let g:denops_server_addr = '127.0.0.1:32123'
+'''
+
 # on_source = ['gin.vim', 'ddc.vim', 'denops-popup-preview.vim', 'denops-helloworld.vim']
 [[plugins]]
 repo = 'lambdalisue/mr.vim'

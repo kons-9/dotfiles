@@ -90,6 +90,26 @@ hook_add = '''
 repo = 'morhetz/gruvbox'
 on_cmd = ['colorscheme gruvbox']
 
+# treesitter
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+build = '''
+:TSUpdate
+'''
+lua_add='''
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "c", "cpp", "arduino", "python", "rust", "typescript", "lua", "vim", "vimdoc", "query" },
+
+  sync_install = false,
+  auto_install = true,
+  ignore_install = {},
+  highlight = {
+    enable = true,
+    disable = {},
+  },
+}
+'''
+
 # notify
 # [[plugins]]
 # repo = "rcarriga/nvim-notify"

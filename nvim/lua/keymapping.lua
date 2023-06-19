@@ -5,6 +5,7 @@ local function keymap(mode, l, r, opt)
       nowait = false,
       expr = false,
       noremap = true,
+      desc = true,
     }
   end
   vim.api.nvim_set_keymap(mode, l, r, opt)

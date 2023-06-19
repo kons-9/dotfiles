@@ -2,11 +2,20 @@
 repo = 'neovim/nvim-lspconfig'
 depends = ['mason.nvim']
 
+[[plugins]]
+repo = 'edKotinsky/Arduino.nvim'
+lua_source = '''
+require('arduino').setup {
+    clangd = '/usr/local/opt/llvm/bin/clangd',
+    arduino = '/usr/local/bin/arduino-cli',
+    arduino_config_dir = '/Users/kons9/Library/Arduino15',
+}
+'''
 
 [[plugins]]
 repo = 'williamboman/mason.nvim' 
 build = ':MasonUpdate'
-depends = ['nvim-lspconfig']
+depends = ['nvim-lspconfig', 'Arduino.nvim']
 lua_source = '''
 -----------------------
 -----------------------
@@ -26,7 +35,7 @@ require("mason-lspconfig").setup({
 --------------
 --------------
 
-local opts = { noremap = true, silent = true }
+local opts = { noremap = true, silent = true , desc=true}
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -40,7 +49,7 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr , desc=true}
 
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
@@ -54,14 +63,17 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
   vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-  -- vim.keymap.set('n', '<leader>fmt', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<leader>lrn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<leader>lca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<leader>lft', vim.lsp.buf.formatting, bufopts)
   vim.api.nvim_create_autocmd("BufWritePre", {
     callback = vim.lsp.buf.formatting_sync,
     buffer = bufnr
   })
+  -- client.server_capabilities.semanicTokensProvider = nil
 end
+
+-- local compatability = require("mason.compatability")
 
 -----------------------
 -----------------------
@@ -89,7 +101,6 @@ require('lspconfig')['pyright'].setup {
     }
   }
 }
-
 
 require('lspconfig')['lua_ls'].setup {
   on_attach = on_attach,
@@ -158,7 +169,10 @@ require('lspconfig')['grammarly'].setup {
   }
 }
 
-require 'lspconfig'['ccls'].setup {
+require('lspconfig')['ccls'].setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  filetypes = {"c", "cpp", "objc", "objcpp"},
   init_options = {
     compilationDatabaseDirectory = "build",
     index = {
@@ -170,25 +184,51 @@ require 'lspconfig'['ccls'].setup {
   }
 }
 
-require('lspconfig')['arduino_language_server'].setup {
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   callback = function(args)
+--     local client = vim.lsp.get_client_by_id(args.data.client_id)
+--     client.server_capabilities.semanticTokensProvider = nil
+--   end,
+-- });
+
+-- require('lspconfig')['arduino_language_server'].setup {
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+--   -- Server-specific settings...
+--   filetypes = {"arduino", "cpp"},
+--   cmd = { 
+--     "arduino-language-server", 
+--     "-clangd", 
+--     "/usr/local/opt/llvm/bin/clangd",
+--     "-cli-config", 
+--     "/Users/kons9/Library/Arduino15/arduino-cli.yaml", 
+--     "-fqbn",
+--     "esp32:esp32:esp32",
+--     "-log",
+--     "-logpath",
+--     "/Users/kons9/tmp/",
+--   },
+-- }
+    -- "-fqbn",
+    -- "arduino:avr:nano",
+    -- "-cli",
+    -- "/Users/kons9/Downloads/arduino-cli_0.29.0_macOS_64bit/arduino-cli",
+    -- "-cli",
+    -- "/Users/kons9/Downloads/arduino-cli_0.2.0_macOS_64bit/arduino-cli",
+    -- "-clangd", 
+    -- "/usr/local/opt/llvm/bin/clangd",
+
+require('lspconfig')['gopls'].setup {
   on_attach = on_attach,
   flags = lsp_flags,
   -- Server-specific settings...
-  cmd = { 
-    "arduino-language-server", 
-    "-clangd", 
-    "/usr/local/opt/llvm/bin/clangd",
-    "-cli-config", 
-    "/User/kons9/Library/Arduino15/arduino-cli.yaml", 
-    "-fqbn",
-    "arduino:avr:nano",
-  },
   settings = {
-    ["arduino_language_server"] = {
+    ["gopls"] = {
     },
-  },
-  -- capabilities = capabilities
+  }
 }
+
+vim.api.nvim_set_hl(0, "@lsp.type.comment.cpp", { link = "Comment" })
 '''
 
 [[plugins]]
