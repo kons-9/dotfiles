@@ -25,11 +25,11 @@ function __check_and_install_in_wsl() {
   fi
 }
 
-__check_and_install nvim
-__check_and_install rustup
-__check_and_install cargo
-__check_and_install git
-__check_and_install python3
-__check_and_install node
+__check_and_install_in_wsl nvim
+__check_and_install_in_wsl rustup
+__check_and_install_in_wsl cargo
+__check_and_install_in_wsl git
+__check_and_install_in_wsl python3
+__check_and_install_in_wsl node
 
 
