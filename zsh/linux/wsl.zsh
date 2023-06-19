@@ -8,7 +8,7 @@ function __check_and_install_in_wsl() {
     echo "$1.exe not found"
     read "yn?Install $1 by winget? [y/n]"
     case $yn in
-      [Yy]* ) winget.exe install $1;;
+      [Yy]* ) winget.exe install $1;alias $1="$1.exe";return;;
       [Nn]* ) ;;
       * ) __eecho "Please answer y or n."; return;;
     esac
