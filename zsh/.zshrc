@@ -49,6 +49,27 @@ if ! type cargo > /dev/null 2>&1; then
   __eecho "you need to write a config for cargo in each environment"
 fi
 
+function __check_and_install_with_cargo () {
+  # if it exists, command = $2
+  local command=$1
+  if [ $# -eq 2 ]; then
+    command=$2
+  fi
+
+  if ! type $command > /dev/null 2>&1; then
+    echo "$command not found"
+    read "yn?Install $1? [y/n]"
+    case $yn in
+      [Yy]* ) ;;
+      [Nn]* ) __eecho "you need $1"; return ;;
+      * ) __eecho "Please answer y or n."; return;;
+    esac
+    echo "installing $1..."
+    cargo install $1
+  fi
+}
+
+
 # common
 __execute plugin.zsh
 __execute prompt.zsh
