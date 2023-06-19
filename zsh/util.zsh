@@ -16,8 +16,8 @@ function __check_and_install_with_cargo () {
     read "yn?Install $1? [y/n]"
     case $yn in
       [Yy]* ) ;;
-      [Nn]* ) eecho "you need $1"; return ;;
-      * ) eecho "Please answer y or n."; return;;
+      [Nn]* ) __eecho "you need $1"; return ;;
+      * ) __eecho "Please answer y or n."; return;;
     esac
     echo "installing $1..."
     cargo install $1

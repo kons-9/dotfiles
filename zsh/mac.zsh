@@ -4,8 +4,8 @@ if ! type brew > /dev/null 2>&1; then
   read "yn?Install homebrew? [y/n]"
   case $yn in
     [Yy]* ) /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; break;;
-    [Nn]* ) eecho "you need to install homebrew";;
-    * ) eecho "Please answer y or n.";;
+    [Nn]* ) __eecho "you need to install homebrew";;
+    * ) __eecho "Please answer y or n.";;
   esac
 fi
 
@@ -15,8 +15,8 @@ if ! type cargo > /dev/null 2>&1; then
   read "yn?Install rustup with brew? [y/n]"
   case $yn in
     [Yy]* ) brew install rustup;;
-    [Nn]* ) eecho "you need rustup"; break;;
-    * ) eecho "Please answer y or n."; break;;
+    [Nn]* ) __eecho "you need rustup"; break;;
+    * ) __eecho "Please answer y or n."; break;;
   esac
 
   source "$HOME/.cargo/env"

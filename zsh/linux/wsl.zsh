@@ -6,8 +6,8 @@ function __check_and_install() {
     read "yn?Install $1 in wsl? [y/n]"
     case $yn in
       [Yy]* ) ;;
-      [Nn]* ) eecho "you need $1"; return;;
-      * ) eecho "Please answer y or n."; return;;
+      [Nn]* ) __eecho "you need $1"; return;;
+      * ) __eecho "Please answer y or n."; return;;
     esac
     sudo apt install $1
   else
