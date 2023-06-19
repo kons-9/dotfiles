@@ -21,7 +21,7 @@ git_config_target=~/.gitconfig
 
 vscode_keybindings_source="${path}/vscode/keybindings.json"
 
-function symlink() {
+function symlink () {
   source=$1
   target=$2
 
@@ -31,7 +31,7 @@ function symlink() {
   else
     echo "${target} is exist."
     if [ ! "$flag" = "-y" ]; then
-      read -p "replace it? (y/n) :" YN
+      read "replace it? (y/n) :": YN
       if [ $YN = "n" ];then
         return
       elif [ ! $YN = "y" ];then

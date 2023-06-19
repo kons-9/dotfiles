@@ -1,4 +1,10 @@
 # if you have installed windows version of nvim, cargo, git, python, node, you can use this file to make them work in wsl
+local flag=true
+
+function __apt_update() {
+  sudo apt upgrade
+  sudo apt update
+}
 
 function __check_and_install_in_wsl() {
   if type $1 > /dev/null 2>&1; then
@@ -19,6 +25,10 @@ function __check_and_install_in_wsl() {
       [Nn]* ) __eecho "you need $1"; return;;
       * ) __eecho "Please answer y or n."; return;;
     esac
+    if [[ flag == true ]]; then
+      flag=false
+      __apt_update
+    fi
     sudo apt install $1
   else
     alias $1="$1.exe"
@@ -26,10 +36,25 @@ function __check_and_install_in_wsl() {
 }
 
 __check_and_install_in_wsl nvim
-__check_and_install_in_wsl rustup
-__check_and_install_in_wsl cargo
 __check_and_install_in_wsl git
 __check_and_install_in_wsl python3
 __check_and_install_in_wsl node
+
+# cargo(rustup) install
+if type rustup > /dev/null 2>&1; then
+  read "yn?Install rustup? [y/n]"
+	curl https://sh.rustup.rs -sSf | sh
+  echo "You may need other essential tools when you build rust tools."
+  read "yn?Install build-essential, pkg-config, libssl-dev? [y/n]"
+  case $yn in
+  [Yy]* ) ;;
+  [Nn]* ) break;;
+  * ) __eecho "Please answer y or n."; break;;
+  esac
+	if [[ flag == true ]]; then
+		__apt_update
+	fi
+	sudo apt install build-essential pkg-config libssl-dev;
+fi
 
 
