@@ -15,7 +15,8 @@ function __map() {
   if alias ${command[1]} > /dev/null 2>&1; then
     # alias exists
     # replace target in $2
-    local target=$(alias ${command[1]} | sed -e "s/^${command[1]}=\(.*\)/\1/")
+    local target=$(alias ${command[1]} | sed -e "s/^${command[1]}=\(.*\)/\1/" | sed -e "s/'//g")
+    target=`echo target` | sed -e ""
     if [ ${#command[@]} -lt 2 ]; then
       alias $1=$target
     else

@@ -35,26 +35,77 @@ function __check_and_install_in_wsl() {
   fi
 }
 
-__check_and_install_in_wsl nvim
+# __check_and_install_in_wsl nvim
 __check_and_install_in_wsl git
 __check_and_install_in_wsl python3
 __check_and_install_in_wsl node
 
 # cargo(rustup) install
-if type rustup > /dev/null 2>&1; then
+if ! type rustup > /dev/null 2>&1; then
   read "yn?Install rustup? [y/n]"
-	curl https://sh.rustup.rs -sSf | sh
+  case $yn in
+    [Yy]* ) ;;
+    [Nn]* ) break;;
+    * ) __eecho "Please answer y or n."; break;;
+  esac
+  curl https://sh.rustup.rs -sSf | sh
   echo "You may need other essential tools when you build rust tools."
   read "yn?Install build-essential, pkg-config, libssl-dev? [y/n]"
+  case $yn in
+    [Yy]* ) ;;
+    [Nn]* ) break;;
+    * ) __eecho "Please answer y or n."; break;;
+  esac
+  if [[ flag == true ]]; then
+    __apt_update
+  fi
+  sudo apt install build-essential pkg-config libssl-dev;
+fi
+
+# nvim install
+if ! type nvim > /dev/null 2>&1; then
+  read "yn?Install nvim? [y/n]"
+  case $yn in
+    [Yy]* ) ;;
+    [Nn]* ) break;;
+    * ) __eecho "Please answer y or n."; break;;
+  esac
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+  sudo mv nvim.appimage /usr/local/bin/nvim
+
+  echo "You may need other essential tools when you build rust tools."
+  read "yn?Install libfuse2? [y/n]"
   case $yn in
   [Yy]* ) ;;
   [Nn]* ) break;;
   * ) __eecho "Please answer y or n."; break;;
   esac
-	if [[ flag == true ]]; then
-		__apt_update
-	fi
-	sudo apt install build-essential pkg-config libssl-dev;
+  if [[ flag == true ]]; then
+    __apt_update
+  fi
+  sudo apt install libfuse2
 fi
 
+# deno install
+if ! type deno > /dev/null 2>&1; then
+  read "yn?Install deno? [y/n]"
+  case $yn in
+    [Yy]* ) ;;
+    [Nn]* ) return;;
+    * ) __eecho "Please answer y or n."; return;;
+  esac
+  if ! type unzip > /dev/null 2>&1; then
+    echo "you need unzip"
+    read "yn?Install unzip? [y/n]"
+    case $yn in
+      [Yy]* ) ;;
+      [Nn]* ) return;;
+      * ) __eecho "Please answer y or n."; return;;
+    esac
+    sudo apt install unzip
+  fi
+  curl -fsSL https://deno.land/x/install/install.sh | sh
 
+  echo 'export DENO_INSTALL="~/.deno"' >> $ZDOTDIR/.zshrc.local
+  echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> $ZDOTDIR/.zshrc.local
+fi

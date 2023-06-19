@@ -1,4 +1,4 @@
-HOME=/mnt/c/Users/gotos
+# HOME=/mnt/c/Users/gotos
 if [ -f "$HOME/.cargo/env" ]; then
   source "$HOME/.cargo/env"
 fi

@@ -7,6 +7,20 @@ function __execute () {
 
 __execute util.zsh
 
+# local setting
+if [[ -f $ZDOTDIR/.zshrc.local ]]; then
+  __execute .zshrc.local
+else
+  read -p "create ~/.zshrc.local? [y/N]" yn
+  case "$yn" in
+    [yY]*) ;;
+    *) break;;
+  esac
+  touch $ZDOTDIR/.zshrc.local
+  vim $ZDOTDIR/.zshrc.local
+  __execute .zshrc.local
+fi
+
 # depends on OS
 # 
 ## mac
@@ -75,17 +89,4 @@ __execute plugin.zsh
 __execute prompt.zsh
 __execute external_command.zsh
 __execute misc.zsh
-
-# local setting
-if [[ -f $ZDOTDIR/.zshrc.local ]]; then
-else
-  read -p "create ~/.zshrc.local? [y/N]" yn
-  case "$yn" in
-    [yY]*) ;;
-    *) break;;
-  esac
-  touch $ZDOTDIR/.zshrc.local
-  vim $ZDOTDIR/.zshrc.local
-  execute .zshrc.local
-fi
 

@@ -24,8 +24,8 @@ setopt hist_reduce_blanks
 setopt ignore_eof
 
 # alias
-__map vi nvim
-__map vim nvim
+__map vi 'nvim'
+__map vim 'nvim'
 __map .. 'cd ..'
 __map ... 'cd ../..'
 __map .... 'cd ../../..'
@@ -35,7 +35,7 @@ __map mv 'mv -i'
 __map rm 'rm -i'
 __map la 'ls -a'
 __map gs 'git status'
-__map sozsh "source ~/.zshrc"
+__map sozsh 'source ~/.zshrc'
 
 # alias for my command
 function _mkdir_and_cd(){
