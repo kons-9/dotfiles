@@ -1,6 +1,6 @@
 if ! type winget > /dev/null 2>&1; then
   eecho "you need to install winget"
-  exit 1
+  return
 fi
 
 if ! type rustup > /dev/null 2>&1; then
@@ -8,8 +8,8 @@ if ! type rustup > /dev/null 2>&1; then
   read "yn?Install rustup? [y/n]"
   case $yn in
     [Yy]* ) ;;
-    [Nn]* ) eecho "you need rustup"; exit 1;;
-    * ) eecho "Please answer y or n."; exit 1;;
+    [Nn]* ) eecho "you need rustup"; break;;
+    * ) eecho "Please answer y or n."; break;;
   esac
   winget install rustup
 fi
