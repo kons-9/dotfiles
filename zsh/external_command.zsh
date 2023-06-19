@@ -7,9 +7,9 @@ __check_and_install_with_cargo ripgrep rg
 __execute external_command/zoxide.zsh
 
 # connect external command to default
-alias cd='z'
-alias ls="exa"
-alias cat='bat'
-alias find='fd'
-alias rg='rg --hidden'
+__map cd 'z'
+__map ls "exa"
+__map cat 'bat'
+__map find 'fd'
+__map rg 'rg --hidden'
 

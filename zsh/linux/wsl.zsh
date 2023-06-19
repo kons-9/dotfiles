@@ -1,11 +1,18 @@
 # if you have installed windows version of nvim, cargo, git, python, node, you can use this file to make them work in wsl
 
-function __check_and_install() {
+function __check_and_install_in_wsl() {
   if type $1 > /dev/null 2>&1; then
     return 
   fi
   if ! type $1.exe > /dev/null 2>&1; then
     echo "$1.exe not found"
+    read "yn?Install $1 by winget? [y/n]"
+    case $yn in
+      [Yy]* ) winget.exe install $1;;
+      [Nn]* ) ;;
+      * ) __eecho "Please answer y or n."; return;;
+    esac
+
     read "yn?Install $1 in wsl? [y/n]"
     case $yn in
       [Yy]* ) ;;
@@ -24,3 +31,5 @@ __check_and_install cargo
 __check_and_install git
 __check_and_install python3
 __check_and_install node
+
+

@@ -31,7 +31,6 @@ if [[ $OSTYPE =~ linux.* ]]; then
     # install apt
     if ! type apt > /dev/null 2>&1; then
       __eecho "you need to install apt"
-      exit 1
     fi
   fi
 
@@ -48,7 +47,6 @@ fi
 if ! type cargo > /dev/null 2>&1; then
   __eecho "cargo not found"
   __eecho "you need to write a config for cargo in each environment"
-  exit 1
 fi
 
 # common
@@ -63,7 +61,7 @@ else
   read -p "create ~/.zshrc.local? [y/N]" yn
   case "$yn" in
     [yY]*) ;;
-    *) exit 0;;
+    *) break;;
   esac
   touch $ZDOTDIR/.zshrc.local
   vim $ZDOTDIR/.zshrc.local
