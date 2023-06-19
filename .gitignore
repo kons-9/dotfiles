@@ -4,3 +4,11 @@ nvim/lua_old
 nvim-setting/nvim/dein
 .vimsessions
 .luarc.json
+
+zsh/.zshrc.local
+zsh/.zsh_history
+zsh/.zshrc.org
+zsh/.zcompdump
+zsh/gitstatus
+zsh/.zsh_sessions
+

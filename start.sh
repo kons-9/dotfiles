@@ -1,34 +1,41 @@
 cd `dirname $0`
 path=`pwd`
+
 # if check is not needed, please cmd `sh start.sh -y`
 flag=$1
 
 nvim_source="${path}/nvim"
 nvim_target=~/.config/nvim
 
-zsh_source="${path}/zsh-setting/zsh"
-zsh_target=~/.zsh
+zsh_source="${path}/zsh/"
+zsh_target=~/.config/zsh
 
-zshrc_source="${path}/zsh-setting/zshrc"
-zshrc_target=~/.zshrc
+zshrc_source="${path}/zsh/.zshenv"
+zshrc_target=~/.zshenv
 
-clang_source="${path}/clang-format"
+clang_source="${path}/clang/.clang-format"
 clang_target=~/.clang-format
 
-git_config_source="${path}/gitconfig"
+git_config_source="${path}/git/.gitconfig"
 git_config_target=~/.gitconfig
+
+vscode_keybindings_source="${path}/vscode/keybindings.json"
 
 function symlink() {
   source=$1
   target=$2
 
   if [ ! -e $target ] && [ ! -L $target ]; then
+    mkdir -p `dirname $target`
     ln -s $source $target
   else
     echo "${target} is exist."
     if [ ! "$flag" = "-y" ]; then
       read -p "replace it? (y/n) :" YN
-      if [ ! $YN = "y" ];then
+      if [ $YN = "n" ];then
+        return
+      elif [ ! $YN = "y" ];then
+        echo "please input y or n"
         return
       fi
     fi
