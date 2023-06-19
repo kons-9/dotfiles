@@ -20,7 +20,7 @@ if [[ "$(uname)" == 'MINGW64_NT-10.0' ]]; then
 fi
 
 ## linux
-if [[ $OSTYPE == 'linux*' ]]; then
+if [[ $OSTYPE =~ linux.* ]]; then
   ## wsl
   if [[ -e /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
     __execute linux/wsl.zsh
