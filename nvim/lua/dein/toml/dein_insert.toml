@@ -9,10 +9,10 @@ let g:copilot_hide_during_completion = 0
 '''
 
 # Japanese
-[[plugins]]
-repo = 'vim-skk/skkeleton'
-on_event = 'InsertEnter'
-depends = ["denops.vim"]
-hook_add = '''
-imap <C-j> <Plug>(skkeleton-toggle)
-'''
+# [[plugins]]
+# repo = 'vim-skk/skkeleton'
+# on_event = 'InsertEnter'
+# depends = ["denops.vim"]
+# hook_add = '''
+# imap <C-j> <Plug>(skkeleton-toggle)
+# '''

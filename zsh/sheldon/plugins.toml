@@ -26,6 +26,10 @@ github = 'chrissicool/zsh-256color'
 [plugins.zsh-syntax-highlighting]
 github = 'zsh-users/zsh-syntax-highlighting'
 
+[plugins.gitstatus]
+github = 'romkatv/gitstatus'
+use = ["*.prompt.zsh"]
+
 # For example:
 #
 # [plugins.base16]

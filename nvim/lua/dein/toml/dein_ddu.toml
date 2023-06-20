@@ -122,7 +122,7 @@ ddu-ff = '''
 ddu-ff-filter = '''
   " execute("call ddu#ui#ff#do_action('preview')")
   inoremap <buffer><silent> <CR>
-        \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+        \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR><esc>
   imap <buffer><silent> <esc>
         \ <esc><Cmd>close<CR>
   inoremap <buffer><silent> <C-e>

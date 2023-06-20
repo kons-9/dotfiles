@@ -8,5 +8,3 @@
 	email = gotoshi.euphonium@gmail.com
 [init]
 	defaultBranch = main
-[credential]
-	helper = osxkeychain
