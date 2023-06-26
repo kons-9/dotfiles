@@ -52,7 +52,7 @@ call ddu#custom#patch_global({
     \     },
     \     'file_rec': #{
     \       expandSymlinks: v:true,
-    \       ignoredDirectories: [".git", "venv", ".vscode", ".ccls-cache"],
+    \       ignoredDirectories: [".git", "venv", ".vscode", ".ccls-cache", "target", ".embuild"],
     \     },
     \   },
     \   'sourceOptions': {
