@@ -1,8 +1,9 @@
+#!/bin/env zsh
 cd `dirname $0`
 path=`pwd`
 
 # if check is not needed, please cmd `sh start.sh -y`
-flag=$1
+flag=$1 || ""
 
 nvim_source="${path}/nvim"
 nvim_target=~/.config/nvim
@@ -13,6 +14,9 @@ zsh_target=~/.config/zsh
 zshrc_source="${path}/zsh/.zshenv"
 zshrc_target=~/.zshenv
 
+zshlocal_source="${path}/zsh/.zshrc.local"
+zshlocal_target=~/.zshrc
+
 clang_source="${path}/clang/.clang-format"
 clang_target=~/.clang-format
 
@@ -21,9 +25,14 @@ git_config_target=~/.gitconfig
 
 vscode_keybindings_source="${path}/vscode/keybindings.json"
 
-function symlink () {
+
+function makeSymLink() {
   source=$1
   target=$2
+  if [ ! -e $source ]; then
+    echo "${source} is not exist."
+    return
+  fi
 
   if [ ! -e $target ] && [ ! -L $target ]; then
     mkdir -p `dirname $target`
@@ -31,7 +40,7 @@ function symlink () {
   else
     echo "${target} is exist."
     if [ ! "$flag" = "-y" ]; then
-      read "replace it? (y/n) :": YN
+      read "YN?replace it? (y/n) :"
       if [ $YN = "n" ];then
         return
       elif [ ! $YN = "y" ];then
@@ -40,14 +49,15 @@ function symlink () {
       fi
     fi
     echo "replace ${target}!"
-    rm -rf $target
-    ln -s $source $target
+    /usr/bin/rm -rf $target
+    /usr/bin/ln -s $source $target
     echo ""
   fi
 }
 
-symlink $nvim_source $nvim_target
-symlink $zsh_source $zsh_target
-symlink $zshrc_source $zshrc_target
-symlink $clang_source $clang_target
-symlink $git_config_source $git_config_target
+makeSymLink $nvim_source $nvim_target
+makeSymLink $zsh_source $zsh_target
+makeSymLink $zshrc_source $zshrc_target
+makeSymLink $zshlocal_source $zshlocal_target
+makeSymLink $clang_source $clang_target
+makeSymLink $git_config_source $git_config_target
