@@ -23,6 +23,9 @@ clang_target=~/.clang-format
 git_config_source="${path}/git/.gitconfig"
 git_config_target=~/.gitconfig
 
+hammerspoon_source="${path}/.hammerspoon"
+hammerspoon_target=~/.hammerspoon
+
 vscode_keybindings_source="${path}/vscode/keybindings.json"
 
 
@@ -69,3 +72,4 @@ makeSymLink $zshrc_source $zshrc_target
 makeSymLink $zshlocal_source $zshlocal_target
 makeSymLink $clang_source $clang_target
 makeSymLink $git_config_source $git_config_target
+makeSymLink $hammerspoon_source $hammerspoon_target
