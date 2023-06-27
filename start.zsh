@@ -28,6 +28,9 @@ git_config_target=~/.gitconfig
 
 vscode_keybindings_source="${dirpath}/vscode/keybindings.json"
 
+hammerspoon_source="${dirpath}/.hammerspoon"
+hammerspoon_target=~/.hammerspoon
+
 
 function makeSymLink() {
   source=$1
@@ -65,3 +68,4 @@ makeSymLink $zshlocal_source $zshlocal_target
 makeSymLink $clang_source $clang_target
 makeSymLink $git_config_source $git_config_target
 makeSymLink $wezterm_source $wezterm_target
+makeSymLink $hammerspoon_source $hammerspoon_target
