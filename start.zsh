@@ -49,8 +49,16 @@ function makeSymLink() {
       fi
     fi
     echo "replace ${target}!"
-    /usr/bin/rm -rf $target
-    /usr/bin/ln -s $source $target
+    if [ -e /usr/bin/rm ]; then
+	    /usr/bin/rm -rf $target
+    else
+	    /bin/rm -rf $target
+    fi
+    if [ -e /usr/bin/ln ]; then
+	    /usr/bin/ln -s $source $target
+    else
+	    /bin/ln -s $source $target
+    fi
     echo ""
   fi
 }
