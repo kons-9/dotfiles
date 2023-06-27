@@ -12,3 +12,4 @@ zsh/.zcompdump
 zsh/gitstatus
 zsh/.zsh_sessions
 
+*-lock.json
