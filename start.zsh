@@ -1,29 +1,32 @@
 #!/bin/env zsh
 cd `dirname $0`
-path=`pwd`
+dirpath=`pwd`
 
 # if check is not needed, please cmd `sh start.sh -y`
 flag=$1 || ""
 
-nvim_source="${path}/nvim"
+nvim_source="${dirpath}/nvim"
 nvim_target=~/.config/nvim
 
-zsh_source="${path}/zsh/"
+zsh_source="${dirpath}/zsh/"
 zsh_target=~/.config/zsh
 
-zshrc_source="${path}/zsh/.zshenv"
+zshrc_source="${dirpath}/zsh/.zshenv"
 zshrc_target=~/.zshenv
 
-zshlocal_source="${path}/zsh/.zshrc.local"
+zshlocal_source="${dirpath}/zsh/.zshrc.local"
 zshlocal_target=~/.zshrc
 
-clang_source="${path}/clang/.clang-format"
+clang_source="${dirpath}/clang/.clang-format"
 clang_target=~/.clang-format
 
-git_config_source="${path}/git/.gitconfig"
+wezterm_source="${dirpath}/wezterm/"
+wezterm_target=~/.config/wezterm
+
+git_config_source="${dirpath}/git/.gitconfig"
 git_config_target=~/.gitconfig
 
-vscode_keybindings_source="${path}/vscode/keybindings.json"
+vscode_keybindings_source="${dirpath}/vscode/keybindings.json"
 
 
 function makeSymLink() {
@@ -49,16 +52,8 @@ function makeSymLink() {
       fi
     fi
     echo "replace ${target}!"
-    if [ -e /usr/bin/rm ]; then
-	    /usr/bin/rm -rf $target
-    else
-	    /bin/rm -rf $target
-    fi
-    if [ -e /usr/bin/ln ]; then
-	    /usr/bin/ln -s $source $target
-    else
-	    /bin/ln -s $source $target
-    fi
+    rm -rf $target
+    ln -s $source $target
     echo ""
   fi
 }
@@ -69,3 +64,4 @@ makeSymLink $zshrc_source $zshrc_target
 makeSymLink $zshlocal_source $zshlocal_target
 makeSymLink $clang_source $clang_target
 makeSymLink $git_config_source $git_config_target
+makeSymLink $wezterm_source $wezterm_target
