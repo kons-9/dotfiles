@@ -12,4 +12,8 @@ return {
     end,
     ft = {"html", "javascript", "typescript", "javascriptreact", "typescriptreact", "xml", "xhtml", "phtml", "jsx", "tsx"},
   },
+  {
+    "github/copilot.vim",
+    event = "InsertEnter",
+  }
 }
