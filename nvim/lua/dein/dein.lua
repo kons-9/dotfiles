@@ -61,7 +61,6 @@ end
 
 vim.call('dein#call_hook', 'source')
 
--- これをifの中に入れるとfiletype detectionがなぜかoffになる
 vim.cmd [[
  filetype plugin indent on
  syntax enable
