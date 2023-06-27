@@ -1,21 +1,19 @@
 # git prompt
 setopt PROMPT_SUBST
-RPROMPT='%*'
 
 function __virtualenv_info {
-  [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
+  [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
 
 function __git_status_info {
-  [ ${GITSTATUS_PROMPT} ] && echo '('${GITSTATUS_PROMPT}')'
+  [ ${GITSTATUS_PROMPT} ] && echo '['${GITSTATUS_PROMPT}']'
   # echo '('${GITSTATUS_PROMPT}')'
 }
 
 function makeprompt {
-PROMPT="%F{green}%n@%m: %F{yellow}%~%f
-$(__virtualenv_info)$(__git_status_info)%F{white}%%%f "
-# $(__virtualenv_info)$(__git_status_info)%F{white}%%%f "
-RPROMPT='$(__git_status_info)'
+PROMPT="%F{green}%n@%m[`uname`]: %F{yellow}%~%f $(__git_status_info)
+$(__virtualenv_info)%F{white}%%%f "
+RPROMPT='%*'
 }
 
 autoload -Uz add-zsh-hook
