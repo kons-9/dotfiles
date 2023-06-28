@@ -1,24 +1,7 @@
-return {
+local spec =  {
   {
     "nvim-lualine/lualine.nvim",
-    config = function() 
-      -- status line
-      -- Bubbles config for lualine
-      -- Author: lokesh-krishna
-      -- MIT license, see LICENSE for more details.
-
-      -- stylua: ignore
-      local colors = {
-        blue   = '#80a0ff',
-        cyan   = '#79dac8',
-        black  = '#080808',
-        white  = '#c6c6c6',
-        red    = '#ff5189',
-        violet = '#d183e8',
-        grey   = '#303030',
-      }
-
-      require('lualine').setup {
+    opts = {
         options = {
           theme = 'iceberg_dark',
           -- component_separators = '|',
@@ -48,8 +31,7 @@ return {
         },
         tabline = {},
         extensions = {},
-      }
-    end,
+    }
   },
   {
     "preservim/vim-indent-guides",
@@ -62,13 +44,34 @@ return {
     end,
   },
   {
-    "morhetz/gruvbox",
+    'akinsho/nvim-bufferline.lua',
+    opts = {}
   },
   {
-    'akinsho/nvim-bufferline.lua',
-    config = function() 
-      require("bufferline").setup{}
-    end,
-  }
+    'folke/noice.nvim',
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'rcarriga/nvim-notify',
+    },
+    opts = {
+      lsp = {
+      -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+      override = {
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["cmp.entry.get_documentation"] = true,
+      },
+    },
+    -- you can enable a preset for easier configuration
+    presets = {
+      bottom_search = true, -- use a classic bottom cmdline for search
+      command_palette = true, -- position the cmdline and popupmenu together
+      long_message_to_split = true, -- long messages will be sent to a split
+      inc_rename = false, -- enables an input dialog for inc-rename.nvim
+      lsp_doc_border = false, -- add a border to hover docs and signature help
+    },
+      }
 
+  }
 }
+return spec
