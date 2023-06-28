@@ -8,3 +8,5 @@
 	email = gotoshi.euphonium@gmail.com
 [init]
 	defaultBranch = main
+[core]
+	editor = vim
