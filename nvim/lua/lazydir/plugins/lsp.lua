@@ -1,4 +1,37 @@
-return {
+
+local augroup = vim.api.nvim_create_augroup('UserLspConfig', {})
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = augroup,
+  callback = function(ev)
+    local opts = function(config)
+      config.silent = true
+      config.noremap = true
+      config.buffer = ev.buf
+      return config
+    end
+    utils.keymap('n', 'gD', vim.lsp.buf.declaration, opts{ desc = "Go to declaration"})
+    utils.keymap('n', 'gd', vim.lsp.buf.definition, opts{ desc = "Go to definition"})
+    utils.keymap('n', 'gi', vim.lsp.buf.implementation, opts{ desc = "Go to implementation"})
+    utils.keymap('n', 'gr', vim.lsp.buf.references, opts{ desc = "Go to references"})
+    utils.keymap('n', 'gt', vim.lsp.buf.type_definition, opts{ desc = "Go to type definition"})
+
+    utils.keymap('n', 'K', vim.lsp.buf.hover, opts{ desc = "Show hover"})
+    utils.keymap('n', '<C-k>', vim.lsp.buf.signature_help, opts{ desc = "Show signature help"})
+
+    utils.keymap('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts{ desc = "Add workspace folder"})
+    utils.keymap('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts{ desc = "Remove workspace folder"})
+    utils.keymap('n', '<leader>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts{ desc = "List workspace folders"})
+
+    utils.keymap('n', '<leader>lr', vim.lsp.buf.rename, opts{ desc = "Rename"})
+    utils.keymap('n', '<leader>la', vim.lsp.buf.code_action, opts{ desc = "Code action"})
+    utils.keymap('n', '<leader>lf', vim.lsp.buf.format, opts{ desc = "Format"})
+
+  end,
+})
+
+local spec =  {
   {
     'neovim/nvim-lspconfig',
     dependencies = {'williamboman/mason.nvim'},
@@ -6,6 +39,33 @@ return {
   {
     'williamboman/mason-lspconfig.nvim',
     dependencies = {'williamboman/mason.nvim', 'neovim/nvim-lspconfig'},
+  },
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    dependencies={
+      {'nvim-lua/plenary.nvim'},
+    },
+    config = function ()
+      local null_ls = require('null-ls')
+      local sources = {
+        null_ls.builtins.formatting.rustfmt,
+        null_ls.builtins.formatting.autopep8,
+        null_ls.builtins.formatting.dart_format,
+        null_ls.builtins.formatting.clang_format,
+      }
+
+      null_ls.setup({
+        sources = sources,
+        on_attach = function(client, bufnr)
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            callback = function () 
+              vim.lsp.buf.format {async = false}
+            end,
+            buffer = bufnr,
+          })
+        end
+      })
+    end,
   },
   {
     'williamboman/mason.nvim',
@@ -18,46 +78,6 @@ return {
       utils.safe_require('mason-lspconfig', function(m)
         m.setup()
       end)
-
-
-      -- Use an on_attach function to only map the following keys
-      -- after the language server attaches to the current buffer
-      local on_attach = function(client, bufnr)
-
-        -- Mappings.
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
-        local function bufopts(desc)
-          if desc == nil then
-            desc = true
-          end
-          return { norermap = true, silent = true, buffer = bufnr, desc = desc }
-        end
-
-        utils.keymap('n', 'gD', vim.lsp.buf.declaration, bufopts("Go to declaration"))
-        utils.keymap('n', 'gd', vim.lsp.buf.definition, bufopts("Go to definition"))
-        utils.keymap('n', 'gi', vim.lsp.buf.implementation, bufopts("Go to implementation"))
-        utils.keymap('n', 'gr', vim.lsp.buf.references, bufopts("Go to references"))
-        utils.keymap('n', 'gt', vim.lsp.buf.type_definition, bufopts("Go to type definition"))
-
-        utils.keymap('n', 'K', vim.lsp.buf.hover, bufopts("Show hover"))
-        utils.keymap('n', '<C-k>', vim.lsp.buf.signature_help, bufopts("Show signature help"))
-
-        utils.keymap('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts("Add workspace folder"))
-        utils.keymap('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts("Remove workspace folder"))
-        utils.keymap('n', '<leader>wl', function()
-          print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, bufopts("List workspace folders"))
-
-        utils.keymap('n', '<leader>lr', vim.lsp.buf.rename, bufopts("Rename"))
-        utils.keymap('n', '<leader>la', vim.lsp.buf.code_action, bufopts("Code action"))
-        utils.keymap('n', '<leader>lf', vim.lsp.buf.formatting, bufopts("Format"))
-
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          callback = vim.lsp.buf.formatting_sync,
-          buffer = bufnr
-        })
-        -- client.server_capabilities.semanicTokensProvider = nil
-      end
 
       -- local compatability = require("mason.compatability")
 
@@ -84,7 +104,6 @@ return {
         if config == nil then
           config = {}
         end
-        config.on_attach = on_attach
         config.flags = lsp_flags
         if lsp then
           lsp.setup(config)
@@ -152,3 +171,4 @@ return {
     }
   }
 }
+return spec

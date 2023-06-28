@@ -15,7 +15,7 @@ function M.keymap(mode, key, result, opts, lazy_nvim)
   end
 
   if lazy_nvim == nil then
-    vim.api.nvim_set_keymap(mode, key, result, opts)
+    vim.keymap.set(mode, key, result, opts)
   end
 
   -- return is for lazy.nvim
