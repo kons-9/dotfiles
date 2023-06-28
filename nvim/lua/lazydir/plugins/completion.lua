@@ -1,5 +1,3 @@
-utils.keymap('n', ':', '<cmd>call CommandlinePre()<CR>', { desc = 'completion' })
-
 local spec = {
   {
     "Shougo/ddc.vim",
@@ -22,7 +20,8 @@ local spec = {
       'matsui54/denops-signature_help',
 
     },
-    event = { "InsertEnter" },
+    event = { "InsertEnter", "TextChangedI", "TextChangedP", "CmdlineEnter", "CmdWinEnter", "ModeChanged"},
+    -- event = { "CmdlineEnter" },
     config = function ()
       vim.cmd([[
       " Customize global settings
@@ -83,9 +82,7 @@ local spec = {
 
   },{
     "Shougo/pum.vim",
-    dependencies = {
-      "Shougo/ddc.vim",
-    },
+    cmd = { "PumToggle" },
     config = function ()
       vim.cmd([[
         nnoremap :       <Cmd>call CommandlinePre()<CR>:
