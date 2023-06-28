@@ -1,65 +1,50 @@
-local function keymap(mode, l, r, opt)
-  if (not opt) then
-    opt = {
-      silent = false,
-      nowait = false,
-      expr = false,
-      noremap = true,
-      desc = true,
-    }
-  end
-  vim.api.nvim_set_keymap(mode, l, r, opt)
-end
-
-local g = vim.g
-
 -- leader
 g.mapleader = ' '
 
 -- buflist setting
-keymap('n', '[b', ':bprevious<CR>', { noremap = true, silent = true })
-keymap('n', ']b', ':bnext<CR>', { noremap = true, silent = true })
-keymap('n', '[B', ':bfirst<CR>', { noremap = true, silent = true })
-keymap('n', ']B', ':blast<CR>', { noremap = true, silent = true })
+utils.keymap('n', '[b', ':bprevious<CR>', { desc='previous buffer' })
+utils.keymap('n', ']b', ':bnext<CR>', { desc='next buffer' })
+utils.keymap('n', '[B', ':bfirst<CR>', { desc='first buffer' })
+utils.keymap('n', ']B', ':blast<CR>', { desc='last buffer' })
 
 -- carsor movement
-keymap('n', 'j', 'gj')
-keymap('n', 'k', 'gk')
-keymap('n', '<down>', 'gj')
-keymap('n', '<up>', 'gk')
+utils.keymap('n', 'j', 'gj', { desc='move down' })
+utils.keymap('n', 'k', 'gk', { desc='move up' })
+utils.keymap('n', '<down>', 'gj', { desc='move down' })
+utils.keymap('n', '<up>', 'gk', { desc='move up' })
 
 -- command history setting
-keymap('c', '<C-p>', '<Up>')
-keymap('c', '<C-n>', '<Down>')
+utils.keymap('c', '<C-p>', '<Up>', { desc='command history up' })
+utils.keymap('c', '<C-n>', '<Down>', { desc='command history down' })
 -- vim.cmd [[set esckeys]]
-keymap('c', '<C-J>', '<C-n>')
-keymap('c', '<C-K>', '<C-p>')
+utils.keymap('c', '<C-J>', '<C-n>', { desc='command history down' })
+utils.keymap('c', '<C-K>', '<C-p>', { desc='command history up' })
 
 -- disable arrow
-keymap('n', '<Up>', 'H')
-keymap('n', '<Down>', 'L')
-keymap('n', '<Left>', '<Nop>')
-keymap('n', '<Right>', '<Nop>')
+utils.keymap('n', '<Up>', 'H', { desc='move to first' })
+utils.keymap('n', '<Down>', 'L', { desc='move to last' })
+utils.keymap('n', '<Left>', '<Nop>', { desc='disable arrow' })
+utils.keymap('n', '<Right>', '<Nop>', { desc='disable arrow' })
 
 -- first last
-keymap('n', 'H', '^')
-keymap('n', 'L', '$')
-keymap('o', 'H', '^')
-keymap('o', 'L', '$')
-keymap('v', 'H', '^')
-keymap('v', 'L', '$')
+utils.keymap('n', 'H', '^', { desc='move to first' })
+utils.keymap('n', 'L', '$', { desc='move to last' })
+utils.keymap('o', 'H', '^', { desc='move to first' })
+utils.keymap('o', 'L', '$', { desc='move to last' })
+utils.keymap('v', 'H', '^', { desc='move to first' })
+utils.keymap('v', 'L', '$', { desc='move to last' })
 
 -- nohilight
--- keymap('n', '<C-h>', ':noh<cr>', { noremap = true, silent = true })
-keymap('n', '<BS>', ':noh<cr>', { noremap = true, silent = true })
+utils.keymap('n', '<C-h>', ':noh<cr>', { desc='nohilight' })
+utils.keymap('n', '<BS>', ':noh<cr>', { desc='nohilight' })
 
 -- etc...
-keymap('c', '%%', "getcmdtype()==':'?expand('%:h').'/': '%%'", { noremap = true, expr = true })
-keymap('s', 'w!!', 'w !sudo tee > /dev/null %<CR> :e!<CR')
+utils.keymap('c', '%%', "getcmdtype()==':'?expand('%:h').'/': '%%'", { desc='expand parent directory' })
+utils.keymap('s', 'w!!', 'w !sudo tee > /dev/null %<CR> :e!<CR', { desc='write as sudo' })
 
 -- terminal
-keymap('t', '<Esc>', '<C-\\><C-n>')
-keymap('t', '<C-[>', '<C-\\><C-n>')
+utils.keymap('t', '<Esc>', '<C-\\><C-n>', { desc='exit terminal' })
+utils.keymap('t', '<C-[>', '<C-\\><C-n>', { desc='exit terminal' })
 vim.cmd [[
   autocmd TermOpen * startinsert
 ]]

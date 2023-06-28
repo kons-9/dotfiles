@@ -12,35 +12,46 @@ return {
     dependencies = {'neovim/nvim-lspconfig'},
     build = ":MasonUpdate",
     config = function()
-      require('mason').setup({})
-      require('mason-lspconfig').setup()
+      utils.safe_require('mason', function(m)
+        m.setup()
+      end)
+      utils.safe_require('mason-lspconfig', function(m)
+        m.setup()
+      end)
 
 
       -- Use an on_attach function to only map the following keys
       -- after the language server attaches to the current buffer
       local on_attach = function(client, bufnr)
-        -- Enable completion triggered by <c-x><c-o>
-        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
         -- Mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
-        local bufopts = { noremap = true, silent = true, buffer = bufnr , desc=true}
+        local function bufopts(desc)
+          if desc == nil then
+            desc = true
+          end
+          return { norermap = true, silent = true, buffer = bufnr, desc = desc }
+        end
 
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-        vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-        vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-        vim.keymap.set('n', '<leader>wl', function()
+        utils.keymap('n', 'gD', vim.lsp.buf.declaration, bufopts("Go to declaration"))
+        utils.keymap('n', 'gd', vim.lsp.buf.definition, bufopts("Go to definition"))
+        utils.keymap('n', 'gi', vim.lsp.buf.implementation, bufopts("Go to implementation"))
+        utils.keymap('n', 'gr', vim.lsp.buf.references, bufopts("Go to references"))
+        utils.keymap('n', 'gt', vim.lsp.buf.type_definition, bufopts("Go to type definition"))
+
+        utils.keymap('n', 'K', vim.lsp.buf.hover, bufopts("Show hover"))
+        utils.keymap('n', '<C-k>', vim.lsp.buf.signature_help, bufopts("Show signature help"))
+
+        utils.keymap('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts("Add workspace folder"))
+        utils.keymap('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts("Remove workspace folder"))
+        utils.keymap('n', '<leader>wl', function()
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, bufopts)
-        vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-        vim.keymap.set('n', '<leader>lrn', vim.lsp.buf.rename, bufopts)
-        vim.keymap.set('n', '<leader>lca', vim.lsp.buf.code_action, bufopts)
-        vim.keymap.set('n', '<leader>lft', vim.lsp.buf.formatting, bufopts)
+        end, bufopts("List workspace folders"))
+
+        utils.keymap('n', '<leader>lr', vim.lsp.buf.rename, bufopts("Rename"))
+        utils.keymap('n', '<leader>la', vim.lsp.buf.code_action, bufopts("Code action"))
+        utils.keymap('n', '<leader>lf', vim.lsp.buf.formatting, bufopts("Format"))
+
         vim.api.nvim_create_autocmd("BufWritePre", {
           callback = vim.lsp.buf.formatting_sync,
           buffer = bufnr
@@ -63,44 +74,38 @@ return {
 
       local data_path = vim.fn.stdpath("data") .. "/mason"
 
-      require('lspconfig')['pyright'].setup {
-        on_attach = on_attach,
-        flags = lsp_flags,
-        settings = {
-          python = {
-            -- pythonPath = '/usr/local/bin/python3.11',
-            analysis = {
-              -- autoSearchPaths = true,
-              -- diagnosticMode = "workspace",
-            },
-          }
-        }
-      }
+      local function register_lsp(lspname, config)
+        local ok, lspconfig = utils.safe_require('lspconfig')
+        if not ok then
+          return
+        end
 
-      require('lspconfig')['dartls'].setup{
-        on_attach = on_attach,
-        flags = lsp_flags,
-      }
+        local lsp = lspconfig[lspname]
+        if config == nil then
+          config = {}
+        end
+        config.on_attach = on_attach
+        config.flags = lsp_flags
+        if lsp then
+          lsp.setup(config)
+        end
+      end
 
-      require('lspconfig')['lua_ls'].setup {
-        on_attach = on_attach,
-        flags = lsp_flags,
+      register_lsp('pyright', {})
+      register_lsp('dartls', {})
+      register_lsp('lua_ls', {
         settings = {
           Lua = {
             runtime = {
-              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
               version = 'LuaJIT',
             },
             diagnostics = {
-              -- Get the language server to recognize the `vim` global
               globals = { 'vim', 'hs' },
             },
             workspace = {
-              -- Make the server aware of Neovim runtime files
               library = vim.api.nvim_get_runtime_file("", true),
               checkThirdParty = false,
             },
-            -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {
               enable = false,
             },
@@ -112,42 +117,13 @@ return {
                 tab_width = "4",
               },
             },
-          }
-        },
-        -- capabilities = capabilities
-      }
-
-      require("lspconfig")['csharp_ls'].setup {
-        on_attach = on_attach,
-        flags =lsp_flags,
-      }
-
-      require('lspconfig')['tsserver'].setup {
-        on_attach = on_attach,
-        flags = lsp_flags,
-        -- Server-specific settings...
-        settings = {
-          ["tsserver"] = {
           },
         },
-        -- capabilities = capabilities
-      }
-
-      require('lspconfig')['rust_analyzer'].setup {
-        on_attach = on_attach,
-        flags = lsp_flags,
-        -- Server-specific settings...
-        settings = {
-          ["rust-analyzer"] = {
-          },
-        },
-        -- capabilities = capabilities
-      }
-
-      require('lspconfig')['ccls'].setup {
-        on_attach = on_attach,
-        flags = lsp_flags,
-        filetypes = {"c", "cpp", "objc", "objcpp"},
+      })
+      register_lsp('csharp_ls')
+      register_lsp('tsserver')
+      register_lsp('rust_analyzer')
+      register_lsp('ccls', {
         init_options = {
           compilationDatabaseDirectory = "build",
           index = {
@@ -157,17 +133,13 @@ return {
             excludeArgs = { "-frounding-math" },
           },
         }
-      }
-
-      require('lspconfig')['gopls'].setup {
-        on_attach = on_attach,
-        flags = lsp_flags,
-        -- Server-specific settings...
-        settings = {
-          ["gopls"] = {
-          },
+      })
+      register_lsp('clangd', {
+        init_options = {
+          clangdFileStatus = true,
         }
-      }
+      })
+      register_lsp('gopls')
 
       vim.api.nvim_set_hl(0, "@lsp.type.comment.cpp", { link = "Comment" })
 

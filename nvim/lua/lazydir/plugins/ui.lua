@@ -52,18 +52,23 @@ return {
     end,
   },
   {
-    "nathanaelkane/vim-indent-guides",
+    "preservim/vim-indent-guides",
     config = function() 
       vim.g.indent_guides_enable_on_vim_startup = 1
       vim.g.indent_guides_auto_colors = 0
       vim.g.indent_guides_guide_size = 1
-      vim.api.nvim_create_augroup('indent', {})
-      vim.api.nvim_create_autocmd({"VimEnter", "ColorScheme"}, { group="indent", command="hi IndentGuidesOdd ctermbg=239" })
-      vim.api.nvim_create_autocmd({"VimEnter", "ColorScheme"}, { group="indent", command="hi IndentGuidesEven ctermbg=237" })
+      vim.api.nvim_create_autocmd({"VimEnter", "ColorScheme"}, { command="hi IndentGuidesOdd ctermbg=239" })
+      vim.api.nvim_create_autocmd({"VimEnter", "ColorScheme"}, { command="hi IndentGuidesEven ctermbg=237" })
     end,
   },
   {
     "morhetz/gruvbox",
+  },
+  {
+    'akinsho/nvim-bufferline.lua',
+    config = function() 
+      require("bufferline").setup{}
+    end,
   }
 
 }
