@@ -1,10 +1,10 @@
 -- help
-vim.cmd [[autocmd FileType help wincmd L]]
+vim.cmd([[autocmd FileType help wincmd L]])
 
-vim.cmd [[
+vim.cmd([[
 syntax on
 filetype plugin indent on
-]]
+]])
 
 --window
 vim.opt.splitright = true
@@ -45,46 +45,48 @@ vim.opt.hlsearch = true
 vim.opt.showmatch = true
 vim.opt.matchtime = 2
 
-vim.opt.whichwrap = 'b,s,h,l,<,>,[,],~'
+vim.opt.whichwrap = "b,s,h,l,<,>,[,],~"
 vim.opt.relativenumber = true
 vim.opt.number = true
 
-utils.make_autocmds{
-  augroup = "numbertoggle",
-  autocmds = {
-    {
-      'BufEnter,FocusGained,InsertLeave,WinEnter', {
-        pattern = '*', 
-        command = 'if &nu && mode() != "i" | set rnu   | endif'
-      }
-    },
-    {
-      'BufLeave,FocusLost,InsertEnter,WinLeave',
-      {
-         pattern = '*', 
-         command = 'if &nu | set nornu | endif'
-      }
-    },
-  }
-}
+utils.make_autocmds({
+	augroup = "numbertoggle",
+	autocmds = {
+		{
+			"BufEnter,FocusGained,InsertLeave,WinEnter",
+			{
+				pattern = "*",
+				command = 'if &nu && mode() != "i" | set rnu   | endif',
+			},
+		},
+		{
+			"BufLeave,FocusLost,InsertEnter,WinLeave",
+			{
+				pattern = "*",
+				command = "if &nu | set nornu | endif",
+			},
+		},
+	},
+})
 
 vim.opt.cursorline = true
 vim.opt.completeopt = 'menu,menuone'
+-- vim.opt.completeopt = "popup"
 
-vim.opt.wildcharm=('\t'):byte()
-vim.opt.wildchar=('\t'):byte()
-vim.opt.wildmode = 'full'
+vim.opt.wildcharm = ("\t"):byte()
+vim.opt.wildchar = ("\t"):byte()
+vim.opt.wildmode = "full"
 
 -- spell checker
-utils.make_autocmds{
-  augroup = 'spell',
-  autocmds = {
-    {
-      'FileType',
-      {
-        pattern='markdown,text,gitcommit',
-        command='setlocal spell spelllang=en,cjk'
-      }
-    },
-  }
-}
+utils.make_autocmds({
+	augroup = "spell",
+	autocmds = {
+		{
+			"FileType",
+			{
+				pattern = "markdown,text,gitcommit",
+				command = "setlocal spell spelllang=en,cjk",
+			},
+		},
+	},
+})
