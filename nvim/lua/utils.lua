@@ -1,6 +1,8 @@
 local M = {}
 
 function M.keymap(mode, key, result, opts, lazy_nvim)
+  local desc = opts.desc
+  opts.desc = nil
   if opts == nil then
     opts = {
       silent = true,
@@ -10,9 +12,10 @@ function M.keymap(mode, key, result, opts, lazy_nvim)
     }
   end
 
-  if opts.desc == nil then
-    opts.desc = true
+  if desc == nil then
+    desc = true
   end
+  opts.desc = desc
 
   if lazy_nvim == nil then
     vim.keymap.set(mode, key, result, opts)
