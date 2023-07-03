@@ -28,6 +28,8 @@ wezterm_target=$XDG_CONFIG_HOME/wezterm
 git_config_source="${dirpath}/git/"
 git_config_target=$XDG_CONFIG_HOME/git
 
+python_source="${dirpath}/python/"
+python_target="$XDG_CONFIG_HOME/python/"
 
 vscode_keybindings_source="${dirpath}/vscode/keybindings.json"
 
@@ -83,3 +85,4 @@ makeSymLink $clang_source $clang_target
 makeSymLink $git_config_source $git_config_target
 makeSymLink $wezterm_source $wezterm_target
 makeSymLink $hammerspoon_source $hammerspoon_target
+makeSymLink $python_source $python_target

@@ -12,7 +12,7 @@ zstyle ':completion:*' list-colors "${LS_COLORS}"
 setopt correct
 
 # history
-HISTFILE=~/.zsh_history
+HISTFILE=$XDG_CACHE_HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
