@@ -11,14 +11,15 @@ __execute util.zsh
 if [[ -f $ZDOTDIR/.zshrc.local ]]; then
   __execute .zshrc.local
 else
-  read -p "create ~/.zshrc.local? [y/N]" yn
+  read "yn?create ~/.zshrc.local? [y/N]"
   case "$yn" in
-    [yY]*) ;;
-    *) break;;
+    [yY]*) 
+      touch $ZDOTDIR/.zshrc.local
+      vim $ZDOTDIR/.zshrc.local
+      __execute .zshrc.local
+    ;;
+    *) ;;
   esac
-  touch $ZDOTDIR/.zshrc.local
-  vim $ZDOTDIR/.zshrc.local
-  __execute .zshrc.local
 fi
 
 # depends on OS

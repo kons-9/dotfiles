@@ -4,3 +4,4 @@ if [ -f "$HOME/.cargo/env" ]; then
 fi
 ZDOTDIR=$HOME/.config/zsh
 XDG_CONFIG_HOME=$HOME/.config
+. "$HOME/.cargo/env"
