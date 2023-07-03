@@ -12,3 +12,5 @@
 	editor = nvim
 [credential]
 	helper = store
+[pull]
+	ff = only
