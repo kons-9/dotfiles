@@ -12,6 +12,7 @@ function __map() {
   # $1: alias name
   # external command form is _$1
   local command=(${(s: :)2})
+  local command_name=(${(s: :)1})
   if alias ${command[1]} > /dev/null 2>&1; then
     # alias exists
     # replace target in $2
@@ -23,7 +24,12 @@ function __map() {
       alias $1="$target ${command[2,-1]}"
     fi
   else
-    alias $1=$2
+#    if  ${command_name[1]} > /dev/null 2>&1; then
+#	eecho "alias is not found"
+#    else
+	    alias $1=$2
+
+#	fi
   fi
 }
 

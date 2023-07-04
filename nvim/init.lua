@@ -8,10 +8,12 @@ if vim.g.vscode then
   -- must have nvim
   require('env/vscode')
 else
+  require('utils')
   require('abbreviation')
   require('options')
   require('keymapping')
-  require('dein')
+  -- require('dein')
+  require('lazydir')
   require('colors')
 end
 

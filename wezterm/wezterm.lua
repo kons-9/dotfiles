@@ -34,10 +34,13 @@ config.font = wezterm.font("Hack Nerd Font Mono")
 config.window_background_opacity = 0.85
 config.font_size = 14.0
 
+config.disable_default_key_bindings = true
+config.use_dead_keys = false
+
 config.keys = {
   { key = "v", mods = "CMD", action = act.PasteFrom 'Clipboard' },
   { key = "c", mods = "CMD", action = act.CopyTo 'Clipboard' },
-
+  { key = "`", mods = "CMD", action = act.CloseCurrentTab{confirm = false}},
 }
 
 return config

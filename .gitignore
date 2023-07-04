@@ -1,3 +1,4 @@
+.DS_Store
 nvim-setting/nvim/dein/repos/github.com
 nvim/lua_old
 .cache
@@ -12,3 +13,6 @@ zsh/.zcompdump
 zsh/gitstatus
 zsh/.zsh_sessions
 
+git/credentials
+
+*-lock.json
