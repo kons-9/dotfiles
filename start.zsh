@@ -29,7 +29,7 @@ git_config_source="${dirpath}/git/"
 git_config_target=$XDG_CONFIG_HOME/git
 
 python_source="${dirpath}/python/"
-python_target="$XDG_CONFIG_HOME/python/"
+python_target="$XDG_CONFIG_HOME/python"
 
 vscode_keybindings_source="${dirpath}/vscode/keybindings.json"
 
