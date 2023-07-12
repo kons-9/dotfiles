@@ -40,6 +40,7 @@ __check_and_install_in_wsl git
 __check_and_install_in_wsl python3
 __check_and_install_in_wsl node
 
+source $CARGO_HOME/env
 # cargo(rustup) install
 if ! type rustup > /dev/null 2>&1; then
   read "yn?Install rustup? [y/n]"

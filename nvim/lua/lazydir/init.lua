@@ -1,5 +1,5 @@
 pcall(function()
-  local lazypath = vim.fn.stdpath("data") ..  "/.cache/nvim/lazy/lazy.nvim"
+  local lazypath = vim.fn.stdpath("data") .. "/.cache/nvim/lazy/lazy.nvim"
   if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
       "git",
@@ -13,15 +13,18 @@ pcall(function()
   vim.opt.rtp:prepend(lazypath)
 end)
 
-require('lazy').setup({{import = "lazydir.plugins"}})
+require('lazy').setup({
+  { import = "lazydir.plugins" },
+  { dir = "~/Documents2/programming/nvim_plugins/redmine.nvim" }
+})
 
 -- disable default plugins
-vim.g.loaded_gzip = 1
-vim.g.loaded_tar = 1
-vim.g.loaded_tarPlugin = 1
+vim.g.loaded_gzip              = 1
+vim.g.loaded_tar               = 1
+vim.g.loaded_tarPlugin         = 1
 
-vim.g.loaded_zip = 1
-vim.g.loaded_zipPlugin = 1
+vim.g.loaded_zip               = 1
+vim.g.loaded_zipPlugin         = 1
 
 vim.g.loaded_rrhelper          = 1
 vim.g.loaded_2html_plugin      = 1
