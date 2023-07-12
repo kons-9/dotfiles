@@ -84,6 +84,7 @@ local spec = {
           request = 'launch';
           name = 'Launch file';
           program = '${file}';
+          justMyCode = false;
           pythonPath = function()
             local cwd = vim.fn.getcwd()
             if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
