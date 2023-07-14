@@ -1,5 +1,6 @@
 # zsh setting
 # you should install zsh before run this script
+echo `cd $ZDOTDIR && git pull` > /dev/null 
 
 function __execute () {
   source $ZDOTDIR/$1

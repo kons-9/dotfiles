@@ -56,8 +56,41 @@ local spec = {
     end,
   },
   {
-    "akinsho/nvim-bufferline.lua",
-    opts = {},
+    "j-hui/fidget.nvim",
+    tag = "legacy",
+    config = function()
+      utils.safe_require("fidget", function(m)
+        m.setup()
+      end
+      )
+    end
+  },
+  {
+    "akinsho/bufferline.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      utils.safe_require("bufferline", function(m)
+        local bufferline = m
+        bufferline.setup({
+          options = {
+            style_preset = {
+              bufferline.style_preset.no_italic
+            },
+            diagnostics = "nvim_lsp",
+            diagnostics_indicator = function(count, level, diagnostics_dict, context)
+              local icon = level:match("error") and " " or " "
+              return " " .. icon .. count
+            end,
+            indicator = {
+              style = 'underline',
+            },
+
+          },
+        })
+      end)
+    end,
   },
   -- {
   -- 	"folke/noice.nvim",

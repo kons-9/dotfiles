@@ -50,23 +50,23 @@ vim.opt.relativenumber = true
 vim.opt.number = true
 
 utils.make_autocmds({
-	augroup = "numbertoggle",
-	autocmds = {
-		{
-			"BufEnter,FocusGained,InsertLeave,WinEnter",
-			{
-				pattern = "*",
-				command = 'if &nu && mode() != "i" | set rnu   | endif',
-			},
-		},
-		{
-			"BufLeave,FocusLost,InsertEnter,WinLeave",
-			{
-				pattern = "*",
-				command = "if &nu | set nornu | endif",
-			},
-		},
-	},
+  augroup = "numbertoggle",
+  autocmds = {
+    {
+      event = "BufEnter,FocusGained,InsertLeave,WinEnter",
+      opts = {
+        pattern = "*",
+        command = 'if &nu && mode() != "i" | set rnu   | endif',
+      },
+    },
+    {
+      event = "BufLeave,FocusLost,InsertEnter,WinLeave",
+      opts = {
+        pattern = "*",
+        command = "if &nu | set nornu | endif",
+      },
+    },
+  },
 })
 
 vim.opt.cursorline = true
@@ -79,14 +79,14 @@ vim.opt.wildmode = "full"
 
 -- spell checker
 utils.make_autocmds({
-	augroup = "spell",
-	autocmds = {
-		{
-			"FileType",
-			{
-				pattern = "markdown,text,gitcommit",
-				command = "setlocal spell spelllang=en,cjk",
-			},
-		},
-	},
+  augroup = "spell",
+  autocmds = {
+    {
+      event = "FileType",
+      opts = {
+        pattern = "markdown,text,gitcommit",
+        command = "setlocal spell spelllang=en,cjk",
+      },
+    },
+  },
 })

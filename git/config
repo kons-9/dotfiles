@@ -10,6 +10,7 @@
 	defaultBranch = main
 [core]
 	editor = nvim
+	whitespace = cr-at-eol
 [credential]
 	helper = store
 [pull]
