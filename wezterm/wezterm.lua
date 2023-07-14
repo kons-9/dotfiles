@@ -11,7 +11,7 @@ if wezterm.config and wezterm.config_builder then
 end
 
 if os:find("windows") then
-  config.default_prog = {"wsl.exe", "--distribution", "Ubuntu-20.04", "--exec", "/usr/bin/zsh", "-l"}
+  config.default_prog = { "wsl.exe", "--distribution", "Ubuntu", "--exec", "/usr/bin/zsh", "-l" }
 end
 -- macos
 if os:find("darwin") then
@@ -25,22 +25,30 @@ end
 -- 最初からフルスクリーンで起動
 local mux = wezterm.mux
 wezterm.on("gui-startup", function(cmd)
-    local tab, pane, window = mux.spawn_window(cmd or {})
-    window:gui_window():toggle_fullscreen()
+  local tab, pane, window = mux.spawn_window(cmd or {})
+  window:gui_window():toggle_fullscreen()
 end)
 
 config.color_scheme = 'Hybrid (Gogh)'
 config.font = wezterm.font("Hack Nerd Font Mono")
 config.window_background_opacity = 0.85
-config.font_size = 14.0
+config.font_size = 11.0
 
 config.disable_default_key_bindings = true
 config.use_dead_keys = false
 
 config.keys = {
-  { key = "v", mods = "CMD", action = act.PasteFrom 'Clipboard' },
-  { key = "c", mods = "CMD", action = act.CopyTo 'Clipboard' },
-  { key = "`", mods = "CMD", action = act.CloseCurrentTab{confirm = false}},
+  { key = "v", mods = "CMD",        action = act.PasteFrom 'Clipboard' },
+  { key = "c", mods = "CMD",        action = act.CopyTo 'Clipboard' },
+  { key = "t", mods = "SHIFT|CTRL", action = act.SpawnTab "DefaultDomain" },
+  { key = "w", mods = "SHIFT|CTRL", action = act.CloseCurrentTab { confirm = false } },
+  { key = "v", mods = "SHIFT|CTRL", action = act.PasteFrom 'Clipboard' },
+  { key = "c", mods = "SHIFT|CTRL", action = act.CopyTo 'Clipboard' },
+  { key = "l", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(1) },
+  { key = "h", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
+  -- { key = "[", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(1) },
+  -- { key = "]", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
+
 }
 
 return config
