@@ -6,9 +6,12 @@ local spec = {
     dependencies = {
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
+      "uga-rosa/cmp-dictionary",
+      'lukas-reineke/cmp-rg',
 
       "hrsh7th/cmp-vsnip",
       "hrsh7th/vim-vsnip",
@@ -37,16 +40,19 @@ local spec = {
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
             ["<C-Space>"] = cmp.mapping.complete(),
             ["<C-e>"] = cmp.mapping.abort(),
-            ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           }),
           sources = cmp.config.sources({
             { name = "nvim_lsp" },
+            { name = "nvim_lsp_signiture_help" },
             { name = "vsnip" }, -- For vsnip users.
             -- { name = 'luasnip' }, -- For luasnip users.
             -- { name = 'ultisnips' }, -- For ultisnips users.
             -- { name = 'snippy' }, -- For snippy users.
           }, {
+            { name = "path" },
             { name = "buffer" },
+            { name = "rg" },
           }),
         })
         cmp.setup.filetype("gitcommit", {
@@ -54,7 +60,15 @@ local spec = {
             { name = "git" }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
           }, {
             { name = "buffer" },
+            { name = "rg" },
           }),
+        })
+        cmp.setup.filetype("markdown", {
+          sources = cmp.config.sources({
+            { name = "dictionary" },
+            { name = "buffer" },
+            { name = "rg" },
+          })
         })
 
         -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).

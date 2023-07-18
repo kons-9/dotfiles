@@ -16,5 +16,12 @@ return {
   {
     "github/copilot.vim",
     event = "InsertEnter",
+    config = function()
+      vim.cmd [[
+        let g:copilot_filetypes = {
+          \ '*': v:true,
+          \ }
+      ]]
+    end
   }
 }
