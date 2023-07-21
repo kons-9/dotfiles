@@ -169,6 +169,8 @@ local spec = {
           clangdFileStatus = true,
         },
       })
+      register_lsp("verible")
+      register_lsp("veridian")
 
       vim.api.nvim_set_hl(0, "@lsp.type.comment.cpp", { link = "Comment" })
     end,
