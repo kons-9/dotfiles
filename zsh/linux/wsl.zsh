@@ -50,6 +50,7 @@ if ! type rustup > /dev/null 2>&1; then
     * ) __eecho "Please answer y or n."; break;;
   esac
   curl https://sh.rustup.rs -sSf | sh
+  echo ""
   echo "You may need other essential tools when you build rust tools."
   read "yn?Install build-essential, pkg-config, libssl-dev? [y/n]"
   case $yn in

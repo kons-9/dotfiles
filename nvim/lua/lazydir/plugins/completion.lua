@@ -51,7 +51,16 @@ local spec = {
             -- { name = 'snippy' }, -- For snippy users.
           }, {
             { name = "path" },
-            { name = "buffer" },
+            {
+              name = "buffer",
+              option = {
+                keyword_length = 2,
+                get_bufnrs = function()
+                  return vim.api.nvim_list_bufs()
+                end
+
+              }
+            },
             { name = "rg" },
           }),
         })
