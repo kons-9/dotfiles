@@ -2,8 +2,8 @@
 local flag=true
 
 function __apt_update() {
-  sudo apt upgrade
   sudo apt update
+  sudo apt upgrade
 }
 
 function __check_and_install_in_wsl() {
@@ -61,6 +61,8 @@ if ! type rustup > /dev/null 2>&1; then
     __apt_update
   fi
   sudo apt install build-essential pkg-config libssl-dev;
+  source "/home/wslmtl/.xdg/data/rust/cargo/env"
+  cargo install cargo-binstall
 fi
 
 # nvim install
@@ -107,6 +109,6 @@ if ! type deno > /dev/null 2>&1; then
   fi
   curl -fsSL https://deno.land/x/install/install.sh | sh
 
-  echo 'export DENO_INSTALL="~/.deno"' >> $ZDOTDIR/.zshrc.local
+  echo 'export DENO_INSTALL="$HOME/.deno"' >> $ZDOTDIR/.zshrc.local
   echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> $ZDOTDIR/.zshrc.local
 fi

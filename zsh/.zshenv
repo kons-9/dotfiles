@@ -9,3 +9,4 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export CARGO_HOME="$XDG_DATA_HOME/rust/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rust/rustup"
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/startup.py
+. "/home/wslmtl/.xdg/data/rust/cargo/env"
