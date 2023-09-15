@@ -26,7 +26,7 @@ local spec = {
 							x = { name = "etc" },
 						},
 						["<leader>"] = {
-							name = "Frecquent use tool",
+							name = "Frequent use tool",
 							f = { name = "FF File" },
 							-- e = { name = "Edit" },
 							-- s = { name = "Search" },

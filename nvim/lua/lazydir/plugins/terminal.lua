@@ -2,8 +2,8 @@ local spec = {
 	{
 		"akinsho/toggleterm.nvim",
 		keys = {
-			utils.keymap("n", "<C-`>", "<cmd>ToggleTerm size=20<CR>", { desc = "Toggle terminal" }, true),
-			utils.keymap("t", "<C-`>", "<C-\\><C-n>:ToggleTermToggleAll<CR>", { desc = "Toggle all terminal" }, true),
+			utils.keymap("n", "<leader><C-t>", "<cmd>ToggleTerm size=20<CR>", { desc = "Toggle terminal" }, true),
+			utils.keymap("t", "<C-t>", "<C-\\><C-n>:ToggleTermToggleAll<CR>", { desc = "Toggle all terminal" }, true),
 		},
 		cmd = { "ToggleTerm", "ToggleTermOpenAll", "ToggleTermCloseAll", "ToggleTermToggleAll" },
 		config = function()
