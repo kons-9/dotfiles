@@ -39,7 +39,7 @@ zshrc_target=~/.zshenv
 zshlocal_source="${dirpath}/zsh/.zshrc.local"
 zshlocal_target=~/.zshrc
 
-hammerspoon_source="${dirpath}/.hammerspoon"
+hammerspoon_source="${dirpath}/hammerspoon"
 hammerspoon_target=~/.hammerspoon
 
 

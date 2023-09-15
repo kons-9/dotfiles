@@ -24,11 +24,11 @@ vim.opt.history = 5000
 
 -- tab indent
 vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-vim.opt.shiftwidth = 2
+vim.opt.shiftwidth = 4
 
 -- string
 -- only capital letter

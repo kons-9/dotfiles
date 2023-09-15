@@ -9,3 +9,8 @@
 --     end
 --   end
 -- end)
+--
+-- hs.hotkey.bind({ "ctrl" }, "h", function()
+  -- delete
+  -- hs.eventtap.keyStroke({}, "delete")
+-- end)
