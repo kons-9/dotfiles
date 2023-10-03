@@ -1,0 +1,3 @@
+[settings]
+output_dir = "output"
+is_check = false

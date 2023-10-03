@@ -1,0 +1,74 @@
+#########################################
+############## installer ################
+#########################################
+# [[installer]]
+# package_manager = "package manager name"
+# command = "install command name"
+# distro = "distro name" // optional
+# // init is used to update package manager
+# init = "init command" // optional
+# // build is used to install package manager
+# build = "build command" // optional
+# if_fail = "next package manager name" // optional
+# before = "trigger command" // optional
+# after = "trigger command" // optional
+
+[[installer]]
+package_manager = "apt"
+command = "sudo apt install"
+distro = "ubuntu"
+init = "sudo apt update && sudo apt upgrade"
+
+[[installer]]
+package_manager = "brew"
+command = "brew install"
+distro = "macos"
+init = "brew update && brew upgrade"
+build = '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";;"'
+
+[[installer]]
+package_manager = "winget"
+command = "winget install"
+distro = "windows"
+init = "winget upgrade all -y"
+build = ""
+
+[[installer]]
+package_manager = "bcargo"
+command = "cargo binstall"
+if_fail = "cargo"
+build = '''
+# install rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install cargo-binstall
+'''
+before = '''
+source $CARGO_HOME/env
+'''
+
+[[installer]]
+package_manager = "cargo"
+command = "cargo install"
+build = '''
+# install rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+'''
+before = '''
+source $CARGO_HOME/env
+'''
+
+[[installer]]
+package_manager = "pip"
+command = "pip3 install"
+build = '''
+# install pip
+
+'''
+
+[[installer]]
+package_manager = "npm"
+command = "npm install -g"
+build = '''
+# install npm from nvm
+
+'''

@@ -1,0 +1,100 @@
+#########################################
+############## commands #################
+#########################################
+# [[command]]
+# command = "type command" // optional 
+# // one of installer or install is required
+# installer = "installer name" or "os"
+# install = "install command"
+# alias = "alias name" // optional
+# depends = ["command name"] // optional
+# build = "build command" // optional
+[[command_list]]
+distro = "ubuntu"
+    [command_list.libfuse2]
+    installer = "apt"
+
+    [command_list.build-essential]
+    installer = "apt"
+
+    [command_list.pkg-config]
+    installer = "apt"
+
+    [command_list.libssl-dev]
+    installer = "apt"
+
+    [coomand_list.unzip]
+    installer = "apt"
+
+[[command_list]]
+distro = "macos"
+    [command_list.pkg-config]
+    installer = "os"
+
+    [coomand_list.openssl]
+    installer = "os"
+
+[[command_list]]
+distro = "wsl"
+    [command_list.libfuse2]
+    installer = "apt"
+
+    [command_list.build-essential]
+    installer = "apt"
+
+    [command_list.pkg-config]
+    installer = "apt"
+
+    [command_list.libssl-dev]
+    installer = "apt"
+
+    [coomand_list.unzip]
+    installer = "apt"
+
+[[command_list]]
+distro = "all"
+    [command_list.exa]
+    installer = "bcargo"
+    alias = "cd"
+
+    [command_list.bat]
+    installer = "bcargo"
+    alias = "cat"
+
+    [command_list.fd-find]
+    command = "fd"
+    installer = "bcargo"
+    alias = "find"
+
+    [command_list.ripgrep]
+    command = "rg"
+    installer = "bcargo"
+    alias = "grep"
+
+    [command_list.sheldon]
+    installer = "bcargo"
+
+    [command_list.neovim]
+    command = "nvim"
+    installer = "os"
+    alias = ["vim", "vi"]
+    depends.wsl = ["libfuse2", "build-essential", "pkg-config", "libssl-dev", "unzip"]
+    depends.macos = ["pkg-config", "openssl"]
+
+    [command_list.git]
+    installer = "os"
+
+    [command_list.zsh]
+    installer = "os"
+    build = '''
+    chsh -s $(which zsh)
+    '''
+
+    [command_list.deno]
+    install = "curl -fsSL https://deno.land/x/install/install.sh | sh"
+    build = '''
+      echo 'export DENO_INSTALL="$HOME/.deno"' >> $ZDOTDIR/.zshrc.local
+      echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> $ZDOTDIR/.zshrc.local
+    '''
+    depends.wsl = ["libfuse2", "build-essential", "pkg-config", "libssl-dev", "unzip"]
+
