@@ -44,18 +44,12 @@ if [[ $OSTYPE =~ linux.* ]]; then
 
   ## ubuntu
   if [[ -e /etc/lsb-release ]]; then
-    # install apt
-    if ! type apt > /dev/null 2>&1; then
-      __eecho "you need to install apt"
-    fi
+    __execute linux/ubuntu.zsh
   fi
 
   ## centos
   if [[ -e /etc/centos-release ]]; then
-    # install yum
-    if ! type yum > /dev/null 2>&1; then
-      __eecho "you need to install yum"
-    fi
+    __eecho "unimplemented"
   fi
 fi
 
