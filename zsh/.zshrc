@@ -1,7 +1,20 @@
 #!/bin/zsh
 # zsh setting
-# you should install zsh before run this script
-echo `cd $ZDOTDIR && git pull` > /dev/null 
+# read .zsh_update and get date of last update
+if [[ ! -f $ZDOTDIR/.zsh_update ]]; then
+    now=`date +%Y%m%d`
+    echo `cd $ZDOTDIR && git pull --all` > /dev/null 
+    echo $now > $ZDOTDIR/.zsh_update
+else
+    last_update=`cat $ZDOTDIR/.zsh_update`
+    now=`date +%Y%m%d`
+    # compare date and if today >= last_update + 1day, update
+    if [[ $now -ge $((last_update + 1)) ]]; then
+        echo "updating zsh setting"
+        echo `cd $ZDOTDIR && git pull --all` 1> /dev/null
+        echo $now > $ZDOTDIR/.zsh_update
+    fi
+fi
 
 function __execute () {
   source $ZDOTDIR/$1

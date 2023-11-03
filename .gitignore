@@ -13,6 +13,8 @@ zsh/.zcompdump
 zsh/gitstatus
 zsh/.zsh_sessions
 zsh/.initialized
+zsh/.apt_update
+zsh/.zsh_update
 
 git/credentials
 
