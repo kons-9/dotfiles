@@ -12,6 +12,7 @@ zsh/.zshrc.org
 zsh/.zcompdump
 zsh/gitstatus
 zsh/.zsh_sessions
+zsh/.initialized
 
 git/credentials
 
