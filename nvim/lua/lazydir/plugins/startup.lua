@@ -46,8 +46,6 @@ local spec = {
             { '<leader>a', '<cmd>Alpha<CR>', desc = "Open startup page", mode = "n" },
         },
 
-  },
     },
-
 }
 return spec
