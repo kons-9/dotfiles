@@ -11,6 +11,7 @@
 [core]
 	editor = nvim
 	whitespace = cr-at-eol
+	autocrlf = input
 [credential]
 	helper = store
 [pull]

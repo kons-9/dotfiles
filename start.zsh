@@ -6,6 +6,10 @@ if [ -z $XDG_CONFIG_HOME ]; then
   export XDG_CONFIG_HOME=~/.config
 fi
 
+if [[ ! -f $ZDOTDIR/.initialized ]]; then
+    __execute initialize/initialize.sh
+fi
+
 # if check is not needed and you want to replace all, please cmd `sh start.sh -y`
 # if check is not needed and you don't want to replace any, please cmd `sh start.sh -n`
 flag=$1 || ""
@@ -38,8 +42,14 @@ zshrc_target=~/.zshenv
 
 zshlocal_source="${dirpath}/zsh/.zshrc.local"
 zshlocal_target=~/.zshrc
+if [ ! -e $zshlocal_source ]; then
+    echo "${zshlocal_source} is not exist, but make .zshrc.local"
+    echo "because zsh require .zshrc and .zshrc is just symlink to .zshrc.local"
+    touch $zshlocal_source
+    nvim $zshlocal_source
+fi
 
-hammerspoon_source="${dirpath}/hammerspoon"
+hammerspoon_source="${dirpath}/hotkey/hammerspoon"
 hammerspoon_target=~/.hammerspoon
 
 
