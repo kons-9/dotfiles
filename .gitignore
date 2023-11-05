@@ -10,6 +10,7 @@ zsh/.zshrc.local
 zsh/.zsh_history
 zsh/.zshrc.org
 zsh/.zcompdump
+zsh/.zcompcache
 zsh/gitstatus
 zsh/.zsh_sessions
 zsh/.initialized
