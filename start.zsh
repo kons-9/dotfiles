@@ -49,7 +49,7 @@ if [ ! -e $zshlocal_source ]; then
     nvim $zshlocal_source
 fi
 
-hammerspoon_source="${dirpath}/hammerspoon"
+hammerspoon_source="${dirpath}/hotkey/hammerspoon"
 hammerspoon_target=~/.hammerspoon
 
 
