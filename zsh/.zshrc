@@ -24,7 +24,6 @@ if [[ ! -f $ZDOTDIR/.initialized ]]; then
   esac
 fi
 
-
 __execute util.zsh
 
 # local setting
@@ -44,9 +43,6 @@ fi
 
 # depends on os
 __execute os/os.zsh
-
-# you need cargo for command, so you should setup rustup in each enviroment.
-source $CARGO_HOME/env
 
 # common
 __execute plugin.zsh
