@@ -167,23 +167,23 @@ vim.opt.relativenumber = true
 vim.opt.number = true
 
 utils.make_autocmds({
-    augroup = "numbertoggle",
-    autocmds = {
-        {
-            event = "BufEnter,FocusGained,InsertLeave,WinEnter",
-            opts = {
-                pattern = "*",
-                command = 'if &nu && mode() != "i" | set rnu   | endif',
-            },
-        },
-        {
-            event = "BufLeave,FocusLost,InsertEnter,WinLeave",
-            opts = {
-                pattern = "*",
-                command = "if &nu | set nornu | endif",
-            },
-        },
+  augroup = "numbertoggle",
+  autocmds = {
+    {
+      event = {"BufEnter","FocusGained","InsertLeave","WinEnter"},
+      opts = {
+        pattern = "*",
+        command = 'if &nu && mode() != "i" | set rnu   | endif',
+      },
     },
+    {
+      event = {"BufLeave","FocusLost","InsertEnter","WinLeave"},
+      opts = {
+        pattern = "*",
+        command = "if &nu | set nornu | endif",
+      },
+    },
+  },
 })
 
 vim.opt.cursorline = true
