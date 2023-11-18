@@ -258,4 +258,5 @@ local spec = {
     }
 }
 
-return spec
+-- return spec
+return {}

@@ -15,7 +15,7 @@ end)
 
 require('lazy').setup({
     { import = "lazydir.plugins" },
-    { dir = "~/Documents2/programming/nvim_plugins/redmine.nvim" }
+--     { dir = "~/Documents2/programming/nvim_plugins/redmine.nvim" }
 })
 
 -- disable default plugins

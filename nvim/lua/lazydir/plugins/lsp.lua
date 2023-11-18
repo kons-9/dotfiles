@@ -76,7 +76,8 @@ local spec = {
     },
     {
         "williamboman/mason.nvim",
-        dependencies = { "neovim/nvim-lspconfig", "williamboman/mason-lspconfig.nvim", "hrsh7th/cmp-nvim-lsp" },
+        -- dependencies = { "neovim/nvim-lspconfig", "williamboman/mason-lspconfig.nvim", "hrsh7th/cmp-nvim-lsp" },
+        dependencies = { "neovim/nvim-lspconfig", "williamboman/mason-lspconfig.nvim" },
         build = ":MasonUpdate",
         config = function()
             utils.safe_require("mason", function(m)
@@ -103,11 +104,11 @@ local spec = {
                 config.flags = lsp_flags
 
                 -- connect to nvim-cmp
-                local ok, cmp_nvim_lsp = utils.safe_require("cmp_nvim_lsp")
-                if ok then
-                    local capabilities = cmp_nvim_lsp.default_capabilities()
-                    config.capabilities = capabilities
-                end
+                -- local ok, cmp_nvim_lsp = utils.safe_require("cmp_nvim_lsp")
+                -- if ok then
+                --     local capabilities = cmp_nvim_lsp.default_capabilities()
+                --     config.capabilities = capabilities
+                -- end
 
                 -- connect to lspconfig
                 local ok, lspconfig = utils.safe_require("lspconfig")
