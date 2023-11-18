@@ -1,3 +1,4 @@
+-- telescope is no longer used. this is replaced by ddu source
 local spec = {
     {
         "nvim-telescope/telescope.nvim",

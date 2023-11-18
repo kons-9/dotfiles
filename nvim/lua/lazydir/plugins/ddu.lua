@@ -3,20 +3,56 @@ local spec = {
     {
         "Shougo/ddu-commands.vim",
         keys = {
-            -- nnoremap <silent> <leader>fo <Cmd>Ddu file_old<CR>
-            -- nnoremap <silent> <leader>fg <Cmd>Ddu rg<CR>
-            -- nnoremap <silent> <leader>fb <Cmd>Ddu buffer<CR>
-            -- nnoremap <silent> <leader>fh <Cmd>Ddu help<CR>
-            -- nnoremap <silent> <leader>fr <Cmd>Ddu mr<CR>
-            -- nnoremap <silent> <leader>fm <Cmd>Ddu man<CR>
-            -- nnoremap <silent> <leader>fc <Cmd>Ddu colorscheme -ui-param-winWidth=&columns*3/4<CR>
-            { "<leader>ff", "<Cmd>Ddu file_rec<CR>",    desc = "Find files",       mode = "n" },
-            { "<leader>fg", "<Cmd>Ddu rg<CR>",          desc = "grep files",       mode = "n" },
-            { "<leader>fb", "<Cmd>Ddu buffer<CR>",      desc = "Find buffer",      mode = "n" },
-            { "<leader>fh", "<Cmd>Ddu help<CR>",        desc = "Find help",        mode = "n" },
-            { "<leader>fr", "<Cmd>Ddu mr<CR>",          desc = "Find mr",          mode = "n" },
-            { "<leader>fm", "<Cmd>Ddu man<CR>",         desc = "Find man",         mode = "n" },
-            { "<leader>fc", "<Cmd>Ddu colorscheme<CR>", desc = "Find colorscheme", mode = "n" },
+            --
+            -- most used
+            --
+
+            { "<leader><leader>ff", "<Cmd>Ddu file_rec<CR>", desc = "Find files",  mode = "n" },
+            { "<leader><leader>fg", "<Cmd>Ddu rg<CR>",       desc = "grep files",  mode = "n" },
+            { "<leader><leader>fo", "<Cmd>Ddu mr<CR>",       desc = "Find mr",     mode = "n" },
+            { "<leader><leader>fb", "<Cmd>Ddu buffer<CR>",   desc = "Find buffer", mode = "n" },
+
+            --
+            -- file
+            --
+
+            { "<leader>fff",        "<Cmd>Ddu file_rec<CR>", desc = "Find files",  mode = "n" },
+            { "<leader>ffg",        "<Cmd>Ddu rg<CR>",       desc = "grep files",  mode = "n" },
+            { "<leader>ffb",        "<Cmd>Ddu buffer<CR>",   desc = "Find buffer", mode = "n" },
+            { "<leader>ffo",        "<Cmd>Ddu mr<CR>",       desc = "Find mr",     mode = "n" },
+
+            --
+            -- lsp
+            --
+
+            {
+                "<leader>flr", "<Cmd>Ddu lsp_references<CR>", desc = "Find lsp references", mode = "n"
+            },
+            {
+                "<leader>fls", "<Cmd>Ddu lsp_documentSymbols<CR>", desc = "Find lsp document symbols", mode = "n"
+            },
+            {
+                "<leader>flw", "<Cmd>Ddu lsp_workspaceSymbols<CR>", desc = "Find lsp workspace symbols", mode = "n"
+            },
+            {
+                "<leader>fla", "<Cmd>Ddu lsp_codeAction<CR>", desc = "Find lsp code action", mode = "n"
+            },
+            {
+                "<leader>flD", "<Cmd>Ddu lsp_definitions<CR>", desc = "Find lsp definitions", mode = "n"
+            },
+            {
+                "<leader>fld", "<Cmd>Ddu lsp_diagnostic<CR>", desc = "Find lsp diagnostic", mode = "n"
+            },
+
+
+            --
+            -- edit
+            --
+
+            { "<leader>fsh", "<Cmd>Ddu help<CR>",        desc = "Find help",        mode = "n" },
+            { "<leader>fsm", "<Cmd>Ddu man<CR>",         desc = "Find man",         mode = "n" },
+            { "<leader>fxc", "<Cmd>Ddu colorscheme<CR>", desc = "Find colorscheme", mode = "n" },
+
         }
 
     },
@@ -35,23 +71,36 @@ local spec = {
                         previewHeight = lines - 8,
                         previewWidth = math.floor(columns * 3 / 8),
                         previewRow = 3,
+                        previewCol = math.floor(columns / 2),
                         filterSplitDirection = "floating",
-                        winWidth = math.floor(columns * 3 / 4),
+                        filterFloatingTitlePos = "right",
+                        filterFloatingPosition = "bottom",
+
+                        floatingBorder = "rounded",
+                        floatingBorderTitle = "ddu!",
+                        previewFloatingBorder = "rounded",
+
+                        winWidth = math.floor(columns * 6 / 8),
                         winCol = math.floor(columns / 8),
                         winRow = 3,
                         winHeight = lines - 8,
+
                         split = "floating",
                         startFilter = true,
                         autoAction = {
                             name = "preview",
+                            params = {
+                                preview = true,
+                            },
                         },
-                        prompt = ">> ",
+                        startAutoAction = true,
+                        prompt = "-> ",
                     }
                 },
                 sources = {
                     file_rec = {
                         expandSymlinks = true,
-                        ignoredDirectories = { ".git", "venv", ".vscode", ".ccls-cache", "target", ".embuild" },
+                        ignoredDirectories = { ".git", "venv", ".vscode", ".ccls-cache", "target", ".embuild", "build" },
                     },
                     rg = {
                         args = { "--json" },
@@ -74,6 +123,9 @@ local spec = {
                 },
                 kindOptions = {
                     file = {
+                        defaultAction = "open",
+                    },
+                    help = {
                         defaultAction = "open",
                     },
                 },
@@ -101,13 +153,16 @@ local spec = {
                         { noremap = true, silent = true })
                     keymap("n", "i", "<Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>",
                         { noremap = true, silent = true })
-                    keymap("n", ":q<CR>", "<Cmd>call ddu#ui#ff#do_action('quit')<CR>",
-                        { noremap = true, silent = true, buffer = true })
-                    keymap("n", "q", "<Cmd>call ddu#ui#ff#do_action('quit')<CR>",
-                        { noremap = true, silent = true })
                     keymap("n", "p", "<Cmd>call ddu#ui#ff#do_action('preview')<CR>",
                         { noremap = true, silent = true })
+
+                    keymap("n", ":q<CR>", "<Cmd>call ddu#ui#ff#do_action('quit')<CR>",
+                        { noremap = true, silent = true })
+                    keymap("n", "q", "<Cmd>call ddu#ui#ff#do_action('quit')<CR>",
+                        { noremap = true, silent = true })
                     keymap("n", "<C-e>", "<Cmd>call ddu#ui#ff#do_action('quit')<CR>",
+                        { noremap = true, silent = true })
+                    keymap("n", "<esc>", "<Cmd>call ddu#ui#ff#do_action('quit')<CR>",
                         { noremap = true, silent = true })
                 end,
             })
@@ -121,13 +176,12 @@ local spec = {
                     keymap("i", "<CR>", "<esc><Cmd>call ddu#ui#ff#do_action('itemAction')<CR>",
                         { noremap = true, silent = true })
                     keymap("i", "<esc>", "<esc><Cmd>close<CR>", { silent = true })
+                    keymap("i", "<C-p>", "<Cmd>call ddu#ui#ff#do_action('preview')<CR>", { noremap = true })
+                    keymap("i", "<C-n>", "<Cmd>call ddu#ui#do_action('cursorNext')<CR>", { noremap = true })
+                    keymap("i", "<C-p>", "<Cmd>call ddu#ui#ff#do_action('cursorPrevious')<CR>", { noremap = true })
+
                     keymap("i", "<C-e>", "<esc><Cmd>call ddu#ui#ff#do_action('quit')<CR>",
-                        { norermap = true, silent = true })
-                    keymap("i", "<C-d>", "<Cmd>call ddu#ui#ff#do_action('preview')<CR>", { noremap = true })
-                    keymap("i", "<C-n>", "<Cmd>call ddu#ui#ff#execute('call cursor(line('.'+1),0)<Bar>redraw')<CR>",
-                        { noremap = true })
-                    keymap("i", "<C-p>", "<Cmd>call ddu#ui#ff#execute('call cursor(line('.'-1),0)<Bar>redraw')<CR>",
-                        { noremap = true })
+                        { noremap = true, silent = true })
                 end,
             })
         end
@@ -170,7 +224,10 @@ local spec = {
 
     },
     {
-        "Shougo/ddu-kind-file"
+        "Shougo/ddu-kind-file",
+    },
+    {
+        "uga-rosa/ddu-source-lsp",
     },
 }
 return spec
