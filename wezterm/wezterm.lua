@@ -20,7 +20,8 @@ end
 -- linux
 if os:find("linux") then
     config.enable_wayland = false
-    config.default_prog = { "nvim" }
+    -- config.default_prog = { "nvim" }
+    config.default_prog = { "zsh", "-l"}
 end
 
 -- 最初からフルスクリーンで起動
