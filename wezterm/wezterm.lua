@@ -31,7 +31,7 @@ wezterm.on("gui-startup", function(cmd)
     window:gui_window():toggle_fullscreen()
 end)
 
-local opacity = 0.85
+local opacity = 0.87
 
 wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
     local index = ''
@@ -50,10 +50,10 @@ wezterm.on("format-tab-title",
         end
         local title = tab.active_pane.title .. " " .. index
         -- local color = 'navy'
-        local color = string.format('rgba(%d%% %d%% %d%% %f)', 0x1b, 0x10, 0x32, opacity)
+        local color = string.format('rgba(%d%% %d%% %d%% %f)', 0x1b, 0x1b, 0x20, opacity)
 
         if tab.is_active then
-            color = string.format('rgba(%d%% %d%% %d%% %f)', 0x0b, 0x00, 0x22, opacity)
+            color = string.format('rgba(%d%% %d%% %d%% %f)', 0x10, 0x10, 0x12, opacity)
         end
 
         return {
@@ -64,10 +64,11 @@ wezterm.on("format-tab-title",
     end
 )
 
-config.color_scheme = 'Hybrid (Gogh)'
+-- config.color_scheme = 'Hybrid (Gogh)'
 -- config.font = wezterm.font("Hack Nerd Font Mono")
+config.color_scheme = 'Kanagawa (Gogh)'
 config.window_background_opacity = opacity
-config.font_size = 9.5
+config.font_size = 10
 
 config.disable_default_key_bindings = true
 config.use_dead_keys = false
@@ -81,6 +82,8 @@ config.keys = {
     { key = "c", mods = "SHIFT|CTRL", action = act.CopyTo 'Clipboard' },
     { key = "l", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(1) },
     { key = "h", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
+    { key = "p", mods = "CTRL",       action = act.SendKey { key = "UpArrow" } },
+    { key = "n", mods = "CTRL",       action = act.SendKey { key = "DownArrow" } },
     -- { key = "[", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(1) },
     -- { key = "]", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
 
