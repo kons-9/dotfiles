@@ -67,7 +67,7 @@ wezterm.on("format-tab-title",
 -- config.font = wezterm.font("Hack Nerd Font Mono")
 config.color_scheme = 'Kanagawa (Gogh)'
 config.window_background_opacity = opacity
-config.font_size = 11
+config.font_size = 9.5
 
 config.disable_default_key_bindings = true
 config.use_dead_keys = false
