@@ -64,6 +64,7 @@ local spec = {
 
             vim.fn['ddu#custom#patch_global'] {
                 ui = "ff",
+                sync = true,
                 uiParams = {
                     ff = {
                         previewFloating = true,
@@ -87,14 +88,15 @@ local spec = {
 
                         split = "floating",
                         startFilter = true,
-                        autoAction = {
-                            name = "preview",
-                            params = {
-                                preview = true,
-                            },
-                        },
-                        startAutoAction = true,
-                        prompt = "-> ",
+                        -- autoAction = {
+                        --     name = "preview",
+                        --     params = {
+                        --         preview = true,
+                        --     },
+                        --     sync = true,
+                        -- },
+                        -- startAutoAction = true,
+                        prompt = "> ",
                     }
                 },
                 sources = {
@@ -176,7 +178,7 @@ local spec = {
                     keymap("i", "<CR>", "<esc><Cmd>call ddu#ui#ff#do_action('itemAction')<CR>",
                         { noremap = true, silent = true })
                     keymap("i", "<esc>", "<esc><Cmd>close<CR>", { silent = true })
-                    keymap("i", "<C-p>", "<Cmd>call ddu#ui#ff#do_action('preview')<CR>", { noremap = true })
+                    keymap("i", "<C-d>", "<Cmd>call ddu#ui#ff#do_action('preview')<CR>", { noremap = true })
                     keymap("i", "<C-n>", "<Cmd>call ddu#ui#do_action('cursorNext')<CR>", { noremap = true })
                     keymap("i", "<C-p>", "<Cmd>call ddu#ui#ff#do_action('cursorPrevious')<CR>", { noremap = true })
 
