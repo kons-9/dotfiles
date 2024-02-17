@@ -3,7 +3,7 @@
 sudo apt update && sudo apt upgrade -y
 
 # install sub modules
-sudo apt install -y git, pkg-config, libssl-dev, curl, wget, libfuse2 , unzip
+sudo apt install -y git pkg-config libssl-dev curl wget libfuse2 unzip zsh gcc
 
 # install nvim
 # note: if cpu architecture is not x86_64, you should change the url

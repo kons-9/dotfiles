@@ -47,7 +47,7 @@ local spec = {
                 null_ls.builtins.formatting.rustfmt,
                 null_ls.builtins.formatting.autopep8,
                 null_ls.builtins.formatting.dart_format,
-                null_ls.builtins.formatting.clang_format,
+                -- null_ls.builtins.formatting.clang_format,
                 null_ls.builtins.formatting.stylua,
                 null_ls.builtins.diagnostics.eslint,
                 null_ls.builtins.completion.spell,
@@ -55,14 +55,14 @@ local spec = {
 
             null_ls.setup({
                 sources = sources,
-                on_attach = function(client, bufnr)
-                    vim.api.nvim_create_autocmd("BufWritePre", {
-                        callback = function()
-                            vim.lsp.buf.format({ async = false })
-                        end,
-                        buffer = bufnr,
-                    })
-                end,
+                -- on_attach = function(client, bufnr)
+                --     vim.api.nvim_create_autocmd("BufWritePre", {
+                --         callback = function()
+                --             vim.lsp.buf.format({ async = false })
+                --         end,
+                --         buffer = bufnr,
+                --     })
+                -- end,
             })
         end,
     },

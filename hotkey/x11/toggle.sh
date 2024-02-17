@@ -16,7 +16,7 @@ function toggle() {
       xdotool windowactivate "${WINDOW_ID}"
     fi
   else
-    sh -c "${TERMINAL_BIN}" &
+    zsh -c "${TERMINAL_BIN}" &
   fi
 }
 

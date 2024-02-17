@@ -1,4 +1,5 @@
 #!/bin/zsh
+export EDITOR=nvim
 
 # color
 autoload -Uz colors: colors

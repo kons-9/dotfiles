@@ -7,6 +7,9 @@ vim.opt.ambiwidth = 'single'
 if vim.g.vscode then
   -- must have nvim
   require('env/vscode')
+  require('utils')
+  require('options')
+  require('keymapping')
 else
   require('utils')
   require('abbreviation')
