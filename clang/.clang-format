@@ -20,7 +20,7 @@ AllowShortEnumsOnASingleLine: false
 # Ew, no.
 AlwaysBreakAfterDefinitionReturnType: false
 # Not mandatory...
-AlwaysBreakTemplateDeclarations: false
+AlwaysBreakTemplateDeclarations: true
 # Readability:
 AlwaysBreakBeforeMultilineStrings: true
 # Nice...
@@ -69,6 +69,6 @@ SpaceBeforeParens: ControlStatements
 JavaScriptWrapImports: true
 JavaScriptQuotes: Single
 DisableFormat:   false
-Standard: c++20
+Standard: c++2b
 SortIncludes: false
 ...
