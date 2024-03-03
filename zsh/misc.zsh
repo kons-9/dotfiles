@@ -24,18 +24,24 @@ setopt hist_reduce_blanks
 # Ctrl D 
 setopt ignore_eof
 
+# time command
+TIMEFMT=$'%J\n%U user\n%S system\n%P cpu\n%*E total'
+
 # alias
 __map vi 'nvim'
 __map vim 'nvim'
 __map .. 'cd ..'
 __map ... 'cd ../..'
 __map .... 'cd ../../..'
-__map ls 'ls -l -h'
+__map ..... 'cd ../../../..'
+__map ls 'ls -h'
+__map ll 'ls -l'
 __map cp 'cp -i'
 __map mv 'mv -i'
 __map rm 'rm -i'
 __map la 'ls -a'
 __map gs 'git status'
+__map gd 'git diff'
 __map sozsh 'source ~/.zshrc'
 
 # alias for my command
