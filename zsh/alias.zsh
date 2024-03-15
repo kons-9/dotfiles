@@ -14,6 +14,7 @@ __map la 'ls -a'
 __map gs 'git status'
 __map gd 'git diff'
 __map sozsh 'source ~/.zshrc'
+__map prevcommand 'history -1 | sed "s/^[ ]*[0-9]*[ ]*//" | cut -d " " -f 2-'
 
 # alias for my command
 function _mkdir_and_cd(){
