@@ -170,7 +170,7 @@ local spec = {
                 },
             })
             register_lsp("verible")
-            register_lsp("veridian")
+            register_lsp("svls")
             register_lsp("gopls")
 
             vim.api.nvim_set_hl(0, "@lsp.type.comment.cpp", { link = "Comment" })

@@ -61,5 +61,6 @@ __execute os/os.zsh
 __execute plugin.zsh
 __execute prompt.zsh
 __execute external_command.zsh
+__execute alias.zsh
 __execute misc.zsh
 

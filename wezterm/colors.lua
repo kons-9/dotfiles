@@ -1,7 +1,9 @@
 local function merge(config)
+    local wezterm = require 'wezterm'
     -- config.color_scheme = 'Hybrid (Gogh)'
     config.color_scheme = 'zenwritten_dark'
-    -- config.font = wezterm.font("Hack Nerd Font Mono")
+    config.font = wezterm.font("JetBrains Mono")
+    config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
     -- config.color_scheme = 'Kanagawa (Gogh)'
     -- config.colors = {
         -- Make the selection text color fully transparent.
