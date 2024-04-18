@@ -41,7 +41,7 @@ function git_new_dir(){
   echo "# $1" > README.md
   git add README.md 
   git commit -m "first commit"
-  gh repo create $1
+  gh repo create $1 --private
   git remote add origin https://github.com/kons-9/$1.git
   git push --set-upstream origin main
 }

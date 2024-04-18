@@ -90,7 +90,13 @@ local spec = {
 
         -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
         cmp.setup.cmdline(":", {
-          mapping = cmp.mapping.preset.cmdline(),
+          -- mapping = cmp.mapping.preset.cmdline(),
+          mapping = {
+            ["Up"] = cmp.mapping.select_prev_item(),
+            ["Down"] = cmp.mapping.select_next_item(),
+            ["<C-Space>"] = cmp.mapping.complete(),
+            ["<C-e>"] = cmp.mapping.abort(),
+          },
           sources = cmp.config.sources({
             { name = "path" },
           }, {
