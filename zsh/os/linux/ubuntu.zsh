@@ -2,7 +2,7 @@
 #
 function __apt_update() {
     echo "updating apt setting"
-    nohup sudo apt update && sudo apt upgrade -y
+    sudo apt update && sudo apt upgrade -y
     echo `date +%Y%m%d` > $ZDOTDIR/.apt_update
 }
 #update apt
