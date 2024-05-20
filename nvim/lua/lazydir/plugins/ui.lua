@@ -11,7 +11,7 @@ local spec = {
                     "mode",
                 },
                 lualine_b = { "filename", "branch", "diagnostics" },
-                lualine_c = {},
+                lualine_c = { "os.date('%y/%m/%d %H:%M:%S')" },
                 lualine_x = { "encoding", "fileformat" },
                 lualine_y = { "filetype", "progress" },
                 lualine_z = {
