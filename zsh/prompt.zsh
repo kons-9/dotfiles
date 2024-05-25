@@ -18,8 +18,7 @@ RPROMPT=''
 
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd makeprompt
-
-TMOUT=1
-TRAPALRM() {
-    zle reset-prompt
-}
+# TMOUT=1
+# TRAPALRM() {
+#     zle reset-prompt
+# }
