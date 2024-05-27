@@ -13,6 +13,7 @@ __map rm 'rm -i'
 __map la 'ls -a'
 __map gs 'git status'
 __map gd 'git diff'
+__map gb 'git branch'
 __map sozsh 'source ~/.zshrc'
 __map prevcommand 'history -1 | sed "s/^[ ]*[0-9]*[ ]*//" | cut -d " " -f 2-'
 
@@ -46,7 +47,12 @@ function git_new_dir(){
   git push --set-upstream origin main
 }
 
+function git_sync(){
+    git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d
+}
+
 __noremap mcd '_mkdir_and_cd'
 __noremap mnvim '_measure_nvim_startup_time'
 __noremap c '_cd_and_ls'
 __noremap gnd 'git_new_dir'
+__noremap gsync 'git_sync'
