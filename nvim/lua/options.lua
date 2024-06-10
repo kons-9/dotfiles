@@ -84,9 +84,25 @@ utils.make_autocmds({
     {
       event = "FileType",
       opts = {
-        pattern = "markdown,text,gitcommit",
+        pattern = {"markdown","text","gitcommit"},
         command = "setlocal spell spelllang=en,cjk",
       },
     },
   },
+})
+
+utils.make_autocmds({
+    augroup = "filetype",
+    autocmds = {
+        {
+            event = {"BufNewFile","BufRead"},
+            opts = {
+                pattern = {"*.mak","*.mk","Makefile","makefile","Makefile.*","makefile.*"},
+                callback = function()
+                    local bufnr = vim.api.nvim_get_current_buf()
+                    vim.api.nvim_buf_set_option(bufnr, "filetype", "make")
+                end,
+            },
+        },
+    },
 })
