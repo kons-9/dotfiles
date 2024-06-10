@@ -70,7 +70,7 @@ utils.make_autocmds({
 })
 
 vim.opt.cursorline = true
-vim.opt.completeopt = 'menu,menuone'
+-- vim.opt.completeopt = 'menu,menuone'
 -- vim.opt.completeopt = "popup"
 
 vim.opt.wildcharm = ("\t"):byte()

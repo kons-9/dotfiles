@@ -169,8 +169,15 @@ local spec = {
                     clangdFileStatus = true,
                 },
             })
-            register_lsp("verible")
-            register_lsp("svls")
+            register_lsp("verible", {
+                cmd = {
+                    "verible-verilog-ls", "--indentation_spaces=4", "--column_limit=200", "--rules_config_search"
+                }
+
+            })
+            -- register_lsp("svls", {
+            --     cmd = { "svls", "-d" },
+            -- })
             register_lsp("gopls")
 
             vim.api.nvim_set_hl(0, "@lsp.type.comment.cpp", { link = "Comment" })

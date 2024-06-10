@@ -13,21 +13,22 @@ local spec = {
                     button("s", "Use latest session", "<cmd>SessionRestore<CR>"),
                 }
             }
-            section.oil = {
-                type = "group",
-                val = {
-                    button("o", "Open file tree", "<cmd>Oil<CR>"),
-                }
-            }
+            -- section.oil = {
+            --     type = "group",
+            --     val = {
+            --         button("o", "Open file tree", "<cmd>Oil<CR>"),
+            --     }
+            -- }
 
             local layout = {
                 { type = "padding", val = 1 },
                 section.header,
                 { type = "padding", val = 2 },
                 section.restore_session,
-                section.oil,
                 section.top_buttons,
+                -- section.oil,
                 section.mru_cwd,
+                { type = "padding", val = 1 },
                 section.mru,
                 { type = "padding", val = 1 },
                 section.bottom_buttons,
