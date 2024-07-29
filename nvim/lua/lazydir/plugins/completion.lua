@@ -26,12 +26,8 @@ local spec = {
             utils.safe_require("cmp", function(cmp)
                 cmp.setup({
                     snippet = {
-                        -- REQUIRED - you must specify a snippet engine
                         expand = function(args)
-                            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-                            -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-                            -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-                            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+                            vim.fn["vsnip#anonymous"](args.body)
                         end,
                     },
                     window = {
@@ -41,8 +37,8 @@ local spec = {
                     mapping = cmp.mapping.preset.insert({
                         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                        ["<C-p>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-                        ["<C-n>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+                        ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+                        ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
                         ["<C-Space>"] = cmp.mapping.complete(),
                         ["<C-e>"] = cmp.mapping.abort(),
                         ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -50,10 +46,7 @@ local spec = {
                     sources = cmp.config.sources({
                         { name = "nvim_lsp" },
                         { name = "nvim_lsp_signiture_help" },
-                        { name = "vsnip" }, -- For vsnip users.
-                        -- { name = 'luasnip' }, -- For luasnip users.
-                        -- { name = 'ultisnips' }, -- For ultisnips users.
-                        -- { name = 'snippy' }, -- For snippy users.
+                        { name = "vsnip" },
                     }, {
                         { name = "path" },
                         {
@@ -90,34 +83,13 @@ local spec = {
                     mapping = cmp.mapping.preset.cmdline(),
                     sources = {
                         { name = "buffer" },
+                        { name = "rg" },
                     },
                 })
 
                 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
                 cmp.setup.cmdline(":", {
-                    -- mapping = cmp.mapping.preset.cmdline(),
-                    mapping = {
-                        ["<Down>"] = {
-                            c = function()
-                                -- local cmp = require("cmp")
-                                if cmp.visible() then
-                                    cmp.select_next_item()
-                                else
-                                    cmp.complete()
-                                end
-                            end,
-                        },
-                        ["<Up>"] = {
-                            c = function()
-                                -- local cmp = require("cmp")
-                                if cmp.visible() then
-                                    cmp.select_prev_item()
-                                else
-                                    cmp.complete()
-                                end
-                            end
-                        }
-                    },
+                    mapping = cmp.mapping.preset.cmdline(),
                     sources = cmp.config.sources({
                         { name = "path" },
                     }, {

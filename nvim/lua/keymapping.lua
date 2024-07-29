@@ -14,11 +14,11 @@ utils.keymap('n', '<down>', 'gj', { desc = 'move down' })
 utils.keymap('n', '<up>', 'gk', { desc = 'move up' })
 
 -- command history setting
--- utils.keymap('c', '<C-p>', '<TAB>', { desc = 'command history up' })
--- utils.keymap('c', '<C-n>', '<S-TAB>', { desc = 'command history down' })
+-- utils.keymap('c', '<C-p>', '<Tab>', { desc = 'command history up', expr = false, silent = true, noremap = true})
+-- utils.keymap('c', '<C-n>', '<S-Tab>', { desc = 'command history down', expr = false, silent = true, noremap = true})
 -- vim.cmd [[set esckeys]]
-utils.keymap('c', '<C-J>', '<C-n>', { desc = 'command history down' })
-utils.keymap('c', '<C-K>', '<C-p>', { desc = 'command history up' })
+utils.keymap('c', '<C-j>', '<C-n>', { desc = 'command history down' })
+utils.keymap('c', '<C-k>', '<C-p>', { desc = 'command history up' })
 
 -- disable arrow
 utils.keymap('n', '<Up>', 'H', { desc = 'move to first' })
