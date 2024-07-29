@@ -29,6 +29,12 @@ clang_target=$XDG_CONFIG_HOME/.clang-format
 wezterm_source="${dirpath}/wezterm/"
 wezterm_target=$XDG_CONFIG_HOME/wezterm
 
+alacritty_source="${dirpath}/alacritty/"
+alacritty_target=$XDG_CONFIG_HOME/alacritty
+
+tmux_source="${dirpath}/tmux/"
+tmux_target=$XDG_CONFIG_HOME/tmux
+
 git_config_source="${dirpath}/git/"
 git_config_target=$XDG_CONFIG_HOME/git
 

@@ -6,7 +6,13 @@ decorations = "Full"
 opacity = 0.9
 startup_mode = "Maximized"
 title = "MainAlacritty"
+dynamic_title = false
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 size = 9.0
+
+[keyboard]
+bindings = [
+    # { key = "t", mods = "Control|Shift", mode = "AppCursor", action = "SpawnNewInstance" }
+]
