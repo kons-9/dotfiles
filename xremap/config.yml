@@ -1,0 +1,32 @@
+# this is xremap configuration file.
+
+modmap:
+  - name: Global
+    remap:
+      CapsLock: Ctrl_L
+      # E/J key
+      grave: Esc
+      # realforce 最下段のキー右から
+      # rightctrl: rightctrl
+      # compose: compose
+      # rightalt: rightalt
+      katakanahiragana: Esc
+      henkan: grave
+      # space: space
+      muhenkan: leftmeta
+      # leftalt: leftalt
+      # leftmeta: leftmeta
+      # leftctrl: leftctrl
+
+keymap:
+  - name: Default
+    # Emacs basic
+    application: 
+      not: org.wezfurlong.wezterm
+    remap:
+      C-h: backspace
+      C-b: left
+      C-f: right
+      C-p: up
+      C-n: down
+
