@@ -1,4 +1,7 @@
 # this is xremap configuration file.
+shared:
+  terminals: &terminals
+    - org.wezfurlong.wezterm
 
 modmap:
   - name: Global
@@ -22,7 +25,7 @@ keymap:
   - name: Default
     # Emacs basic
     application: 
-      not: org.wezfurlong.wezterm
+      not: *terminals
     remap:
       C-h: backspace
       C-b: left
