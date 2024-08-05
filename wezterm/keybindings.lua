@@ -11,6 +11,7 @@ local function merge(config)
         { key = "c", mods = "SHIFT|CTRL", action = act.CopyTo 'Clipboard' },
         { key = "l", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(1) },
         { key = "h", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
+        { key = "Backspace", mods = "SHIFT", action = act.ActivateTabRelative(-1) },
         -- { key = "p", mods = "CTRL",       action = act.SendKey { key = "UpArrow" } },
         -- { key = "n", mods = "CTRL",       action = act.SendKey { key = "DownArrow" } },
         -- { key = "[", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(1) },

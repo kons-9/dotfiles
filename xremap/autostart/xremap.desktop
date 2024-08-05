@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=xremap
+Type=Application
+Comment=Remap keys
+Exec=/home/toshiki/.xdg/data/rust/cargo/bin/xremap /home/toshiki/dotfiles/xremap/config.yml
+Terminal=false
+# OnlyShowIn=GNOME;
+# X-GNOME-Autostart-enabled=true
+

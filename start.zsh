@@ -7,7 +7,7 @@ if [ -z $XDG_CONFIG_HOME ]; then
 fi
 
 if [[ ! -f $ZDOTDIR/.initialized ]]; then
-    __execute initialize/initialize.sh
+    __execute $(dirpath)/initialize/initialize.sh
 fi
 
 # if check is not needed and you want to replace all, please cmd `sh start.sh -y`
@@ -57,7 +57,6 @@ fi
 
 hammerspoon_source="${dirpath}/hotkey/hammerspoon"
 hammerspoon_target=~/.hammerspoon
-
 
 function makeSymLink() {
   source=$1

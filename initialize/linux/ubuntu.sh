@@ -19,3 +19,5 @@ fi
 if ! type python3 > /dev/null 2>&1; then
     sudo apt install -y python3
 fi
+
+sudo apt install -y firefox 
