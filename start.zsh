@@ -1,4 +1,7 @@
 #!/bin/env zsh
+function __execute () {
+  source $ZDOTDIR/$1
+}
 cd `dirname $0`
 dirpath=`pwd`
 # if XDG_CONFIG_HOME is not set, set it to ~/.config
@@ -7,7 +10,7 @@ if [ -z $XDG_CONFIG_HOME ]; then
 fi
 
 if [[ ! -f $ZDOTDIR/.initialized ]]; then
-    __execute $(dirpath)/initialize/initialize.sh
+    bash $dirpath/initialize/initialize.sh
 fi
 
 # if check is not needed and you want to replace all, please cmd `sh start.sh -y`

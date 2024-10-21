@@ -150,6 +150,7 @@ local spec = {
                     },
                 },
             })
+            register_lsp("ts_ls")
             -- register_lsp("csharp_ls")
             -- register_lsp("tsserver")
             register_lsp("rust_analyzer")

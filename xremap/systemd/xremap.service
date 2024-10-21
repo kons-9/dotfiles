@@ -1,14 +1,10 @@
 [Unit]
-Description=Remap keys on Wayland
+Description=xremap
+After=default.target
 
 [Service]
-KillMode=process
+ExecStart=/home/toshiki/.xdg/data/rust/cargo/bin/xremap --watch /home/toshiki/dotfiles/xremap/config.yml
 Restart=always
-ExecStart=/home/toshiki/.xdg/data/rust/cargo/bin/xremap /home/toshiki/dotfiles/xremap/config.yml
-ExecStop=/usr/bin/killall xremap
-Type=simple
-User=root
-Group=root
 
 [Install]
 WantedBy=default.target
