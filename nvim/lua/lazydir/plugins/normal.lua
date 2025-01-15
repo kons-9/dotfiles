@@ -6,6 +6,7 @@ return {
       local ft = require('Comment.ft')
 
       ft.systemverilog = {"//%s"}
+      ft.promela = {"/* %s */"}
     end,
   }
 }
