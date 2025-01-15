@@ -172,11 +172,17 @@ local spec = {
             })
             register_lsp("verible", {
                 cmd = {
-                    "verible-verilog-ls", "--indentation_spaces=4", "--column_limit=200", "--rules_config_search"
+                    "verible-verilog-ls",
+                    "--indentation_spaces=4", "--column_limit=100", "--rules_config_search",
+                    -- "--port_declarations_indentation=indent", "--formal_parameters_indentation=indent",
+                    -- "--expand_coverpoints",
                 }
 
             })
             -- register_lsp("svls", {
+            --     root_dir = function(fname)
+            --         return require("lspconfig.util").find_git_ancestor(fname)
+            --     end,
             --     cmd = { "svls", "-d" },
             -- })
             register_lsp("gopls")
