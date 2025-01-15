@@ -4,9 +4,9 @@ function __execute () {
 }
 cd `dirname $0`
 dirpath=`pwd`
-# if XDG_CONFIG_HOME is not set, set it to ~/.config
+# if XDG_CONFIG_HOME is not set, set it to ~/.xdg/config
 if [ -z $XDG_CONFIG_HOME ]; then
-  export XDG_CONFIG_HOME=~/.config
+  export XDG_CONFIG_HOME=~/.xdg/config
 fi
 
 if [[ ! -f $ZDOTDIR/.initialized ]]; then
