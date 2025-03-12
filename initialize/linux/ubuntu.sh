@@ -8,9 +8,9 @@ sudo apt install -y git pkg-config libssl-dev curl wget libfuse2 unzip zsh gcc
 # install nvim
 # note: if cpu architecture is not x86_64, you should change the url
 if [ "$(uname -m)" = "x86_64" ]; then
-    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-    chmod u+x nvim.appimage
-    sudo mv nvim.appimage /usr/local/bin/nvim
+    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+    chmod u+x nvim-linux-x86_64.appimage
+    sudo mv nvim-linux-x86_64.appimage /usr/local/bin/nvim
 else
     echo "cpu architecture is not x86_64"
     echo "please install nvim manually"

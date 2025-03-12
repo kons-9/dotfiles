@@ -1,0 +1,16 @@
+FROM fedora:latest
+RUN dnf install -y zsh git curl sudo
+
+RUN useradd -ms /bin/zsh test
+RUN echo "test ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+COPY . /home/test/dotfiles
+RUN chown -R test /home/test
+
+USER test
+WORKDIR /home/test/dotfiles
+RUN zsh start.zsh -y
+
+WORKDIR /home/test
+
+ENTRYPOINT ["/bin/zsh"]

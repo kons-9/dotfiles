@@ -28,10 +28,10 @@ keymap:
     # Emacs basic
     remap:
       C-h: backspace
-      C-b: left
-      C-f: right
-      C-p: up
-      C-n: down
+      # C-b: left
+      # C-f: right
+      # C-p: up
+      # C-n: down
 
   - name: wezterm
     remap:
