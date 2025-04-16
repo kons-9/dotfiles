@@ -15,7 +15,6 @@ else
   require('abbreviation')
   require('options')
   require('keymapping')
-  -- require('dein')
   require('lazydir')
   require('colors')
 end

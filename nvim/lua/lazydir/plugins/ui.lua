@@ -37,9 +37,9 @@ local spec = {
             vim.g.indent_guides_auto_colors = 0
             vim.g.indent_guides_guide_size = 1
             vim.cmd([[
-        autocmd VimEnter,Colorscheme * hi IndentGuidesOdd guibg=239 ctermbg=239
-        autocmd VimEnter,Colorscheme * hi IndentGuidesEven guibg=237 ctermbg=237
-      ]])
+                autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#808080 ctermbg=23
+                autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#303030 ctermbg=23
+            ]])
             vim.cmd("call indent_guides#enable()")
         end,
     },
