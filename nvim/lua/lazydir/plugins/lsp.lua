@@ -33,167 +33,124 @@ local spec = {
     {
         "neovim/nvim-lspconfig",
         dependencies = { "williamboman/mason.nvim" },
-        -- event = "VimEnter",
-    },
-    -- {
-    --     "jose-elias-alvarez/null-ls.nvim",
-    --     dependencies = {
-    --         { "nvim-lua/plenary.nvim" },
-    --     },
-    --     event = "BufWritePre",
-    --     config = function()
-    --         local null_ls = require("null-ls")
-    --         local sources = {
-    --             null_ls.builtins.formatting.rustfmt,
-    --             null_ls.builtins.formatting.autopep8,
-    --             null_ls.builtins.formatting.dart_format,
-    --             -- null_ls.builtins.formatting.clang_format,
-    --             null_ls.builtins.formatting.stylua,
-    --             null_ls.builtins.diagnostics.eslint,
-    --             null_ls.builtins.completion.spell,
-    --         }
-    --
-    --         null_ls.setup({
-    --             sources = sources,
-    --             -- on_attach = function(client, bufnr)
-    --             --     vim.api.nvim_create_autocmd("BufWritePre", {
-    --             --         callback = function()
-    --             --             vim.lsp.buf.format({ async = false })
-    --             --         end,
-    --             --         buffer = bufnr,
-    --             --     })
-    --             -- end,
-    --         })
-    --     end,
-    -- },
-    {
-        "akinsho/flutter-tools.nvim",
-        cmd = "FlutterRun",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        config = true,
     },
     {
         "williamboman/mason.nvim",
         dependencies = { "neovim/nvim-lspconfig", "williamboman/mason-lspconfig.nvim", "hrsh7th/cmp-nvim-lsp" },
         build = ":MasonUpdate",
         config = function()
+            local lsps = {
+                { "ts_ls",         {} },
+                { "lua_ls", {
+                    settings = {
+                        Lua = {
+                            runtime = {
+                                version = "LuaJIT",
+                            },
+                            diagnostics = {
+                                globals = { "vim", "hs" },
+                            },
+                            workspace = {
+                                library = vim.api.nvim_get_runtime_file("", true),
+                                checkThirdParty = false,
+                            },
+                            telemetry = {
+                                enable = false,
+                            },
+                            format = {
+                                enable = true,
+                                defaultConfig = {
+                                    indent_style = "space",
+                                    indent_size = "4",
+                                    tab_width = "4",
+                                },
+                            },
+                        },
+                    },
+                } },
+                { "rust_analyzer", {} },
+                { "clangd", {
+                    init_options = {
+                        clangdFileStatus = true,
+                    },
+                } },
+                { "verible", {
+                    cmd = {
+                        "verible-verilog-ls",
+                        "--indentation_spaces=4", "--column_limit=100", "--rules_config_search",
+                        -- "--port_declarations_indentation=indent", "--formal_parameters_indentation=indent",
+                        -- "--expand_coverpoints",
+                    }
+                } },
+            }
+
+            local names_of_servers = {}
+            for _, lsp in ipairs(lsps) do
+                names_of_servers[#names_of_servers + 1] = lsp[1]
+            end
+
             utils.safe_require("mason", function(m)
                 m.setup()
             end)
             utils.safe_require("mason-lspconfig", function(m)
-                m.setup()
+                m.setup {
+                    automatic_installation = true,
+                    ensure_installed = names_of_servers,
+                }
             end)
 
-            -----------------------
-            -----------------------
-            -- lsp server config --
-            -----------------------
-            -----------------------
-
-            local function register_lsp(lspname, config)
-                if config == nil then
-                    config = {}
-                end
-                -- Set up lspconfig.
-                local lsp_flags = {
-                    debounce_text_changes = 150,
-                }
-                config.flags = lsp_flags
-
-                -- connect to nvim-cmp
-                local ok, cmp_nvim_lsp = utils.safe_require("cmp_nvim_lsp")
-                if ok then
-                    local capabilities = cmp_nvim_lsp.default_capabilities()
-                    config.capabilities = capabilities
-                end
-
-                -- connect to lspconfig
-                local ok, lspconfig = utils.safe_require("lspconfig")
-                if not ok then
-                    return
-                end
-
-                local lsp = lspconfig[lspname]
-                if lsp then
-                    lsp.setup(config)
-                end
+            for _, lsp in ipairs(lsps) do
+                vim.lsp.config(lsp[1], lsp[2])
             end
+            vim.lsp.enable(names_of_servers)
 
-            register_lsp("pyright", {})
-            -- register_lsp("dartls", {})
-            register_lsp("lua_ls", {
-                settings = {
-                    Lua = {
-                        runtime = {
-                            version = "LuaJIT",
-                        },
-                        diagnostics = {
-                            globals = { "vim", "hs" },
-                        },
-                        workspace = {
-                            library = vim.api.nvim_get_runtime_file("", true),
-                            checkThirdParty = false,
-                        },
-                        telemetry = {
-                            enable = false,
-                        },
-                        format = {
-                            enable = true,
-                            defaultConfig = {
-                                indent_style = "space",
-                                indent_size = "4",
-                                tab_width = "4",
-                            },
-                        },
-                    },
-                },
+            -- vim.cmd [[set completeopt+=menuone,noselect,popup]]
+            vim.lsp.start({
+                name = 'ts_ls',
+                cmd = { 'typescript-language-server', '--stdio' },
+                on_attach = function(client, bufnr)
+                    vim.lsp.completion.enable(true, client.id, bufnr, {
+                        autotrigger = true, -- 自動補完を有効にする
+                        convert = function(item)
+                            return { abbr = item.label:gsub('%b()', '') }
+                        end,
+                    })
+                end,
             })
-            register_lsp("ts_ls")
-            -- register_lsp("csharp_ls")
-            -- register_lsp("tsserver")
-            register_lsp("rust_analyzer")
-            -- register_lsp("ccls", {
-            --   init_options = {
-            --     compilationDatabaseDirectory = "build",
-            --     index = {
-            --       threads = 0,
-            --     },
-            --     clang = {
-            --       excludeArgs = { "-frounding-math" },
-            --     },
-            --   },
-            -- })
-            register_lsp("clangd", {
-                init_options = {
-                    clangdFileStatus = true,
-                },
+            vim.api.nvim_create_autocmd('LspAttach', {
+                group = vim.api.nvim_create_augroup('my.lsp', {}),
+                callback = function(args)
+                    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+                    -- if client:supports_method('textDocument/implementation') then
+                    --     -- Create a keymap for vim.lsp.buf.implementation ...
+                    -- end
+                    -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
+                    if client:supports_method('textDocument/completion') then
+                        -- Optional: trigger autocompletion on EVERY keypress. May be slow!
+                        -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
+                        -- client.server_capabilities.completionProvider.triggerCharacters = chars
+                        vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+                    end
+                    -- Auto-format ("lint") on save.
+                    -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
+                    if not client:supports_method('textDocument/willSaveWaitUntil')
+                        and client:supports_method('textDocument/formatting') then
+                        vim.api.nvim_create_autocmd('BufWritePre', {
+                            group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
+                            buffer = args.buf,
+                            callback = function()
+                                vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+                            end,
+                        })
+                    end
+                end,
             })
-            register_lsp("verible", {
-                cmd = {
-                    "verible-verilog-ls",
-                    "--indentation_spaces=4", "--column_limit=100", "--rules_config_search",
-                    -- "--port_declarations_indentation=indent", "--formal_parameters_indentation=indent",
-                    -- "--expand_coverpoints",
-                }
-
-            })
-            -- register_lsp("svls", {
-            --     root_dir = function(fname)
-            --         return require("lspconfig.util").find_git_ancestor(fname)
-            --     end,
-            --     cmd = { "svls", "-d" },
-            -- })
-            register_lsp("gopls")
 
             vim.api.nvim_set_hl(0, "@lsp.type.comment.cpp", { link = "Comment" })
         end,
         keys = {
             { "<leader>e", vim.diagnostic.open_float, mode = "n", desc = "Open diagnostics" },
             { "<leader>q", vim.diagnostic.setloclist, mode = "n", desc = "Set loclist" },
-            { "[d",        vim.diagnostic.goto_prev,  mode = "n", desc = "Go to previous diagnostic" },
-            { "]d",        vim.diagnostic.goto_next,  mode = "n", desc = "Go to next diagnostic" },
         },
     },
 }
