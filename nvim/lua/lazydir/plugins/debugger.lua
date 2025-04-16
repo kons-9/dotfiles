@@ -4,6 +4,7 @@ local spec = {
     dependencies = {
       'theHamsta/nvim-dap-virtual-text',
       'rcarriga/nvim-dap-ui',
+      'nvim-neotest/nvim-nio',
       -- 'mfussenegger/nvim-dap-python',
     },
     keys = {

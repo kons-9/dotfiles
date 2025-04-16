@@ -35,37 +35,37 @@ local spec = {
         dependencies = { "williamboman/mason.nvim" },
         -- event = "VimEnter",
     },
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        dependencies = {
-            { "nvim-lua/plenary.nvim" },
-        },
-        event = "BufWritePre",
-        config = function()
-            local null_ls = require("null-ls")
-            local sources = {
-                null_ls.builtins.formatting.rustfmt,
-                null_ls.builtins.formatting.autopep8,
-                null_ls.builtins.formatting.dart_format,
-                -- null_ls.builtins.formatting.clang_format,
-                null_ls.builtins.formatting.stylua,
-                null_ls.builtins.diagnostics.eslint,
-                null_ls.builtins.completion.spell,
-            }
-
-            null_ls.setup({
-                sources = sources,
-                -- on_attach = function(client, bufnr)
-                --     vim.api.nvim_create_autocmd("BufWritePre", {
-                --         callback = function()
-                --             vim.lsp.buf.format({ async = false })
-                --         end,
-                --         buffer = bufnr,
-                --     })
-                -- end,
-            })
-        end,
-    },
+    -- {
+    --     "jose-elias-alvarez/null-ls.nvim",
+    --     dependencies = {
+    --         { "nvim-lua/plenary.nvim" },
+    --     },
+    --     event = "BufWritePre",
+    --     config = function()
+    --         local null_ls = require("null-ls")
+    --         local sources = {
+    --             null_ls.builtins.formatting.rustfmt,
+    --             null_ls.builtins.formatting.autopep8,
+    --             null_ls.builtins.formatting.dart_format,
+    --             -- null_ls.builtins.formatting.clang_format,
+    --             null_ls.builtins.formatting.stylua,
+    --             null_ls.builtins.diagnostics.eslint,
+    --             null_ls.builtins.completion.spell,
+    --         }
+    --
+    --         null_ls.setup({
+    --             sources = sources,
+    --             -- on_attach = function(client, bufnr)
+    --             --     vim.api.nvim_create_autocmd("BufWritePre", {
+    --             --         callback = function()
+    --             --             vim.lsp.buf.format({ async = false })
+    --             --         end,
+    --             --         buffer = bufnr,
+    --             --     })
+    --             -- end,
+    --         })
+    --     end,
+    -- },
     {
         "akinsho/flutter-tools.nvim",
         cmd = "FlutterRun",
@@ -150,6 +150,7 @@ local spec = {
                     },
                 },
             })
+            register_lsp("ts_ls")
             -- register_lsp("csharp_ls")
             -- register_lsp("tsserver")
             register_lsp("rust_analyzer")
@@ -169,8 +170,22 @@ local spec = {
                     clangdFileStatus = true,
                 },
             })
-            register_lsp("verible")
-            register_lsp("veridian")
+            register_lsp("verible", {
+                cmd = {
+                    "verible-verilog-ls",
+                    "--indentation_spaces=4", "--column_limit=100", "--rules_config_search",
+                    -- "--port_declarations_indentation=indent", "--formal_parameters_indentation=indent",
+                    -- "--expand_coverpoints",
+                }
+
+            })
+            -- register_lsp("svls", {
+            --     root_dir = function(fname)
+            --         return require("lspconfig.util").find_git_ancestor(fname)
+            --     end,
+            --     cmd = { "svls", "-d" },
+            -- })
+            register_lsp("gopls")
 
             vim.api.nvim_set_hl(0, "@lsp.type.comment.cpp", { link = "Comment" })
         end,

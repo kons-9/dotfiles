@@ -19,4 +19,6 @@ zsh/.zsh_update
 
 git/credentials
 
+wezterm/local_config.lua
+
 *-lock.json

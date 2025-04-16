@@ -50,27 +50,27 @@ vim.opt.relativenumber = true
 vim.opt.number = true
 
 utils.make_autocmds({
-  augroup = "numbertoggle",
-  autocmds = {
-    {
-      event = {"BufEnter","FocusGained","InsertLeave","WinEnter"},
-      opts = {
-        pattern = "*",
-        command = 'if &nu && mode() != "i" | set rnu   | endif',
-      },
+    augroup = "numbertoggle",
+    autocmds = {
+        {
+            event = { "BufEnter", "FocusGained", "InsertLeave", "WinEnter" },
+            opts = {
+                pattern = "*",
+                command = 'if &nu && mode() != "i" | set rnu   | endif',
+            },
+        },
+        {
+            event = { "BufLeave", "FocusLost", "InsertEnter", "WinLeave" },
+            opts = {
+                pattern = "*",
+                command = "if &nu | set nornu | endif",
+            },
+        },
     },
-    {
-      event = {"BufLeave","FocusLost","InsertEnter","WinLeave"},
-      opts = {
-        pattern = "*",
-        command = "if &nu | set nornu | endif",
-      },
-    },
-  },
 })
 
 vim.opt.cursorline = true
-vim.opt.completeopt = 'menu,menuone'
+-- vim.opt.completeopt = 'menu,menuone'
 -- vim.opt.completeopt = "popup"
 
 vim.opt.wildcharm = ("\t"):byte()
@@ -79,14 +79,30 @@ vim.opt.wildmode = "full"
 
 -- spell checker
 utils.make_autocmds({
-  augroup = "spell",
-  autocmds = {
-    {
-      event = "FileType",
-      opts = {
-        pattern = "markdown,text,gitcommit",
-        command = "setlocal spell spelllang=en,cjk",
-      },
+    augroup = "spell",
+    autocmds = {
+        {
+            event = "FileType",
+            opts = {
+                pattern = { "markdown", "text", "gitcommit" },
+                command = "setlocal spell spelllang=en,cjk",
+            },
+        },
     },
-  },
+})
+
+utils.make_autocmds({
+    augroup = "filetype",
+    autocmds = {
+        {
+            event = { "BufNewFile", "BufRead" },
+            opts = {
+                pattern = { "*.mak", "*.mk", "Makefile", "makefile", "Makefile.*", "makefile.*" },
+                callback = function()
+                    local bufnr = vim.api.nvim_get_current_buf()
+                    vim.api.nvim_buf_set_option(bufnr, "filetype", "make")
+                end,
+            },
+        },
+    },
 })

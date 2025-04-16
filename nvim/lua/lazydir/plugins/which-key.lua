@@ -1,6 +1,10 @@
 local spec = {
     {
         "folke/which-key.nvim",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "echasnovski/mini.nvim",
+        },
         event = "VeryLazy",
         init = function()
             vim.o.timeout = true
@@ -9,38 +13,26 @@ local spec = {
         config = function()
             utils.safe_require("which-key", function(wk)
                 wk.setup({})
-                wk.register({
-                    ["<leader>"] = {
-                        d = { name = "Debug" },
-                        f = {
-                            name = "Fuzzy Finder('telescope')",
-                            f = { name = "File" },
-                            e = { name = "Edit" },
-                            s = { name = "Search" },
-                            m = { name = "Move" },
-                            c = { name = "Command" },
-                            l = { name = "Lsp" },
-                            g = { name = "Git" },
-                            x = { name = "etc" },
-                        },
-                        g = { name = "LSP GoTo" },
-                        l = { name = "LSP etc" },
-                        s = { name = "Session" },
-                        t = { name = "tree" },
-                        w = { name = "LSP Workspace" },
-                        ["<C-t>"] = { name = "Toggle terminal" },
-                        ["<leader>"] = {
-                            name = "Frequent use tool",
-                            f = { name = "FF File" },
-                            -- e = { name = "Edit" },
-                            -- s = { name = "Search" },
-                            -- m = { name = "Move" },
-                            -- c = { name = "Command" },
-                            l = { name = "FF Lsp" },
-                            -- g = { name = "Git" },
-                            -- x = { name = "etc" },
-                        },
-                    },
+                wk.add({
+                    { "<leader><C-t>",     group = "Toggle terminal" },
+                    { "<leader><leader>",  group = "Frequent use tool" },
+                    { "<leader><leader>f", group = "FF File" },
+                    { "<leader><leader>l", group = "FF Lsp" },
+                    { "<leader>d",         group = "Debug" },
+                    { "<leader>f",         group = "Fuzzy Finder('telescope')" },
+                    { "<leader>fc",        group = "Command" },
+                    { "<leader>fe",        group = "Edit" },
+                    { "<leader>ff",        group = "File" },
+                    { "<leader>fg",        group = "Git" },
+                    { "<leader>fl",        group = "Lsp" },
+                    { "<leader>fm",        group = "Move" },
+                    { "<leader>fs",        group = "Search" },
+                    { "<leader>fx",        group = "etc" },
+                    { "<leader>g",         group = "LSP GoTo" },
+                    { "<leader>l",         group = "LSP etc" },
+                    { "<leader>s",         group = "Session" },
+                    { "<leader>t",         group = "tree" },
+                    { "<leader>w",         group = "LSP Workspace" },
                 })
             end)
         end,

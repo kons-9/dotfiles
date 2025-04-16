@@ -11,10 +11,14 @@ function __git_status_info {
 }
 
 function makeprompt {
-PROMPT="%F{green}%n@%m[`uname`]: %F{yellow}%~%f $(__git_status_info)
+PROMPT="%F{green}%n@%m[`uname`]: %F{yellow}%~%f $(__git_status_info) [%*]
 $(__virtualenv_info)%F{white}%%%f "
-RPROMPT='%*'
+RPROMPT=''
 }
 
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd makeprompt
+# TMOUT=1
+# TRAPALRM() {
+#     zle reset-prompt
+# }

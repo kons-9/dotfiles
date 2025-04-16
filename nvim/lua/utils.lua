@@ -1,58 +1,58 @@
 local M = {}
 
 function M.keymap(mode, key, result, opts, lazy_nvim)
-  local desc = opts.desc
-  opts.desc = nil
+    local desc = opts.desc
+    opts.desc = nil
 
-  if opts == nil or #opts == 0 then
-    opts = {
-      silent = true,
-      nowait = false,
-      expr = false,
-      noremap = true,
-    }
-  end
+    if opts == nil or #opts == 0 then
+        opts = {
+            silent = true,
+            nowait = false,
+            expr = false,
+            noremap = true,
+        }
+    end
 
-  if desc == nil then
-    desc = true
-  end
+    if desc == nil then
+        desc = true
+    end
 
-  opts.desc = desc
+    opts.desc = desc
 
-  if lazy_nvim == nil then
-    vim.keymap.set(mode, key, result, opts)
-  end
+    if lazy_nvim == nil then
+        vim.keymap.set(mode, key, result, opts)
+    end
 
-  -- return is for lazy.nvim
-  return { key, result, opts, mode = mode }
+    -- return is for lazy.nvim
+    return { key, result, opts, mode = mode }
 end
 
 -- args contains augroup and autocmds
 function M.make_autocmds(args)
-  if args.augroup then
-    vim.api.nvim_create_augroup(args.augroup, { clear = true })
-  end
-  for _, v in ipairs(args.autocmds) do
-    local event = v.event
-    local opts = v.opts
-
     if args.augroup then
-      opts.group = args.augroup
+        vim.api.nvim_create_augroup(args.augroup, { clear = true })
     end
-    vim.api.nvim_create_autocmd(event, opts)
-  end
+    for _, v in ipairs(args.autocmds) do
+        local event = v.event
+        local opts = v.opts
+
+        if args.augroup then
+            opts.group = args.augroup
+        end
+        vim.api.nvim_create_autocmd(event, opts)
+    end
 end
 
 function M.safe_require(module, callback)
-  local ok, safe_module = pcall(require, module)
-  if ok then
-    if callback then
-      callback(safe_module)
+    local ok, safe_module = pcall(require, module)
+    if ok then
+        if callback then
+            callback(safe_module)
+        end
+    else
+        print("Error loading module " .. module)
     end
-  else
-    print("Error loading module " .. module)
-  end
-  return ok, safe_module
+    return ok, safe_module
 end
 
 _G["utils"] = M

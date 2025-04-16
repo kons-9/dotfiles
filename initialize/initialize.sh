@@ -1,9 +1,11 @@
 #!/bin/bash
 # configure environment variables, which is written in .zshenv
-source zsh/.zshenv
+git_base_dir=$(git rev-parse --show-toplevel)
 
-source initialize/linux.sh
+source $git_base_dir/zsh/.zshenv
+
+source $git_base_dir/initialize/linux/linux.sh
 
 # common
-source initialize/rust.sh
-source initialize/nvm.sh
+source $git_base_dir/initialize/rust.sh
+source $git_base_dir/initialize/nvm.sh

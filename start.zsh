@@ -1,13 +1,16 @@
 #!/bin/env zsh
+function __execute () {
+  source $ZDOTDIR/$1
+}
 cd `dirname $0`
 dirpath=`pwd`
-# if XDG_CONFIG_HOME is not set, set it to ~/.config
+# if XDG_CONFIG_HOME is not set, set it to ~/.xdg/config
 if [ -z $XDG_CONFIG_HOME ]; then
-  export XDG_CONFIG_HOME=~/.config
+  export XDG_CONFIG_HOME=~/.xdg/config
 fi
 
 if [[ ! -f $ZDOTDIR/.initialized ]]; then
-    __execute initialize/initialize.sh
+    bash $dirpath/initialize/initialize.sh
 fi
 
 # if check is not needed and you want to replace all, please cmd `sh start.sh -y`
@@ -28,6 +31,12 @@ clang_target=$XDG_CONFIG_HOME/.clang-format
 
 wezterm_source="${dirpath}/wezterm/"
 wezterm_target=$XDG_CONFIG_HOME/wezterm
+
+alacritty_source="${dirpath}/alacritty/"
+alacritty_target=$XDG_CONFIG_HOME/alacritty
+
+tmux_source="${dirpath}/tmux/"
+tmux_target=$XDG_CONFIG_HOME/tmux
 
 git_config_source="${dirpath}/git/"
 git_config_target=$XDG_CONFIG_HOME/git
@@ -51,7 +60,6 @@ fi
 
 hammerspoon_source="${dirpath}/hotkey/hammerspoon"
 hammerspoon_target=~/.hammerspoon
-
 
 function makeSymLink() {
   source=$1
@@ -92,6 +100,8 @@ makeSymLink $zsh_source $zsh_target
 makeSymLink $zshrc_source $zshrc_target
 makeSymLink $zshlocal_source $zshlocal_target
 makeSymLink $clang_source $clang_target
+makeSymLink $alacritty_source $alacritty_target
+makeSymLink $tmux_source $tmux_target
 makeSymLink $git_config_source $git_config_target
 makeSymLink $wezterm_source $wezterm_target
 makeSymLink $hammerspoon_source $hammerspoon_target

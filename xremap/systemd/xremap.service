@@ -1,0 +1,12 @@
+[Unit]
+Description=xremap
+After=default.target
+
+[Service]
+ExecStart=/home/toshiki/.xdg/data/rust/cargo/bin/xremap --watch /home/toshiki/dotfiles/xremap/config.yml
+Restart=always
+
+[Install]
+WantedBy=default.target
+
+
