@@ -100,6 +100,8 @@ makeSymLink $zsh_source $zsh_target
 makeSymLink $zshrc_source $zshrc_target
 makeSymLink $zshlocal_source $zshlocal_target
 makeSymLink $clang_source $clang_target
+makeSymLink $alacritty_source $alacritty_target
+makeSymLink $tmux_source $tmux_target
 makeSymLink $git_config_source $git_config_target
 makeSymLink $wezterm_source $wezterm_target
 makeSymLink $hammerspoon_source $hammerspoon_target
