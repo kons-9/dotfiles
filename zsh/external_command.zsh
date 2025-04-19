@@ -1,9 +1,9 @@
 __execute external_command/zoxide.zsh
 
 # connect external command to default
-__map cd 'z'
-__map ls 'exa'
-__map cat 'bat'
-__map find 'fd'
-__map rg 'rg --hidden'
+__noremap cd 'z'
+__noremap ls 'exa'
+__noremap cat 'bat'
+__noremap find 'fd'
+__noremap rg 'rg --hidden'
 

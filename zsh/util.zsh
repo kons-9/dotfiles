@@ -4,32 +4,40 @@ function __eecho() {
   echo $1 1>&2
 }
 
+# aliasを作成する関数, そのままaliasを作成する
 function __noremap() {
   alias $1=$2
 }
 
+# aliasを作成する関数
+# $1: alias name
+# $2: command
+# commandが実行不可能な場合は、aliasを作成しない
+# コマンドにaliasがある場合はそのaliasを展開してaliasを作成する
 function __map() {
-  # $1: alias name
-  # external command form is _$1
-  local command=(${(s: :)2})
-  local command_name=(${(s: :)1})
-  if alias ${command[1]} > /dev/null 2>&1; then
-    # alias exists
-    # replace target in $2
-    local target=$(alias ${command[1]} | sed -e "s/^${command[1]}=\(.*\)/\1/" | sed -e "s/'//g")
-    target=`echo target` | sed -e ""
-    if [ ${#command[@]} -lt 2 ]; then
-      alias $1=$target
-    else
-      alias $1="$target ${command[2,-1]}"
+    local name=$1
+    local target_command=$2
+    
+    # 分割してコマンドを取得
+    local target_command_list=(${(z)target_command})
+    # コマンドが実行可能か確認
+    if ! command -v ${target_command_list[1]} &> /dev/null; then
+        __eecho "${target_command_list[1]} is not found"
+        return
     fi
-  else
-#    if  ${command_name[1]} > /dev/null 2>&1; then
-#	eecho "alias is not found"
-#    else
-	    alias $1=$2
 
-#	fi
-  fi
+    # target_command_listの最初の要素にaliasがある場合は、aliasを展開する
+    if alias ${target_command_list[1]} &> /dev/null; then
+        # 例: 
+        # __map cd "z"
+        # __map .. "cd .."
+        # の場合、
+        # % alias ..
+        # ..='z ..'
+        # が作成される
+        target_command_list[1]=$(alias ${target_command_list[1]} | sed -e "s/${target_command_list[1]}=//" -e "s/'//g" -e 's/"//g')
+    fi
+    target_command=$(echo $target_command_list | sed -e 's/ /\\ /g' -e 's/\\ / /g')
+    __noremap $name "$target_command"
 }
 
