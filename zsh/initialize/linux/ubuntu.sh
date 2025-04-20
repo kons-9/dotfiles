@@ -4,7 +4,7 @@
 if [ "$NO_SUDO" != "1" ]; then
     sudo apt update && sudo apt upgrade -y
     # install sub modules
-    sudo apt install -y git pkg-config libssl-dev curl wget libfuse2 unzip zsh gcc
+    sudo apt install -y git pkg-config libssl-dev curl wget libfuse2 unzip zsh gcc python3
 
     # install nvim
     # note: if cpu architecture is not x86_64, you should change the url
@@ -16,10 +16,5 @@ if [ "$NO_SUDO" != "1" ]; then
         echo "cpu architecture is not x86_64"
         echo "please install nvim manually"
     fi
-
-    if ! type python3 > /dev/null 2>&1; then
-        sudo apt install -y python3
-    fi
-
 fi
 

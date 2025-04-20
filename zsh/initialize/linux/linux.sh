@@ -1,5 +1,3 @@
-# arch or ubuntu
-git_base_dir=$(git rev-parse --show-toplevel)
 this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 if [ -f /etc/arch-release ]; then

@@ -40,15 +40,3 @@ function __map() {
     __noremap $name "$target_command"
 }
 
-function __makeSymLink() {
-    source=$1
-    target=$2
-    if [ ! -e $source ]; then
-        echo "${source} is not exist."
-        return
-    fi
-    rm -rf $target
-    mkdir -p `dirname $target`
-    ln -s $source $target
-    echo "make symlink ${target}!"
-}

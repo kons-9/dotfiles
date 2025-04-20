@@ -18,7 +18,7 @@ if [[ ! -f $ZDOTDIR/generated/initialized ]]; then
   read "yn?want to initialize automatically? [y/N]"
   case "$yn" in
     [yY]*) 
-        __execute ../start.zsh
+        __execute initialize.zsh
         # restart zsh
         exec zsh -l
     ;;
