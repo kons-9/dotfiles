@@ -7,7 +7,6 @@ function __virtualenv_info {
 
 function __git_status_info {
   [ ${GITSTATUS_PROMPT} ] && echo '['${GITSTATUS_PROMPT}']'
-  # echo '('${GITSTATUS_PROMPT}')'
 }
 
 function makeprompt {

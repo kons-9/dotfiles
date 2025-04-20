@@ -12,7 +12,12 @@ vim.cmd [[set clipboard+=unnamed]]
 
 local vscode = require('vscode')
 
-vim.keymap.set('n', '<leader><C-t>', function() vscode.action('workbench.action.terminal.toggleTerminal') end, { desc = 'open terminal' })
+vim.keymap.set('n', '<leader><C-t>', function() vscode.action('workbench.action.terminal.toggleTerminal') end,
+    { desc = 'open terminal' })
 
 vim.keymap.set('n', '[b', function() vscode.action('workbench.action.previousEditor') end, { desc = 'previous buffer' })
 vim.keymap.set('n', ']b', function() vscode.action('workbench.action.nextEditor') end, { desc = 'next buffer' })
+-- fuzzy finder
+vim.keymap.set("n", '<leader>ff', function()
+    vscode.action('workbench.view.search')
+end, { desc = 'fuzzy finder' })

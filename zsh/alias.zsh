@@ -1,4 +1,10 @@
 # alias
+__noremap cd 'z'
+__noremap ls 'exa'
+__noremap cat 'bat'
+__noremap find 'fd'
+__noremap rg 'rg --hidden'
+
 __map vi 'nvim'
 __map vim 'nvim'
 __map .. 'cd ..'
