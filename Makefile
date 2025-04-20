@@ -1,4 +1,7 @@
 .PHONY: docker_build_ubuntu docker_run_ubuntu docker_build_fedora
+init:
+	zsh zsh/initialize.zsh
+
 # docker build by Dockerfile.ubuntu
 docker_build_ubuntu:
 	docker build -t test_ubuntu -f Dockerfile.ubuntu .

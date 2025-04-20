@@ -20,7 +20,7 @@ function __makeSymLink() {
 #####################
 # use XDG_CONFIG_HOME
 #####################
-nvim_source="${dirpath}/nvim"
+nvim_source="${dirpath}/editor/nvim"
 nvim_target=$XDG_CONFIG_HOME/nvim
 __makeSymLink $nvim_source $nvim_target
 
@@ -28,15 +28,15 @@ zsh_source="${dirpath}/zsh/"
 zsh_target=$XDG_CONFIG_HOME/zsh
 __makeSymLink $zsh_source $zsh_target
 
-clang_source="${dirpath}/clang/.clang-format"
+clang_source="${dirpath}/lang/clang/.clang-format"
 clang_target=$XDG_CONFIG_HOME/.clang-format
 __makeSymLink $clang_source $clang_target
 
-wezterm_source="${dirpath}/wezterm/"
+wezterm_source="${dirpath}/terminal/wezterm/"
 wezterm_target=$XDG_CONFIG_HOME/wezterm
 __makeSymLink $wezterm_source $wezterm_target
 
-alacritty_source="${dirpath}/alacritty/"
+alacritty_source="${dirpath}/terminal/alacritty/"
 alacritty_target=$XDG_CONFIG_HOME/alacritty
 __makeSymLink $alacritty_source $alacritty_target
 
@@ -48,11 +48,11 @@ git_config_source="${dirpath}/git/"
 git_config_target=$XDG_CONFIG_HOME/git
 __makeSymLink $git_config_source $git_config_target
 
-python_source="${dirpath}/python/"
+python_source="${dirpath}/lang/python/"
 python_target="$XDG_CONFIG_HOME/python"
 __makeSymLink $python_source $python_target
 
-vscode_keybindings_source="${dirpath}/vscode/keybindings.json"
+vscode_keybindings_source="${dirpath}/editor/vscode/keybindings.json"
 
 zshrc_source="${dirpath}/zsh/.zshenv"
 zshrc_target=~/.zshenv
