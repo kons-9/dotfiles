@@ -67,10 +67,7 @@ if [ ! -e $zshlocal_source ]; then
 fi
 __makeSymLink $zshlocal_source $zshlocal_target
 
-hammerspoon_source="${dirpath}/hotkey/hammerspoon"
-hammerspoon_target=~/.hammerspoon
-__makeSymLink $hammerspoon_source $hammerspoon_target
-
+#install binaries
 if [[ ! -f ${dirpath}/zsh/generated/initialized ]]; then
     source "${dirpath}/zsh/initialize/linux/linux.sh"
     source "${dirpath}/zsh/initialize/rust.sh"

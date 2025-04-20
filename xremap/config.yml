@@ -32,10 +32,3 @@ keymap:
       # C-f: right
       # C-p: up
       # C-n: down
-
-  - name: wezterm
-    remap:
-      M-e: 
-        launch: [ "/usr/bin/zsh", "/home/toshiki/dotfiles/xremap/toggle.sh", "wezterm", "org.wezfurlong.wezterm"]
-      WIN-e: 
-        launch: [ "/usr/bin/zsh", "/home/toshiki/dotfiles/xremap/toggle.sh", "wezterm", "org.wezfurlong.wezterm"]
