@@ -3,7 +3,9 @@ Description=xremap
 After=default.target
 
 [Service]
-ExecStart=/home/toshiki/.xdg/data/rust/cargo/bin/xremap --watch /home/toshiki/dotfiles/xremap/config.yml
+ExecStart=%h/.xdg/data/rust/cargo/bin/xremap %h/dotfiles/keybindings/xremap/config.yml
+StandardOutput=journal
+StandardError=journal
 Restart=always
 
 [Install]
