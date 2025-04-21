@@ -51,8 +51,7 @@ while true; do
             exit 0
             ;;
         *)
-            echo "Invalid action."
-            sleep 1
+            exit 0
             ;;
     esac
 done

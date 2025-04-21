@@ -18,7 +18,11 @@ while true; do
     case "$action" in
         n)
             read -p "New window name: " newname
-            tmux new-window -n "$newname"
+            if [ -z "$newname" ]; then
+                tmux new-window
+            else
+                tmux new-window -n "$newname"
+            fi
             ;;
         a)
             target=$(tmux list-windows -t "$current_session" -F "#{window_index}: #{window_name}" | fzf --prompt="Switch to window: ")
@@ -48,8 +52,7 @@ while true; do
             exit 0
             ;;
         *)
-            echo "Invalid action."
-            sleep 1
+            exit 0
             ;;
     esac
 done
