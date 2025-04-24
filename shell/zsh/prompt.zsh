@@ -2,11 +2,11 @@
 setopt PROMPT_SUBST
 
 function __virtualenv_info {
-  [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
+    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
 
 function __git_status_info {
-  [ ${GITSTATUS_PROMPT} ] && echo '['${GITSTATUS_PROMPT}']'
+    [ ${GITSTATUS_PROMPT} ] && echo '['${GITSTATUS_PROMPT}']'
 }
 
 function makeprompt {
@@ -17,7 +17,3 @@ RPROMPT=''
 
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd makeprompt
-# TMOUT=1
-# TRAPALRM() {
-#     zle reset-prompt
-# }

@@ -21,3 +21,7 @@ __execute plugin.zsh
 __execute prompt.zsh
 __execute alias.zsh
 __execute misc.zsh
+
+export NVM_DIR="$HOME/.xdg/config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

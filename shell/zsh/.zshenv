@@ -16,3 +16,4 @@ export DENO_INSTALL="$XDG_DATA_HOME/deno"
 
 # path setting
 export PATH="$DENO_INSTALL/bin:$PATH"
+. "/home/toshiki/.xdg/data/rust/cargo/env"

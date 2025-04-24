@@ -1,8 +1,8 @@
 #!/bin/env zsh
 cd `dirname $0`
-dirpath=`pwd`/..
+dirpath=`pwd`/../..
 
-source "${dirpath}/zsh/.zshenv"
+source "${dirpath}/shell/zsh/.zshenv"
 
 function __makeSymLink() {
     source=$1
@@ -24,7 +24,7 @@ nvim_source="${dirpath}/editor/nvim"
 nvim_target=$XDG_CONFIG_HOME/nvim
 __makeSymLink $nvim_source $nvim_target
 
-zsh_source="${dirpath}/zsh/"
+zsh_source="${dirpath}/shell/zsh/"
 zsh_target=$XDG_CONFIG_HOME/zsh
 __makeSymLink $zsh_source $zsh_target
 
@@ -54,11 +54,11 @@ __makeSymLink $python_source $python_target
 
 vscode_keybindings_source="${dirpath}/editor/vscode/keybindings.json"
 
-zshrc_source="${dirpath}/zsh/.zshenv"
+zshrc_source="${dirpath}/shell/zsh/.zshenv"
 zshrc_target=~/.zshenv
 __makeSymLink $zshrc_source $zshrc_target
 
-zshlocal_source="${dirpath}/zsh/generated/zshrc.local"
+zshlocal_source="${dirpath}/shell/zsh/generated/zshrc.local"
 zshlocal_target=~/.zshrc
 if [ ! -e $zshlocal_source ]; then
     echo "${zshlocal_source} is not exist."
@@ -69,8 +69,8 @@ __makeSymLink $zshlocal_source $zshlocal_target
 
 #install binaries
 if [[ ! -f ${dirpath}/zsh/generated/initialized ]]; then
-    source "${dirpath}/zsh/initialize/linux/linux.sh"
-    source "${dirpath}/zsh/initialize/rust.sh"
-    source "${dirpath}/zsh/initialize/nvm.sh"
+    source "${dirpath}/shell/zsh/initialize/linux/linux.sh"
+    source "${dirpath}/shell/zsh/initialize/rust.sh"
+    source "${dirpath}/shell/zsh/initialize/nvm.sh"
 fi
 

@@ -1,6 +1,6 @@
 .PHONY: docker_build_ubuntu docker_run_ubuntu docker_build_fedora
-init:
-	zsh zsh/initialize.zsh
+init-zsh:
+	zsh shell/zsh/initialize.zsh
 
 font-install:
 	mkdir -p ${XDG_DATA_HOME}/fonts

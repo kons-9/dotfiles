@@ -1,11 +1,19 @@
 #!/bin/zsh
+function __is_command_available() {
+    command -v $1 &> /dev/null
+}
+
 function __eecho() {
-  echo $1 1>&2
+    echo $1 1>&2
 }
 
 # aliasを作成する関数, そのままaliasを作成する
 function __noremap() {
-  alias $1=$2
+    if ! __is_command_available $2; then
+        __eecho "$2 is not found"
+        return
+    fi
+    alias $1=$2
 }
 
 # aliasを作成する関数
@@ -20,7 +28,7 @@ function __map() {
     # 分割してコマンドを取得
     local target_command_list=(${(z)target_command})
     # コマンドが実行可能か確認
-    if ! command -v ${target_command_list[1]} &> /dev/null; then
+    if ! __is_command_available ${target_command_list[1]}; then
         __eecho "${target_command_list[1]} is not found"
         return
     fi
