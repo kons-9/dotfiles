@@ -30,27 +30,27 @@ function _mkdir_and_cd(){
 }
 
 function _measure_nvim_startup_time(){
-  nvim --startuptime tmp.log +q && cat tmp.log && rm -rf tmp.log
+    nvim --startuptime tmp.log +q && cat tmp.log && rm -rf tmp.log
 }
 
 function _cd_and_ls(){
-  cd $1
-  ls
+    cd $1
+    ls
 }
 
 function git_new_dir(){
-  if [ -z "$1" ]; then
-    echo "Please input the name of the repository"
-    return 1
-  fi
-  echo "Creating a new repository $1"
-  git init
-  echo "# $1" > README.md
-  git add README.md 
-  git commit -m "first commit"
-  gh repo create $1 --private
-  git remote add origin https://github.com/kons-9/$1.git
-  git push --set-upstream origin main
+    if [ -z "$1" ]; then
+        echo "Please input the name of the repository"
+        return 1
+    fi
+    echo "Creating a new repository $1"
+    git init
+    echo "# $1" > README.md
+    git add README.md 
+    git commit -m "first commit"
+    gh repo create $1 --private
+    git remote add origin https://github.com/kons-9/$1.git
+    git push --set-upstream origin main
 }
 
 function git_sync(){

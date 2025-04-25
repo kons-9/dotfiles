@@ -2,6 +2,9 @@
 init-zsh:
 	zsh shell/zsh/initialize.zsh
 
+init-bash:
+	bash shell/bash/initialize.bash
+
 font-install:
 	mkdir -p ${XDG_DATA_HOME}/fonts
 	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/JetBrainsMono.zip

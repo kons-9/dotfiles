@@ -44,7 +44,10 @@ utils.keymap('s', 'w!!', 'w !sudo tee > /dev/null %<CR> :e!<CR', { desc = 'write
 
 -- terminal
 utils.keymap('t', '<Esc>', '<C-\\><C-n>', { desc = 'exit terminal' })
-utils.keymap('t', '<C-[>', '<C-\\><C-n>', { desc = 'exit terminal' })
+utils.keymap('n', '<C-[>', '<Esc>', { desc = 'exit terminal' })
+utils.keymap('i', '<C-[>', '<Esc>', { desc = 'exit terminal' })
+utils.keymap('v', '<C-[>', '<Esc>', { desc = 'exit terminal' })
+
 vim.cmd [[
   autocmd TermOpen * startinsert
 ]]
