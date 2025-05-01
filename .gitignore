@@ -5,7 +5,7 @@
 zsh/.zsh_history
 zsh/.zcompdump
 
-zsh/generated
+generated
 
 git/credentials
 
