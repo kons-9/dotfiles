@@ -1,0 +1,27 @@
+{
+    // ui settings
+    "window.menuBarVisibility": "toggle",
+    "window.commandCenter": false,
+    "workbench.layoutControl.enabled": false,
+    "workbench.tree.indent": 24,
+    "workbench.activityBar.location": "top",
+    "workbench.statusBar.visible": true,
+    "workbench.layoutControl.type": "menu",
+    "editor.minimap.enabled": false,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorBlinking": "phase",
+    "editor.renderLineHighlight": "gutter",
+    "editor.renderLineHighlightOnlyWhenFocus": true,
+    "editor.glyphMargin": false,
+    "editor.lineNumbers": "on",
+    "editor.showFoldingControls": "never",
+    "zenMode.fullScreen": false,
+
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    
+    // extension settings
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+}

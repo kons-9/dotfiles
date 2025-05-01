@@ -1,0 +1,74 @@
+// Place your key bindings in this file to override the defaults
+[
+    // explorer settings
+    {
+        "key": "ctrl+t",
+        "command": "workbench.view.explorer",
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.toggleSidebarVisibility",
+                "explorer.openToSide",
+            ]
+        },
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "j",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "list.focusDown",
+                {
+                    "command": "list.toggleExpand",
+                    "when": "!explorerResourceIsFolder"
+                }
+            ],
+        },
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "k",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "list.focusUp",
+                "list.toggleExpand",
+            ],
+        },
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus && !explorerResourceIsFolder"
+    },
+    {
+        "key": "o",
+        "command": "explorer.newFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "d",
+        "command": "deleteFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "y",
+        "command": "filesExplorer.copy",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "p",
+        "command": "filesExplorer.paste",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "r",
+        "command": "renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+]
