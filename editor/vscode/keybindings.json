@@ -11,6 +11,17 @@
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
     },
     {
+        "key": "enter",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.toggleSidebarVisibility",
+                "list.toggleExpand",
+            ]
+        },
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+    },
+    {
         "key": "ctrl+enter",
         "command": "runCommands",
         "args": {
@@ -19,7 +30,7 @@
                 "explorer.openToSide",
             ]
         },
-        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus && !explorerResourceIsFolder"
     },
     {
         "key": "j",
@@ -27,10 +38,7 @@
         "args": {
             "commands": [
                 "list.focusDown",
-                {
-                    "command": "list.toggleExpand",
-                    "when": "!explorerResourceIsFolder"
-                }
+                "filesExplorer.openFilePreserveFocus",
             ],
         },
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
@@ -41,10 +49,11 @@
         "args": {
             "commands": [
                 "list.focusUp",
-                "list.toggleExpand",
+                "filesExplorer.openFilePreserveFocus",
+                // "list.toggleExpand",
             ],
         },
-        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus && !explorerResourceIsFolder"
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
     },
     {
         "key": "o",
@@ -70,5 +79,65 @@
         "key": "r",
         "command": "renameFile",
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "ctrl+`",
+        "command": "workbench.action.terminal.toggleTerminal",
+    },
+
+    // custom command
+    // fuzzy finder
+    {
+        // file name search
+        "key": "space f f",
+        "command": "workbench.action.quickOpen",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        // grep search
+        "key": "space f g",
+        "command": "workbench.action.findInFiles",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+
+    // ai related
+    {
+        // quick chat
+        "key": "space q c",
+        "command": "workbench.action.openQuickChat",
+        "when": "(neovim.mode == normal || neovim.mode == visual)&& editorFocus"
+    },
+    {
+        // inline chat
+        "key": "space i c",
+        "command": "inlineChat.startWithCurrentLine",
+        "args": "@workspace",
+        "when": "(neovim.mode == normal || neovim.mode == visual)&& editorFocus"
+    },
+    {
+        // explain code
+        "key": "space e x",
+        "command": "workbench.action.openQuickChat",
+        "args": "@workspace /explain please explain the selected code",
+        "when": "neovim.mode == visual && editorFocus"
+    },
+    {
+        // refactor/fix code
+        "key": "space r f",
+        "command": "workbench.action.openQuickChat",
+        "args": "@workspace /fix",
+        "when": "neovim.mode == visual && editorFocus"
+    },
+    {
+        // documentation
+        "key": "space d d",
+        "command": "workbench.action.openQuickChat",
+        "args": "@workspace /doc please write a docstring for the selected code",
+        "when": "neovim.mode == visual && editorFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "workbench.action.closeQuickOpen",
+        "when": "inQuickOpen"
     },
 ]
