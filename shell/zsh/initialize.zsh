@@ -53,8 +53,14 @@ python_target="$XDG_CONFIG_HOME/python"
 __makeSymLink $python_source $python_target
 
 vscode_keybindings_source="${dirpath}/editor/vscode/keybindings.json"
+vscode_keybindings_target=$XDG_CONFIG_HOME/Code/User/keybindings.json
+__makeSymLink $vscode_keybindings_source $vscode_keybindings_target
 
-zshrc_source="${dirpath}/shell/zsh/.zshenv"
+vscode_settings_source="${dirpath}/editor/vscode/settings.json"
+vscode_settings_target=$XDG_CONFIG_HOME/Code/User/settings.json
+__makeSymLink $vscode_settings_source $vscode_settings_target
+
+zshrc_source="${dirpath}/shell/common/env.sh"
 zshrc_target=~/.zshenv
 __makeSymLink $zshrc_source $zshrc_target
 
@@ -68,9 +74,9 @@ fi
 __makeSymLink $zshlocal_source $zshlocal_target
 
 #install binaries
-if [[ ! -f ${dirpath}/zsh/generated/initialized ]]; then
+if [[ ! -f ${dirpath}/shell/zsh/generated/initialized ]]; then
     source "${dirpath}/shell/zsh/initialize/linux/linux.sh"
     source "${dirpath}/shell/zsh/initialize/rust.sh"
     source "${dirpath}/shell/zsh/initialize/nvm.sh"
+    touch ${dirpath}/shell/zsh/generated/initialized
 fi
-

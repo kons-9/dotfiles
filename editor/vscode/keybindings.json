@@ -47,7 +47,7 @@
         "args": {
             "commands": [
                 "workbench.action.toggleSidebarVisibility",
-                "list.toggleExpand",
+                "explorer.openAndPassFocus",
             ]
         },
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
@@ -145,11 +145,6 @@
     },
     {
         "key": "ctrl+[",
-        "command": "workbench.action.terminal.toggleTerminal",
-        "when": "(terminalProcessSupported || terminalWebExtensionContributedProfile) && terminalFocus"
-    },
-    {
-        "key": "ctrl+[",
         "command": "search.action.cancel",
         "when": "listFocus && searchViewletVisible && !inputFocus && !treestickyScrollFocused && searchState != '0'"
     },
@@ -159,6 +154,11 @@
     {
         "key": "space ctrl+t",
         "command": "workbench.action.terminal.toggleTerminal",
+        "when": "neovim.mode == normal && terminalProcessSupported && editorFocus"
+    },
+    {
+        "key": "space t t",
+        "command": "workbench.view.explorer",
         "when": "neovim.mode == normal && terminalProcessSupported && editorFocus"
     },
     // fuzzy finder

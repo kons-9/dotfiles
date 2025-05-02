@@ -5,7 +5,6 @@
     "workbench.layoutControl.enabled": false,
     "workbench.tree.indent": 24,
     "workbench.activityBar.location": "top",
-    "workbench.statusBar.visible": true,
     "workbench.layoutControl.type": "menu",
     "editor.minimap.enabled": false,
     "editor.cursorSmoothCaretAnimation": "on",
@@ -24,4 +23,11 @@
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
+    "workbench.colorTheme": "GitHub Dark High Contrast",
+
+    "workbench.startupEditor": "none",
+    "workbench.editor.empty.hint": "hidden",
+
+    "accessibility.verbosity.emptyEditorHint": false,
+    "security.workspace.trust.untrustedFiles": "open",
 }
