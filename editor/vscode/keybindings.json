@@ -1,5 +1,36 @@
 // Place your key bindings in this file to override the defaults
 [
+    // disable default keybinding
+    {
+        "key": "ctrl+shift+oem_3",
+        "command": "-workbench.action.terminal.new",
+        "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+    },
+    {
+        "key": "ctrl+shift+i",
+        "command": "-workbench.action.chat.openEditSession",
+        "when": "chatEditingParticipantRegistered && !chatSetupHidden && view != 'workbench.panel.chat.view.edits'"
+    },
+    {
+        "key": "ctrl+shift+i",
+        "command": "-workbench.panel.chatEditing",
+        "when": "workbench.panel.chat.view.edits.active"
+    },
+    {
+        "key": "ctrl+shift+i",
+        "command": "-workbench.action.toggleDevTools",
+        "when": "isDevelopment"
+    },
+    {
+        "key": "escape",
+        "command": "-search.action.cancel",
+        "when": "listFocus && searchViewletVisible && !inputFocus && !treestickyScrollFocused && searchState != '0'"
+    },
+    {
+        "key": "ctrl+shift+n",
+        "command": "-workbench.action.newWindow"
+    },
+
     // explorer settings
     {
         "key": "ctrl+t",
@@ -7,8 +38,8 @@
     },
     {
         "key": "ctrl+t",
-        "command": "workbench.action.toggleSidebarVisibility",
-        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+        "command": "workbench.action.closeSidebar",
+        "when": "explorerViewletVisible && sideBarFocus && !inputFocus"
     },
     {
         "key": "enter",
@@ -20,6 +51,16 @@
             ]
         },
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "enter",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "list.toggleExpand",
+            ]
+        },
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus && explorerResourceIsFolder"
     },
     {
         "key": "ctrl+enter",
@@ -80,12 +121,46 @@
         "command": "renameFile",
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
     },
+    
+    // terminal settings
     {
         "key": "ctrl+`",
         "command": "workbench.action.terminal.toggleTerminal",
     },
+    {
+        "key": "ctrl+shift+oem_3",
+        "command": "workbench.action.terminal.toggleTerminal",
+    },
+    
+    // ctrl + [ maps to escape
+    {
+        "key": "ctrl+[",
+        "command": "workbench.action.closeSidebar",
+        "when": "sideBarFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "workbench.action.closeQuickOpen",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "(terminalProcessSupported || terminalWebExtensionContributedProfile) && terminalFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "search.action.cancel",
+        "when": "listFocus && searchViewletVisible && !inputFocus && !treestickyScrollFocused && searchState != '0'"
+    },
 
-    // custom command
+    // custom command using neovim mode
+    // prefix is "space"
+    {
+        "key": "space ctrl+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "neovim.mode == normal && terminalProcessSupported && editorFocus"
+    },
     // fuzzy finder
     {
         // file name search
@@ -105,14 +180,13 @@
         // quick chat
         "key": "space q c",
         "command": "workbench.action.openQuickChat",
-        "when": "(neovim.mode == normal || neovim.mode == visual)&& editorFocus"
+        "when": "(neovim.mode == normal || neovim.mode == visual) && editorFocus"
     },
     {
         // inline chat
         "key": "space i c",
         "command": "inlineChat.startWithCurrentLine",
-        "args": "@workspace",
-        "when": "(neovim.mode == normal || neovim.mode == visual)&& editorFocus"
+        "when": "(neovim.mode == normal || neovim.mode == visual) && editorFocus"
     },
     {
         // explain code
@@ -123,21 +197,16 @@
     },
     {
         // refactor/fix code
-        "key": "space r f",
+        "key": "space f x",
         "command": "workbench.action.openQuickChat",
-        "args": "@workspace /fix",
+        "args": "@workspace /fix please refactor/fix the selected code",
         "when": "neovim.mode == visual && editorFocus"
     },
     {
         // documentation
-        "key": "space d d",
+        "key": "space d c",
         "command": "workbench.action.openQuickChat",
         "args": "@workspace /doc please write a docstring for the selected code",
         "when": "neovim.mode == visual && editorFocus"
-    },
-    {
-        "key": "ctrl+[",
-        "command": "workbench.action.closeQuickOpen",
-        "when": "inQuickOpen"
     },
 ]
