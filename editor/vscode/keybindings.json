@@ -1,6 +1,8 @@
 // Place your key bindings in this file to override the defaults
 [
+    //////////////////////////////////////////////////////////////////////////////
     // disable default keybinding
+    //////////////////////////////////////////////////////////////////////////////
     {
         "key": "ctrl+shift+oem_3",
         "command": "-workbench.action.terminal.new",
@@ -30,8 +32,27 @@
         "key": "ctrl+shift+n",
         "command": "-workbench.action.newWindow"
     },
-
+    {
+        "key": "ctrl+n",
+        "command": "-workbench.action.files.newUntitledFile"
+    },
+    {
+        "key": "shift+a",
+        "command": "-explorer.newFolder",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "a",
+        "command": "-explorer.newFile",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "ctrl+alt+meta+n",
+        "command": "-welcome.showNewFileEntries"
+    },
+    //////////////////////////////////////////////////////////////////////////////
     // explorer settings
+    //////////////////////////////////////////////////////////////////////////////
     {
         "key": "ctrl+t",
         "command": "workbench.view.explorer",
@@ -121,8 +142,6 @@
         "command": "renameFile",
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
     },
-    
-    // terminal settings
     {
         "key": "ctrl+`",
         "command": "workbench.action.terminal.toggleTerminal",
@@ -131,26 +150,54 @@
         "key": "ctrl+shift+oem_3",
         "command": "workbench.action.terminal.toggleTerminal",
     },
-    
-    // ctrl + [ maps to escape
+    //////////////////////////////////////////////////////////////////////////////
+    // custom command
+    //////////////////////////////////////////////////////////////////////////////
+    // prefix is "space" or "ctrl+;"
+    //////////////////////////////////////////////////////////////////////////////
+    // prefix ctrl+; is for native vscode
     {
-        "key": "ctrl+[",
-        "command": "workbench.action.closeSidebar",
-        "when": "sideBarFocus"
+        // open workspace
+        "key": "ctrl+; ctrl+o ctrl+w",
+        "command": "workbench.action.openWorkspace",
     },
     {
-        "key": "ctrl+[",
-        "command": "workbench.action.closeQuickOpen",
-        "when": "inQuickOpen"
+        // open recent folder/workspace
+        "key": "ctrl+; ctrl+o ctrl+r",
+        "command": "workbench.action.openRecent",
     },
     {
-        "key": "ctrl+[",
-        "command": "search.action.cancel",
-        "when": "listFocus && searchViewletVisible && !inputFocus && !treestickyScrollFocused && searchState != '0'"
+        // open folder
+        "key": "ctrl+; ctrl+o ctrl+f",
+        "command": "workbench.action.files.openFolder"
     },
-
-    // custom command using neovim mode
-    // prefix is "space"
+    // switch zen mode
+    {
+        "key": "ctrl+; ctrl+z",
+        "command": "workbench.action.toggleZenMode",
+    },
+    // terminal settings
+    {
+        "key": "ctrl+; ctrl+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+    },
+    // code runner
+    {
+        "key": "ctrl+; ctrl+r",
+        "command": "code-runner.run"
+    },
+    {
+        "key": "ctrl+; ctrl+q",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "code-runner.stop",
+                "workbench.action.closePanel",
+            ]
+        }
+    },
+    //////////////////////////////////////////////////////////////////////////////
+    // prefix space is for neovim normal mode (not using neovim functionality)
     {
         "key": "space ctrl+t",
         "command": "workbench.action.terminal.toggleTerminal",
@@ -174,7 +221,6 @@
         "command": "workbench.action.findInFiles",
         "when": "neovim.mode == normal && editorFocus"
     },
-
     // ai related
     {
         // quick chat
@@ -208,5 +254,350 @@
         "command": "workbench.action.openQuickChat",
         "args": "@workspace /doc please write a docstring for the selected code",
         "when": "neovim.mode == visual && editorFocus"
+    },
+    // lsp related
+    {
+        // go to declaration
+        "key": "space g D",
+        "command": "editor.action.revealDeclaration",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        // go to definition
+        "key": "space g d",
+        "command": "editor.action.revealDefinition",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        // go to type definition
+        "key": "space g t",
+        "command": "editor.action.revealTypeDefinition",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        // go to implementation
+        "key": "space g i",
+        "command": "editor.action.revealImplementation",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        // go to references
+        "key": "space g r",
+        "command": "editor.action.revealReferences",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        // show hover
+        "key": "shift+k",
+        "command": "editor.action.showHover",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        // show signature help
+        "key": "ctrl+k",
+        "command": "editor.action.showSignatureHelp",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        // rename
+        "key": "space l r",
+        "command": "editor.action.rename",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        // code action
+        "key": "space l a",
+        "command": "editor.action.codeAction",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        // format
+        "key": "space l f",
+        "command": "editor.action.formatDocument",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        "key": "[ d",
+        "command": "editor.action.marker.next",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        "key": "] d",
+        "command": "editor.action.marker.prev",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    // tab
+    {
+        "key": "] b",
+        "command": "workbench.action.nextEditor",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    {
+        "key": "[ b",
+        "command": "workbench.action.previousEditor",
+        "when": "neovim.mode == normal && editorFocus"
+    },
+    //////////////////////////////////////////////////////////////////////////////
+    // ctrl + [ maps to escape
+    //////////////////////////////////////////////////////////////////////////////
+    {
+        "key": "ctrl+[",
+        "command": "workbench.action.closeSidebar",
+        "when": "sideBarFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "workbench.action.closeQuickOpen",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "search.action.cancel",
+        "when": "listFocus && searchViewletVisible && !inputFocus && !treestickyScrollFocused && searchState != '0'"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "closeMarkersNavigation",
+        "when": "editorFocus && markersNavigationVisible"
+    },
+    // {
+    //     "key": "ctrl+[",
+    //     "command": "cancelSelection",
+    //     "when": "editorHasSelection && textInputFocus"
+    // },
+    {
+        "key": "ctrl+[",
+        "command": "cancelRenameInput",
+        "when": "editorFocus && renameInputVisible"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "cancelLinkedEditingInput",
+        "when": "LinkedEditingInputVisible && editorTextFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "closeBreakpointWidget",
+        "when": "breakpointWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "closeFindWidget",
+        "when": "editorFocus && findWidgetVisible && !isComposing"
+    },
+    // {
+    //     "key": "ctrl+[",
+    //     "command": "closeParameterHints",
+    //     "when": "editorFocus && parameterHintsVisible"
+    // },
+    {
+        "key": "ctrl+[",
+        "command": "closeQuickDiff",
+        "when": "dirtyDiffVisible"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "closeReferenceSearch",
+        "when": "inReferenceSearchEditor && !config.editor.stablePeek"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "closeReferenceSearch",
+        "when": "editorTextFocus && referenceSearchVisible && !config.editor.stablePeek || referenceSearchVisible && !config.editor.stablePeek && !inputFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "closeReplaceInFilesWidget",
+        "when": "replaceInputBoxFocus && searchViewletVisible"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "commentsClearFilterText",
+        "when": "commentsFilterFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "diffEditor.exitCompareMove",
+        "when": "comparingMovedCode"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.action.selectEditor",
+        "when": "stickyScrollFocused"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.action.webvieweditor.hideFind",
+        "when": "webviewFindWidgetVisible && !editorFocus && activeEditor == 'WebviewEditor'"
+    },
+    // {
+    //     "key": "ctrl+[",
+    //     "command": "editor.cancelOperation",
+    //     "when": "cancellableOperation"
+    // },
+    {
+        "key": "ctrl+[",
+        "command": "editor.closeCallHierarchy",
+        "when": "callHierarchyVisible && !config.editor.stablePeek"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.closeTestPeek",
+        "when": "testing.isInPeek && !config.editor.stablePeek || testing.isPeekVisible && !config.editor.stablePeek"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.closeTypeHierarchy",
+        "when": "typeHierarchyVisible && !config.editor.stablePeek"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.gotoNextSymbolFromResult.cancel",
+        "when": "hasSymbols"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.hideDropWidget",
+        "when": "dropWidgetVisible"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.hidePasteWidget",
+        "when": "pasteWidgetVisible"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "filesExplorer.cancelCut",
+        "when": "explorerResourceCut && filesExplorerFocus && foldersViewVisible && !inputFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "gitlens.key.escape",
+        "when": "editorTextFocus && gitlens:key:escape && !codeActionMenuVisible && !findWidgetVisible && !isInEmbeddedEditor && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !suggestWidgetVisible"
+    },
+    // {
+    //     "key": "ctrl+[",
+    //     "command": "hideCodeActionWidget",
+    //     "when": "codeActionMenuVisible"
+    // },
+    // {
+    //     "key": "ctrl+[",
+    //     "command": "hideSuggestWidget",
+    //     "when": "suggestWidgetVisible && textInputFocus"
+    // },
+    {
+        "key": "ctrl+[",
+        "command": "inlineChat.close",
+        "when": "inlineChatHasProvider && inlineChatVisible"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "inlineChat.discardHunkChange",
+        "when": "inlineChatHasProvider && inlineChatVisible && inlineChatResponseType == 'messagesAndEdits'"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "inlineChat.hideHint",
+        "when": "inlineChatShowingHint"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "keybindings.editor.clearSearchResults",
+        "when": "inKeybindings && inKeybindingsSearch"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "keybindings.editor.rejectWhenExpression",
+        "when": "inKeybindings && whenFocus && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "leaveEditorMessage",
+        "when": "messageVisible"
+    },
+    // {
+    //     "key": "ctrl+[",
+    //     "command": "leaveSnippet",
+    //     "when": "inSnippetMode && textInputFocus"
+    // },
+    {
+        "key": "ctrl+[",
+        "command": "list.clear",
+        "when": "listFocus && listHasSelectionOrFocus && !inputFocus && !treestickyScrollFocused"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "list.closeFind",
+        "when": "listFocus && treeFindOpen"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "notebook.cell.chat.acceptChanges",
+        "when": "inlineChatFocused && notebookCellChatFocused && notebookChatUserDidEdit && !notebookCellEditorFocused"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "notebook.cell.chat.discard",
+        "when": "inlineChatFocused && notebookCellChatFocused && !notebookCellEditorFocused && !notebookChatUserDidEdit"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "notebook.hideFind",
+        "when": "notebookEditorFocused && notebookFindWidgetFocused"
+    },
+    // {
+    //     "key": "ctrl+[",
+    //     "command": "notifications.hideToasts",
+    //     "when": "notificationToastsVisible"
+    // },
+    // {
+    //     "key": "ctrl+[",
+    //     "command": "notifications.hideToasts",
+    //     "when": "notificationFocus && notificationToastsVisible"
+    // },
+    {
+        "key": "ctrl+[",
+        "command": "problems.action.clearFilterText",
+        "when": "problemsFilterFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "removeSecondaryCursors",
+        "when": "editorHasMultipleSelections && textInputFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "scm.clearInput",
+        "when": "scmRepository && !editorHasSelection && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "workbench.action.chat.stopReadChatItemAloud",
+        "when": "scopedChatSynthesisInProgress"
+    },
+    // {
+    //     "key": "ctrl+[",
+    //     "command": "workbench.action.hideComment",
+    //     "when": "commentEditorFocused || commentFocused"
+    // },
+    {
+        "key": "ctrl+[",
+        "command": "workbench.action.terminal.hideSuggestWidget",
+        "when": "terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "workbench.actions.workbench.panel.output.clearFilterText",
+        "when": "outputFilterFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "workbench.banner.focusBanner",
+        "when": "bannerFocused"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "workbench.statusBar.clearFocus",
+        "when": "statusBarFocused"
     },
 ]

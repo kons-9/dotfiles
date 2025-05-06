@@ -5,16 +5,15 @@ vim.opt.fileformats = 'unix,dos,mac'
 vim.opt.ambiwidth = 'single'
 
 if vim.g.vscode then
-  -- must have nvim
-  require('utils')
-  require('options')
-  require('keymapping')
-  require('env/vscode')
+    -- must have nvim
+    require('utils')
+    require('keymapping')
+    require('env/vscode')
 else
-  require('utils')
-  require('abbreviation')
-  require('options')
-  require('keymapping')
-  require('lazydir')
-  require('colors')
+    require('utils')
+    require('abbreviation')
+    require('options')
+    require('keymapping')
+    require('lazydir')
+    require('colors')
 end
