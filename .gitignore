@@ -1,21 +1,11 @@
 .DS_Store
-nvim-setting/nvim/dein/repos/github.com
-nvim/lua_old
 .cache
-nvim-setting/nvim/dein
 .vimsessions
-.luarc.json
 
-zsh/.zshrc.local
 zsh/.zsh_history
-zsh/.zshrc.org
 zsh/.zcompdump
-zsh/.zcompcache
-zsh/gitstatus
-zsh/.zsh_sessions
-zsh/.initialized
-zsh/.apt_update
-zsh/.zsh_update
+
+generated
 
 git/credentials
 

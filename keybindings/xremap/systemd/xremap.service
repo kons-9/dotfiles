@@ -1,0 +1,14 @@
+[Unit]
+Description=xremap
+After=default.target
+
+[Service]
+ExecStart=%h/.xdg/data/rust/cargo/bin/xremap %h/dotfiles/keybindings/xremap/config.yml
+StandardOutput=journal
+StandardError=journal
+Restart=always
+
+[Install]
+WantedBy=default.target
+
+
