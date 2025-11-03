@@ -78,5 +78,6 @@ if [[ ! -f ${dirpath}/shell/zsh/generated/initialized ]]; then
     source "${dirpath}/shell/zsh/initialize/linux/linux.sh"
     source "${dirpath}/shell/zsh/initialize/rust.sh"
     source "${dirpath}/shell/zsh/initialize/nvm.sh"
+    mkdir -p ${dirpath}/shell/zsh/generated/
     touch ${dirpath}/shell/zsh/generated/initialized
 fi
