@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     sudo \
     zsh \
+    xz-utils \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
