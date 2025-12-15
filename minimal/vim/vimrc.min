@@ -41,7 +41,7 @@ set showmatch
 set matchtime=2
 
 set whichwrap=b,s,h,l,<,>,[,]
-set relativenumber
+" set relativenumber
 set number
 set numberwidth=3
 

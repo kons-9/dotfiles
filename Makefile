@@ -1,15 +1,13 @@
-.PHONY: docker_build_ubuntu docker_run_ubuntu docker_build_fedora
+.PHONY: docker_build_ubuntu docker_run_ubuntu docker_build_fedora init test sudo-xremap xremap
+
 init:
 	cd nix && \
 	nix run .#homeConfigurations.default.activationPackage
 	make sudo-xremap
 
-font-install:
-	mkdir -p ${XDG_DATA_HOME}/fonts
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/JetBrainsMono.zip
-	unzip JetBrainsMono.zip -d ${XDG_DATA_HOME}/fonts
-	rm JetBrainsMono.zip
-	fc-cache -f -r
+test:
+	echo "This is a test target"
+	make docker_build_ubuntu
 
 sudo-xremap:
 	cd ${XDG_CONFIG_HOME}/systemd/user/ && \
