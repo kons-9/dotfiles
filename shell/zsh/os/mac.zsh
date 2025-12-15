@@ -1,1 +1,0 @@
-__map clip pbcopy
