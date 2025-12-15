@@ -25,7 +25,11 @@
     PYTHONSTARTUP = "$XDG_CONFIG_HOME/python/startup.py";
     NVM_DIR       = "$XDG_CONFIG_HOME/nvm";
     DENO_INSTALL = "$XDG_DATA_HOME/deno";
-    PATH = "${DENO_INSTALL}/bin:${config.home.sessionVariables.PATH or "$PATH"}";
+    VOLTA_BIN = "$HOME/.volta/bin";
   };
+  home.sessionPath = [
+    "$DENO_INSTALL/bin"
+    "$VOLTA_BIN"
+  ];
 }
 
