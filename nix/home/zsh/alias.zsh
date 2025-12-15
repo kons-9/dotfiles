@@ -22,6 +22,7 @@ __map gd 'git diff'
 __map gb 'git branch'
 __map sozsh 'source ~/.zshrc'
 __map prevcommand 'history -1 | sed "s/^[ ]*[0-9]*[ ]*//" | cut -d " " -f 2-'
+__map pip 'uv pip'
 
 # alias for my command
 function _mkdir_and_cd(){

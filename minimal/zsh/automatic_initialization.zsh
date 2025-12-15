@@ -1,20 +1,21 @@
 mkdir -p $ZDOTDIR/generated
+GENERATED_DIR="$ZDOTDIR/generated"
 
-if [[ ! -f $ZDOTDIR/generated/zshrc.local ]]; then
-    touch $ZDOTDIR/generated/zshrc.local
-    nvim $ZDOTDIR/generated/zshrc.local
+if [[ ! -f $GENERATED_DIR/zshrc.local ]]; then
+    touch $GENERATED_DIR/zshrc.local
+    nvim $GENERATED_DIR/zshrc.local
 fi
 
-if [[ ! -f $ZDOTDIR/generated/zsh_update ]]; then
+if [[ ! -f $GENERATED_DIR/zsh_update ]]; then
     now=`date +%Y%m%d`
     echo `cd $ZDOTDIR && git pull --all` > /dev/null 
-    echo $now > $ZDOTDIR/generated/zsh_update
+    echo $now > $GENERATED_DIR/zsh_update
 fi
 
 # whether initialized or not
 # if .initialized does not exist, initialize
-if [[ ! -f $ZDOTDIR/generated/initialized ]]; then
-  touch $ZDOTDIR/generated/initialized
+if [[ ! -f $GENERATED_DIR/initialized ]]; then
+  touch $GENERATED_DIR/initialized
   read "yn?want to initialize automatically? [y/N]"
   case "$yn" in
     [yY]*) 
