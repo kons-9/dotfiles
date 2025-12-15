@@ -2,8 +2,8 @@
 .cache
 .vimsessions
 
-zsh/.zsh_history
-zsh/.zcompdump
+.zsh_history
+.zcompdump
 
 generated
 

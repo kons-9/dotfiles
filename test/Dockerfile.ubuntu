@@ -1,0 +1,31 @@
+FROM ubuntu:22.04
+
+RUN apt-get update && apt-get install -y \
+    curl \
+    sudo \
+    zsh \
+    xz-utils \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -ms /bin/zsh test
+RUN echo "test ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+COPY . /home/test/dotfiles
+RUN chown -R test /home/test
+
+USER test
+WORKDIR /home/test/dotfiles
+
+RUN curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --no-daemon
+
+WORKDIR /home/test/dotfiles/nix/
+
+ENV NIX_PROFILE=/home/test/.nix-profile
+ENV PATH=$NIX_PROFILE/bin:$NIX_PROFILE/sbin:/nix/var/nix/profiles/default/bin:$PATH
+
+RUN . $NIX_PROFILE/etc/profile.d/nix.sh && \
+    nix build .#homeConfigurations.default.activationPackage --extra-experimental-features nix-command --extra-experimental-features flakes
+
+WORKDIR /home/test
+
+ENTRYPOINT ["/bin/zsh"]
