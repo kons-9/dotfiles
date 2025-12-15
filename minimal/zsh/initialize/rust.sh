@@ -1,5 +1,6 @@
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
+echo $CARGO_HOME
 source $CARGO_HOME/env
 
 # install rust tools

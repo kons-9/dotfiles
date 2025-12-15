@@ -4,7 +4,7 @@
 if [ "$NO_SUDO" != "1" ]; then
     sudo apt update && sudo apt upgrade -y
     # install sub modules
-    sudo apt install -y git pkg-config libssl-dev curl wget libfuse2 unzip zsh gcc python3
+    sudo apt install -y git pkg-config libssl-dev curl wget libfuse2 unzip zsh gcc python3 gh
 
     # install nvim
     # note: if cpu architecture is not x86_64, you should change the url
