@@ -9,9 +9,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wezterm.url = "github:wezterm/wezterm?dir=nix";
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = inputs @ { nixpkgs, home-manager, ... }:
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -24,6 +25,7 @@
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home/home.nix ];
+        extraSpecialArgs = { inherit inputs; };
       };
   };
 }

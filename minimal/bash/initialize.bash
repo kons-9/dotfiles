@@ -6,18 +6,18 @@ __makeSimlink() {
 }
 
 cd "$(dirname "$0")"
-dirpath="$(pwd)/../.."
+dirpath="$(pwd)"
 
-source "${dirpath}/shell/common/env.sh"
+source "${dirpath}common_env.sh"
 
-bashrc_source="${dirpath}/shell/bash/.bashrc"
+bashrc_source="${dirpath}/.bashrc"
 bashrc_target="$HOME/.bashrc"
 __makeSimlink $bashrc_source $bashrc_target
 
-bash_aliases_source="${dirpath}/shell/bash/.bash_aliases"
+bash_aliases_source="${dirpath}/.bash_aliases"
 bash_aliases_target="$HOME/.bash_aliases"
 __makeSimlink $bash_aliases_source $bash_aliases_target
 
-bash_profile_source="${dirpath}/shell/common/env.sh"
+bash_profile_source="${dirpath}/common_env.sh"
 bash_profile_target="$HOME/.bash_profile"
 __makeSimlink $bash_profile_source $bash_profile_target
