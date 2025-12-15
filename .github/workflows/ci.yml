@@ -1,0 +1,15 @@
+name: CI
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up docker buildx
+        uses: docker/setup-buildx-action@v2
+      - name: just test
+        run: make test
+
