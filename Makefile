@@ -1,8 +1,10 @@
-.PHONY: docker_build_ubuntu docker_run_ubuntu docker_build_fedora init test sudo-xremap xremap
+.PHONY: docker_build_ubuntu docker_run_ubuntu docker_build_fedora init test sudo-xremap xremap reload-nix
 
-init:
+reload-nix:
 	cd nix && \
 	nix run .#homeConfigurations.default.activationPackage
+
+init: reload-nix
 	make sudo-xremap
 
 test:
