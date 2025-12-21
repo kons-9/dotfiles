@@ -22,7 +22,7 @@
             # もし、自分が~/.zshrcではなくて、かつ、~/.zshrcが存在する場合は、~/.zshrcを読み込む
             is_this_path_dot_zshrc() {
                 local current_script
-                current_script="$(realpath ''${(%):-%N})"
+                current_script="$(realpath "${config.xdg.configHome}/zsh/.zshrc")"
                 local zshrc_path
                 zshrc_path="$(realpath ~/.zshrc)"
                 if [ "$current_script" = "$zshrc_path" ]; then
