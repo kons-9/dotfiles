@@ -5,15 +5,21 @@
     programs.zsh = {
         enable = true;
         envExtra = ''
-            export CARGO_HOME="$XDG_DATA_HOME/rust/cargo"
-            export RUSTUP_HOME="$XDG_DATA_HOME/rust/rustup"
-            export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/startup.py
-            export NVM_DIR="$XDG_CONFIG_HOME/nvm"
+            export XDG_CONFIG_HOME="${config.xdg.configHome}"
+            export XDG_DATA_HOME="${config.xdg.dataHome}"
+            export XDG_CACHE_HOME="${config.xdg.cacheHome}"
+
+            export ZDOTDIR="${config.xdg.configHome}/zsh"
+
+            export CARGO_HOME="${config.xdg.dataHome}/rust/cargo"
+            export RUSTUP_HOME="${config.xdg.dataHome}/rust/rustup"
+            export PYTHONSTARTUP="${config.xdg.configHome}/python/startup.py"
+            export NVM_DIR="${config.xdg.configHome}/nvm"
 
             export SHELDON_CONFIG_DIR="$ZDOTDIR/../zsh-manual/sheldon"
             export SHELDON_CONFIG_FILE="$SHELDON_CONFIG_DIR/plugins.toml"
 
-            export DENO_INSTALL="$XDG_DATA_HOME/deno"
+            export DENO_INSTALL="${config.xdg.dataHome}/deno"
 
             export PATH="$DENO_INSTALL/bin:$PATH"
         '';

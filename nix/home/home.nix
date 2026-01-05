@@ -15,6 +15,15 @@
     xdg.cacheHome  = "${config.home.homeDirectory}/.xdg/cache";
     xdg.stateHome  = "${config.home.homeDirectory}/.xdg/state";
 
+    home.sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+        XDG_CONFIG_HOME = config.xdg.configHome;
+        XDG_DATA_HOME = config.xdg.dataHome;
+        XDG_CACHE_HOME = config.xdg.cacheHome;
+        XDG_STATE_HOME = config.xdg.stateHome;
+    };
+
     imports = [
         ./zsh.nix
         ./gui.nix

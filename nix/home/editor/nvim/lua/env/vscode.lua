@@ -21,3 +21,38 @@ vim.keymap.set('n', ']b', function() vscode.action('workbench.action.nextEditor'
 vim.keymap.set("n", '<leader>ff', function()
     vscode.action('workbench.view.search')
 end, { desc = 'fuzzy finder' })
+
+local mappings = {
+    up = 'k',
+    down = 'j',
+    wrappedLineStart = '0',
+    wrappedLineFirstNonWhitespaceCharacter = '^',
+    wrappedLineEnd = '$',
+}
+
+local function moveCursor(to, select)
+    return function()
+        local mode = vim.api.nvim_get_mode()
+        if mode.mode == 'V' or mode.mode == '' then
+            return mappings[to]
+        end
+
+        vscode.action('cursorMove', {
+            args = {
+                {
+                    to = to,
+                    by = 'wrappedLine',
+                    value = vim.v.count1,
+                    select = select
+                },
+            },
+        })
+        return '<Ignore>'
+    end
+end
+
+vim.keymap.set('n', 'k', moveCursor('up'), { expr = true })
+vim.keymap.set('n', 'j', moveCursor('down'), { expr = true })
+
+vim.keymap.set('v', 'k', moveCursor('up', true), { expr = true })
+vim.keymap.set('v', 'j', moveCursor('down', true), { expr = true })

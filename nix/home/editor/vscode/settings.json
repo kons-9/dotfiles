@@ -20,8 +20,8 @@
     "zenMode.fullScreen": false,
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": true,
-    "workbench.statusBar.visible": false,
-    "workbench.colorTheme": "GitHub Dark High Contrast",
+    "workbench.statusBar.visible": true,
+    "workbench.colorTheme": "Solarized Dark",
     "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
     "editor.fontSize": 12,
     "terminal.integrated.fontSize": 12,
@@ -98,5 +98,12 @@
         "spwn": "spwn build",
         "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
         "gleam": "gleam run -m $fileNameWithoutExt"
-    }
+    },
+    "terminal.integrated.cursorStyle": "block",
+    "terminal.integrated.cursorBlinking": true,
+    "workbench.colorCustomizations": {
+        "terminalCursor.foreground": "#FF0000",
+        "terminalCursor.background": "#FFFFFF"
+    },
+    "terminal.integrated.gpuAcceleration": "off"
 }
