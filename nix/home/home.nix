@@ -1,5 +1,5 @@
 # home/home.nix
-{ pkgs, config, ... }:
+{ pkgs, config, isWsl, ... }:
 
 {
     # home.username = builtins.getEnv "USER";
@@ -22,6 +22,7 @@
         XDG_DATA_HOME = config.xdg.dataHome;
         XDG_CACHE_HOME = config.xdg.cacheHome;
         XDG_STATE_HOME = config.xdg.stateHome;
+        IS_WSL = if isWsl then "1" else "0";
     };
 
     imports = [

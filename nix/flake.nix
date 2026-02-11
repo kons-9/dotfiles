@@ -19,13 +19,14 @@
         inherit system;
         config.allowUnfree = true;
     };
+    isWsl = builtins.getEnv "WSL_DISTRO_NAME" != "";
   in
   {
     homeConfigurations.default =
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home/home.nix ];
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = { inherit inputs isWsl; };
       };
   };
 }
