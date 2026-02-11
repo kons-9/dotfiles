@@ -6,6 +6,8 @@ reload-nix:
 
 init: reload-nix
 	make sudo-xremap
+	
+init-wsl: reload-nix
 
 test:
 	echo "This is a test target"
