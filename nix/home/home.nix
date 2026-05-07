@@ -2,14 +2,12 @@
 { pkgs, config, ... }:
 
 {
-    # home.username = builtins.getEnv "USER";
-    # home.homeDirectory = builtins.getEnv "HOME";
     home.username = "toshiki";
     home.homeDirectory = "/home/toshiki";
 
-    home.stateVersion = "23.11"; # 初回は固定
+    home.stateVersion = "23.11";
 
-    xdg.enable=true;
+    xdg.enable = true;
     xdg.configHome = "${config.home.homeDirectory}/.xdg/config";
     xdg.dataHome   = "${config.home.homeDirectory}/.xdg/data";
     xdg.cacheHome  = "${config.home.homeDirectory}/.xdg/cache";

@@ -1,0 +1,113 @@
+# PowerShell Profile
+# Managed by chezmoi - dotfiles repository
+
+# ─── Environment Variables ───────────────────────────────────────────────────
+$env:XDG_CONFIG_HOME = "$HOME\.xdg\config"
+$env:XDG_DATA_HOME   = "$HOME\.xdg\data"
+$env:XDG_STATE_HOME  = "$HOME\.xdg\state"
+$env:XDG_CACHE_HOME  = "$HOME\.xdg\cache"
+$env:EDITOR          = "nvim"
+
+# Language / Tool paths
+$env:CARGO_HOME      = "$env:XDG_DATA_HOME\rust\cargo"
+$env:RUSTUP_HOME     = "$env:XDG_DATA_HOME\rust\rustup"
+$env:PYTHONSTARTUP   = "$env:XDG_CONFIG_HOME\python\startup.py"
+$env:GIT_CONFIG_GLOBAL = "$HOME\.gitconfig"
+
+# ─── PSReadLine (History / Keybindings) ──────────────────────────────────────
+if (Get-Module -ListAvailable PSReadLine) {
+    Set-PSReadLineOption -EditMode Emacs
+    Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+    Set-PSReadLineOption -PredictionSource History
+    Set-PSReadLineOption -MaximumHistoryCount 100000
+    Set-PSReadLineOption -HistoryNoDuplicates
+    Set-PSReadLineOption -BellStyle None
+
+    # Ctrl+p/n で履歴検索 (zsh 風)
+    Set-PSReadLineKeyHandler -Key Ctrl+p -Function HistorySearchBackward
+    Set-PSReadLineKeyHandler -Key Ctrl+n -Function HistorySearchForward
+    # Ctrl+a/e で行頭/行末
+    Set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
+    Set-PSReadLineKeyHandler -Key Ctrl+e -Function EndOfLine
+    # Ctrl+w で単語削除
+    Set-PSReadLineKeyHandler -Key Ctrl+w -Function BackwardDeleteWord
+}
+
+# ─── Tab Completion ──────────────────────────────────────────────────────────
+Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+
+# ─── Prompt ──────────────────────────────────────────────────────────────────
+function prompt {
+    $loc = (Get-Location).Path.Replace($HOME, '~')
+    $branch = ''
+    if (Get-Command git -ErrorAction SilentlyContinue) {
+        $b = git branch --show-current 2>$null
+        if ($b) { $branch = " [$b]" }
+    }
+    "${loc}${branch}`n> "
+}
+
+# ─── Aliases ─────────────────────────────────────────────────────────────────
+# Modern CLI replacements (require: eza, bat, fd, ripgrep, zoxide)
+
+# eza (ls replacement)
+if (Get-Command eza -ErrorAction SilentlyContinue) {
+    Remove-Item Alias:ls -ErrorAction SilentlyContinue
+    function ls  { eza @args }
+    function ll  { eza -l @args }
+    function la  { eza -la @args }
+    function lt  { eza --tree @args }
+}
+
+# bat (cat replacement)
+if (Get-Command bat -ErrorAction SilentlyContinue) {
+    Remove-Item Alias:cat -ErrorAction SilentlyContinue
+    function cat { bat @args }
+}
+
+# fd (find replacement)
+if (Get-Command fd -ErrorAction SilentlyContinue) {
+    function find { fd @args }
+}
+
+# ripgrep
+if (Get-Command rg -ErrorAction SilentlyContinue) {
+    function grep { rg --hidden @args }
+}
+
+# zoxide (cd replacement)
+if (Get-Command zoxide -ErrorAction SilentlyContinue) {
+    Invoke-Expression (& { (zoxide init powershell | Out-String) })
+}
+
+# nvim
+if (Get-Command nvim -ErrorAction SilentlyContinue) {
+    Set-Alias -Name vi  -Value nvim
+    Set-Alias -Name vim -Value nvim
+}
+
+# Git shortcuts
+function gs { git status @args }
+function gd { git diff @args }
+function gb { git branch @args }
+function ga { git add @args }
+function gc { git commit @args }
+function gp { git push @args }
+function gl { git log --oneline -20 @args }
+
+# Navigation
+function .. { Set-Location .. }
+function ... { Set-Location ..\.. }
+function .... { Set-Location ..\..\.. }
+
+# Utilities (zsh 由来)
+function mkcd { param([string]$d) New-Item -ItemType Directory -Path $d -Force | Out-Null; Set-Location $d }
+function which { param([string]$cmd) (Get-Command $cmd -ErrorAction SilentlyContinue).Source }
+
+{{ if eq .profile "work" -}}
+# ─── Work Environment ────────────────────────────────────────────────────────
+# Uncomment and configure as needed:
+# $env:HTTP_PROXY  = "http://proxy.example.com:8080"
+# $env:HTTPS_PROXY = "http://proxy.example.com:8080"
+# $env:NO_PROXY    = "localhost,127.0.0.1,.local"
+{{ end -}}

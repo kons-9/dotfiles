@@ -1,0 +1,39 @@
+FROM ubuntu:22.04
+
+RUN apt-get update && apt-get install -y \
+    curl \
+    sudo \
+    zsh \
+    git \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# chezmoi のインストール
+RUN sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+
+# テスト用ユーザー作成
+RUN useradd -ms /bin/zsh testuser
+RUN echo "testuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+COPY . /home/testuser/dotfiles
+RUN chown -R testuser:testuser /home/testuser
+
+USER testuser
+WORKDIR /home/testuser/dotfiles
+
+# chezmoi を非対話で適用 (personal profile)
+RUN chezmoi init --source=/home/testuser/dotfiles/chezmoi \
+    --promptString="git_name=testuser" \
+    --promptString="git_email=test@example.com" \
+    --promptChoice="profile=personal" \
+    --apply
+
+# 検証スクリプトをコピー
+COPY --chown=testuser:testuser test/verify_chezmoi.sh /home/testuser/verify.sh
+RUN chmod +x /home/testuser/verify.sh
+
+# 検証を実行
+RUN /home/testuser/verify.sh
+
+WORKDIR /home/testuser
+ENTRYPOINT ["/bin/zsh"]

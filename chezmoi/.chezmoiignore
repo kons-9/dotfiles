@@ -1,0 +1,19 @@
+# OS-specific ignore rules
+
+{{ if ne .chezmoi.os "windows" }}
+# Linux does not need PowerShell profile or Windows symlink script
+Documents/
+run_onchange_windows_symlinks.ps1
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+# Windows does not need Linux-specific configs
+dot_xdg/config/zsh/
+dot_xdg/config/tmux/
+dot_xdg/config/alacritty/
+dot_xdg/config/xremap/
+{{ end }}
+
+# Always ignore
+README.md
+LICENSE

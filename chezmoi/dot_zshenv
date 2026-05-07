@@ -1,0 +1,9 @@
+# ~/.zshenv - Bootstrap for XDG-based zsh configuration
+# Managed by chezmoi
+
+export XDG_CONFIG_HOME="$HOME/.xdg/config"
+export XDG_DATA_HOME="$HOME/.xdg/data"
+export XDG_STATE_HOME="$HOME/.xdg/state"
+export XDG_CACHE_HOME="$HOME/.xdg/cache"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"

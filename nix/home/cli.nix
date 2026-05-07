@@ -7,9 +7,8 @@
     bat
     ripgrep
     zoxide
-    sheldon
     tree
-    # docker
+    chezmoi
   ];
 }
 

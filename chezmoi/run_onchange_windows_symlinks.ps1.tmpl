@@ -1,0 +1,74 @@
+{{- if eq .chezmoi.os "windows" -}}
+# chezmoi run_onchange script for Windows symlinks
+# Creates symlinks from standard Windows config paths to XDG locations
+
+$XDG_CONFIG = "$HOME\.xdg\config"
+
+$Links = @(
+    # VSCode: AppData/Roaming/Code/User → .xdg/config/Code/User
+    @{
+        Target = "$XDG_CONFIG\Code\User"
+        Link   = "$env:APPDATA\Code\User"
+    },
+    # Wezterm: LOCALAPPDATA/wezterm → .xdg/config/wezterm
+    @{
+        Target = "$XDG_CONFIG\wezterm"
+        Link   = "$env:LOCALAPPDATA\wezterm"
+    },
+    # Neovim: LOCALAPPDATA/nvim → .xdg/config/nvim
+    @{
+        Target = "$XDG_CONFIG\nvim"
+        Link   = "$env:LOCALAPPDATA\nvim"
+    },
+    # Git config
+    @{
+        Target = "$XDG_CONFIG\git\config"
+        Link   = "$HOME\.gitconfig"
+    },
+    # Git ignore
+    @{
+        Target = "$XDG_CONFIG\git\ignore"
+        Link   = "$HOME\.gitignore_global"
+    },
+    # clang-format
+    @{
+        Target = "$XDG_CONFIG\clang\.clang-format"
+        Link   = "$HOME\.clang-format"
+    }
+)
+
+foreach ($item in $Links) {
+    $link = $item.Link
+    $target = $item.Target
+
+    if (-not (Test-Path $target)) {
+        Write-Host "Skip (target not found): $target"
+        continue
+    }
+
+    if (Test-Path $link) {
+        $existing = Get-Item $link -Force
+        if ($existing.LinkType -eq "SymbolicLink") {
+            Write-Host "Already linked: $link"
+        } else {
+            Write-Host "WARNING: $link exists but is not a symlink. Skipping."
+        }
+        continue
+    }
+
+    # Ensure parent directory exists
+    $parent = Split-Path $link -Parent
+    if (-not (Test-Path $parent)) {
+        New-Item -ItemType Directory -Path $parent -Force | Out-Null
+    }
+
+    Write-Host "Linking: $link -> $target"
+    if (Test-Path $target -PathType Container) {
+        New-Item -ItemType SymbolicLink -Path $link -Target $target | Out-Null
+    } else {
+        New-Item -ItemType SymbolicLink -Path $link -Target $target | Out-Null
+    }
+}
+
+Write-Host "`nWindows symlinks configured."
+{{- end -}}

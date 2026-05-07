@@ -1,0 +1,19 @@
+{{- $profile := promptChoiceOnce . "profile" "Environment profile" (list "personal" "work") -}}
+{{- $gitName := "" -}}
+{{- $gitEmail := "" -}}
+
+{{- if eq $profile "personal" -}}
+{{-   $gitName = "toshiki goto" -}}
+{{-   $gitEmail = "gotoshi.euphonium@gmail.com" -}}
+{{- else -}}
+{{-   $gitName = promptStringOnce . "git_name" "Work Git user.name" -}}
+{{-   $gitEmail = promptStringOnce . "git_email" "Work Git user.email" -}}
+{{- end -}}
+
+[data]
+    profile = {{ $profile | quote }}
+    git_name = {{ $gitName | quote }}
+    git_email = {{ $gitEmail | quote }}
+
+[edit]
+    command = "nvim"

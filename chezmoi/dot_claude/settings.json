@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(rg *)",
+      "Bash(fd *)",
+      "Bash(cat *)",
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(cargo *)",
+      "Bash(uv *)",
+      "Bash(chezmoi *)",
+      "Bash(eza *)",
+      "Bash(bat *)"
+    ],
+    "deny": []
+  },
+  "language": "日本語"
+}

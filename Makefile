@@ -1,13 +1,26 @@
-.PHONY: docker_build_ubuntu docker_run_ubuntu docker_build_fedora init test sudo-xremap xremap
+.PHONY: init init-nix init-chezmoi test test-chezmoi sudo-xremap xremap docker_build_ubuntu docker_run_ubuntu docker_build_fedora
 
-init:
+# Full setup: Nix packages + chezmoi dotfiles
+init: init-nix init-chezmoi
+
+# Nix: Install packages only (Linux)
+init-nix:
 	cd nix && \
 	nix run .#homeConfigurations.default.activationPackage
-	make sudo-xremap
+
+# chezmoi: Deploy config files (cross-platform)
+init-chezmoi:
+	chezmoi init --source=$(CURDIR)/chezmoi --apply
 
 test:
-	echo "This is a test target"
-	make docker_build_ubuntu
+	make test-chezmoi
+
+# chezmoi デプロイをDockerで検証
+test-chezmoi:
+	docker build -t test_chezmoi -f test/Dockerfile.chezmoi .
+
+test-chezmoi-shell: test-chezmoi
+	docker run -it --rm test_chezmoi
 
 sudo-xremap:
 	cd ${XDG_CONFIG_HOME}/systemd/user/ && \

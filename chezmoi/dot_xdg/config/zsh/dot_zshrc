@@ -1,0 +1,19 @@
+# $ZDOTDIR/.zshrc - Main zsh configuration
+# Sourced for interactive shells
+
+function __execute () {
+    source $ZDOTDIR/$1
+}
+
+__execute "env.zsh"
+__execute "utils.zsh"
+__execute "external_command.zsh"
+
+if __is_command_available sheldon; then
+    1=
+    eval "$(sheldon source)"
+fi
+
+__execute "prompt.zsh"
+__execute "misc.zsh"
+__execute "alias.zsh"
